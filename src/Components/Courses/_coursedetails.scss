@@ -1,0 +1,13 @@
+.conteinerDetails{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .cardDetails{
+        display: flex;
+        width: 40%;
+        border: 2px solid blue;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

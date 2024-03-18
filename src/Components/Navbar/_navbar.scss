@@ -1,0 +1,47 @@
+.conteinerNavbar{
+  display: flex;
+  background-color: #0466c8;
+  color: white;
+  width: 100%;
+  justify-content:space-evenly;
+  margin: 0;
+  align-items: center;
+  h3{
+    margin: 0;
+  }
+  .containerCategories{
+    gap: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .containerBrand {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; /* Agregado para centrar verticalmente */
+      text-align: center;
+      margin: 0;
+    
+      p {
+        /* Eliminado display: flex */
+        margin: 0; /* Ajustado el margen para evitar espacio extra */
+      }
+    
+      .logoIcon {
+        /* Eliminado display: flex */
+        width: 24px;
+        margin-right: 0.625rem; /* Ajustado margen derecho para separar el logo del texto */
+      }
+    }
+  .conteinerLinks{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.875rem;
+      img{
+          width: 20px;
+      }
+  }
+}

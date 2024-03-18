@@ -1,0 +1,377 @@
+@charset "UTF-8";
+.containerCourses {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+}
+.containerCourses .containerInfoCourses h2 {
+  margin: 40px 0;
+}
+.containerCourses .containerInfoCourses p {
+  margin: 30px 0;
+  font-size: 18px;
+}
+.containerCourses .containerCoursesList {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.containerCourses .containerCoursesList .containerListItems {
+  width: 50%;
+}
+.containerCourses .containerCoursesList ul li {
+  margin: 8px 10px;
+  list-style: none;
+  font-weight: bold;
+}
+
+.containerList {
+  display: flex;
+  width: 60%;
+  border: 2px solid red;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.containerList .card {
+  width: 190px;
+  height: 254px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  position: relative;
+  padding: 1.8rem;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
+}
+.containerList .card:hover {
+  border-color: #6c00f8;
+  box-shadow: 10px 5px 18px 0 rgba(255, 255, 255, 0.877);
+}
+.containerList .card:hover .card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
+}
+.containerList .card-details {
+  color: rgb(162, 0, 255);
+  height: 100%;
+  gap: 0.5em;
+  display: grid;
+  place-content: center;
+  font-family: "Courier New", Courier, monospace;
+}
+.containerList .card-button {
+  text-decoration: none;
+  text-align: center;
+  transform: translate(-50%, 125%);
+  width: 70%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #6c00f8;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+  cursor: pointer;
+  font-family: "Courier New", Courier, monospace;
+}
+.containerList .text-body {
+  color: rgb(134, 134, 134);
+}
+.containerList .text-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.conteinerDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.conteinerDetails .cardDetails {
+  display: flex;
+  width: 40%;
+  border: 2px solid blue;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerTitleHome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.containerTitleHome h1 {
+  margin: 60px 0;
+}
+
+.containerLogin {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.conteinerNavbar {
+  display: flex;
+  background-color: #0466c8;
+  color: white;
+  width: 100%;
+  justify-content: space-evenly;
+  margin: 0;
+  align-items: center;
+}
+.conteinerNavbar h3 {
+  margin: 0;
+}
+.conteinerNavbar .containerCategories {
+  gap: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.conteinerNavbar .containerBrand {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; /* Agregado para centrar verticalmente */
+  text-align: center;
+  margin: 0;
+}
+.conteinerNavbar .containerBrand p {
+  /* Eliminado display: flex */
+  margin: 0; /* Ajustado el margen para evitar espacio extra */
+}
+.conteinerNavbar .containerBrand .logoIcon {
+  /* Eliminado display: flex */
+  width: 24px;
+  margin-right: 0.625rem; /* Ajustado margen derecho para separar el logo del texto */
+}
+.conteinerNavbar .conteinerLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.875rem;
+}
+.conteinerNavbar .conteinerLinks img {
+  width: 20px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.containerRouteCurriculums {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid blue;
+}
+.containerRouteCurriculums .containerTitleRouteCurriculums {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid red;
+  height: 10em;
+}
+.containerRouteCurriculums .articleRouteCurriculums {
+  border: 2px solid lightblue;
+  height: 18em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.conteinerJobs {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.conteinerJobs .firstArticleJobs {
+  border: 4px solid red;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 200px;
+}
+
+.containerJobsList {
+  display: flex;
+  width: 60%;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.containerJobsList .cardJobs {
+  width: 7em; /* Puedes mantener este tamaño fijo si lo deseas */
+  height: 10rem;
+  border-radius: 20px;
+  background: #f5f5f5;
+  position: relative;
+  padding: 1.8rem;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
+  font-size: 1rem;
+}
+.containerJobsList .cardJobs:hover {
+  border-color: #6c00f8;
+  box-shadow: 10px 5px 18px 0 rgba(255, 255, 255, 0.877);
+}
+.containerJobsList .cardJobs:hover .card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
+}
+.containerJobsList .cardJobsDetails {
+  color: rgb(162, 0, 255);
+  height: 100%;
+  gap: 0.5em;
+  display: grid;
+  place-content: center;
+  font-family: "Courier New", Courier, monospace;
+}
+.containerJobsList .card-button {
+  text-decoration: none;
+  text-align: center;
+  transform: translate(-50%, 125%);
+  width: 70%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #6c00f8;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+  cursor: pointer;
+  font-family: "Courier New", Courier, monospace;
+}
+.containerJobsList .text-body {
+  color: rgb(134, 134, 134);
+}
+.containerJobsList .text-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.firstContainerAddJobs {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px solid blue;
+}
+.firstContainerAddJobs .containerAddJobs {
+  display: flex;
+  justify-content: center;
+}
+.firstContainerAddJobs .containerAddJobs .containerFormAddJobs {
+  display: flex;
+  border: 2px solid lightgreen;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+}
+.firstContainerAddJobs .containerAddJobs .containerFormAddJobs .containerInputAddJobs {
+  width: 100%;
+}
+.firstContainerAddJobs .containerAddJobs .containerFormAddJobs .containerInputAddJobs input {
+  width: 100%;
+}
+.firstContainerAddJobs .containerAddJobs .containerFormAddJobs svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.firstContainerAddJobs .containerAddJobs .containerFormAddJobs form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.firstContainerAddJobs .containerAddJobs .containerFormAddJobs button {
+  display: flex;
+}
+.firstContainerAddJobs .containerTemplate {
+  border: 2px solid lightcoral;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 0;
+  width: 100%;
+}
+.firstContainerAddJobs .containerTemplate .template {
+  border: 2px solid limegreen;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+.firstContainerAddJobs .containerTemplate .template article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.firstContainerAddJobs .containerTemplate .template h3 {
+  border: 2px solid lightskyblue;
+}
+.firstContainerAddJobs .containerTemplate .template h2 {
+  border: 2px solid lightgoldenrodyellow;
+}
+.firstContainerAddJobs .containerTemplate .template p {
+  border: 2px solid lightgreen;
+}
+.firstContainerAddJobs .containerTemplate .template .containerButtonsTemplate {
+  display: flex;
+  gap: 0.75rem;
+}
+.firstContainerAddJobs .containerTemplate .template .containerButtonsTemplate button {
+  border: 2px solid red;
+  border-radius: 0.625rem;
+  padding: 0.625rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.875rem;
+}/*# sourceMappingURL=styles.css.map */

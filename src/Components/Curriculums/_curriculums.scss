@@ -1,0 +1,23 @@
+.containerRouteCurriculums{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid blue;
+    .containerTitleRouteCurriculums{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid red;
+        height: 10em;
+    }
+    .articleRouteCurriculums{
+        border: 2px solid lightblue;
+        height: 18em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

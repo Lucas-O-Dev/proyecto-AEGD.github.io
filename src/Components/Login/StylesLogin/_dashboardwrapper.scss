@@ -1,0 +1,47 @@
+.conteinerDashboardWrapper{
+    border: 2px solid blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    .navbarDashboardWrapper{
+        margin-top: 1.25rem;
+        border: 2px solid lightblue;
+        display: flex;
+        gap: 0.625rem;
+        justify-content: center;
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    }
+
+    .conteinerBodyDashboard{
+        margin-top: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .conteinerLinksDashboard{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 10px 0;
+            gap: 0.625rem;
+            .conteinerTitleLinkDashboard{
+                display: flex;
+                justify-content: flex-start;
+                width: 100%;
+                gap: 0.375rem;
+            }
+            .conteinerUrlLinkDashboard{
+                display: flex;
+                justify-content: flex-start;
+                width: 100%;
+                gap: 0.375rem;
+            }
+        }
+    }
+}
