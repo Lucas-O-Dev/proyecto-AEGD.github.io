@@ -1,56 +1,50 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route} from 'react-router-dom'
-import Navbar from './Components/Navbar/Navbar'
-import Home from './Components/Home/Home'
-import LoginView from './Components/Login/LoginView'
-import DashBoardView from './Components/Login/DashBoardView'
-import EditProfileView from './Components/Login/EditProfileView'
-import SignOutView from './Components/Login/SignOutView'
-import PublicProfileView from './Components/Login/PublicProfileView'
-import ChooseUserNameView from './Components/Login/ChooseUserNameView'
-import Courses from './Components/Courses/Courses'
-import CourseDetails from './Components/Courses/CourseDetails'
-import Curriculums from './Components/Curriculums/Curriculums'
-import Jobs from './Components/Jobs/Jobs'
-import Cart from './Components/Cart/Cart'
-import AddJobs from './Components/Jobs/AddJobs/AddJobs'
-import ProtectedRoutes from './Components/ProtectedRoutes/ProtectedRoutes'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './Components/Context/CartContext'; // Importa el proveedor del contexto del carrito
-import './App.css'
+import './App.css';
+import Landing from './Components/Landing/Landing';
+import Login from './Components/Login/Login';
+import Home from './Components/Home/Home';
+import PersonalData from './Components/Login/PersonalData'
+import Register from './Components/Login/Register/Register';
+import Profile from './Components/Login/Profile';
+import Empleado from './Components/Login/Register/Empleado';
+import Empleador from './Components/Login/Register/Empleador';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+import Navbar from './Components/Navbar/Navbar'; // Importa la Navbar
 
 function App() {
-
   return (
-<>
+    <CartProvider>
+      <BrowserRouter>
+      <ToastContainer />
+        <Routes>
+          {/* Rutas donde se renderizará la Navbar */}
+          <Route path="/Home" element={<WithNavbar><Home /></WithNavbar>} />
+          <Route path="/Profile" element={<WithNavbar><Profile /></WithNavbar>} />
+          <Route path="/PersonalData" element={<WithNavbar><PersonalData /></WithNavbar>} />
+          <Route path="/Empleado" element={<WithNavbar><Empleado /></WithNavbar>} />
+          <Route path="/Empleador" element={<WithNavbar><Empleador /></WithNavbar>} />
+          {/* Otras rutas */}
+          <Route path="/" element={<Landing />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
+        </Routes>
+      </BrowserRouter>
+    </CartProvider>
+  );
+}
 
-<CartProvider>
-<BrowserRouter>
-<Navbar/>
-<Routes>
+// Componente que envuelve los componentes con la Navbar
+const WithNavbar = ({ children }) => {
+  return (
+    <>
+      <Navbar />
+      {children}
+    </>
+  );
+};
 
-          <Route path="/" element={<Home />} />
-            <Route path="/Login" element={<LoginView />} />
-            <Route path="/DashBoard" element={<DashBoardView />} />
-            <Route path="/Dashboard/Profile" element={<EditProfileView />} />
-            <Route path="/Signout" element={<SignOutView />} />
-            <Route path="/u/:username" element={<PublicProfileView />} />
-            <Route path="/choose-username" element={<ChooseUserNameView />} />
-          <Route path="/Courses" element={<Courses />} />         
-          <Route path="/Cart" element={<Cart />} />
-          <Route path="/Jobs" element={<Jobs />} />
-          <Route path="/course/:id" element={<CourseDetails  />} />{/* Actualiza la ruta para los detalles del curso */}
-          <Route path="/AddJobs" element={<AddJobs />} />
-          <Route element={<ProtectedRoutes canActivate={true}/>}>
-
-          <Route path="/Curriculums" element={<Curriculums />} />
-
-          </Route>
-
-</Routes>
-</BrowserRouter>
-</CartProvider>
-</>
-)}
-
-export default App
+export default App;

@@ -20,7 +20,7 @@ const Navbar = () => {
     return(
         <div className="conteinerNavbar">
             <div className="containerBrand">
-            <Link to="/"><img src={logoIcon} alt="logo-icon" className="logoIcon"/></Link>
+            <Link to="/home"><img src={logoIcon} alt="logo-icon" className="logoIcon"/></Link>
             <p>AEGD</p>
             </div>
             <div className="containerCategories">
@@ -35,7 +35,7 @@ const Navbar = () => {
             </h3></StyledLink>
             </div>
             <div className="conteinerLinks">
-            <Link to="/Login"><img src={userIcon} alt="cart-icon" /></Link>
+            <Link to="/Profile"><img src={userIcon} alt="cart-icon" /></Link>
             <Link to="/Cart"><img src={cartIcon} alt="cart-icon" /></Link>
             </div>
         </div>
