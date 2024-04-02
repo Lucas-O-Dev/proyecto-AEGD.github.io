@@ -20,20 +20,17 @@ const Login = () => {
     const contraseña = e.target.password.value;
 
     try {
-      if (registrando) {
-        await signInWithEmailAndPassword(auth, correo, contraseña);
-        setError(null); // Limpiar errores si la autenticación tiene éxito
-        console.log('Usuario autenticado correctamente');
-      }
+      const userCredential = await signInWithEmailAndPassword(auth, correo, contraseña);
+      const user = userCredential.user;
+      console.log('Usuario autenticado correctamente');
+      console.log('UID del usuario:', user.uid); // Imprime el UID del usuario autenticado
+      setError(null); // Limpiar errores si la autenticación tiene éxito
+      navigate('/Home')
     } catch (error) {
       setError(error.message); // Manejar errores de autenticación
       console.error('Error al autenticar:', error.message);
     }
   };
-
-  const handleClickLogin = () => {
-    navigate('/Home')
-  }
 
   return (
     <div>
@@ -43,7 +40,7 @@ const Login = () => {
           <form onSubmit={funcAutentication}>
             <input type="text" placeholder="Ingresar Email" id="email" />
             <input type="password" placeholder="Ingresar Pass" id="password" />
-            <button onClick={handleClickLogin}>Loguearse</button>
+            <button type='submit'>Loguearse</button>
           </form>
           {error && <p>{error}</p>} {/* Mostrar mensaje de error si hay un error de autenticación */}
           <SignOutButton />
