@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
-import { collection, addDoc} from 'firebase/firestore'
-import { db, auth } from '../../../Firebase/Config';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Si estás usando React Router, si no lo estás usando, puedes eliminar esta importación
 
+const PersonalData = ({ agregarDatos, subirDatosAFirebase }) => {
 
-
-const PersonalData = () => {
-
-
-    // Definimos los estados para cada input del formulario
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [localidad, setLocalidad] = useState('');
@@ -16,70 +10,52 @@ const PersonalData = () => {
     const [numeroTelefonico, setNumeroTelefonico] = useState('');
     const [rol, setRol] = useState('');
     const [error, setError] = useState('');
-    const [userID, setUserID] = useState(null); // Estado para guardar el UID del usuario
-    const navigate = useNavigate(); // Inicializamos useNavigate
+    const navigate = useNavigate(); // Si estás usando React Router, si no lo estás usando, puedes eliminar esta línea
+    
 
-    useEffect(() => {
-        // Cuando el componente se monta, obtenemos el UID del usuario
-        const currentUser = auth.currentUser;
-        if (currentUser) {
-            const uid = currentUser.uid;
-            setUserID(uid);
+    const handleSubmit = async (event) => {
+
+        event.preventDefault();
+        
+        try {
+            if (!name || !email || !localidad || !direccion || !numeroTelefonico || !rol) {
+                setError('Por favor, complete todos los campos obligatorios.');
+                return;
+            }
+
+            const formData = {
+                name,
+                email,
+                localidad,
+                direccion,
+                numeroTelefonico,
+                rol
+            };
+
+            console.log("Datos del formulario:", formData);
+
+            // Agregamos los datos al estado para ser enviados al componente padre
+            agregarDatos(formData);
+
+            // Llamamos a la función para subir los datos a Firebase
+            await subirDatosAFirebase(formData); // Esperamos a que se complete la función subirDatosAFirebase
+
+            // Redireccionar según el rol seleccionado
+            if (rol === 'empleado') {
+                navigate('/Empleado'); // Navegamos a la ruta para el empleado
+            } else if (rol === 'empleador') {
+                navigate('/Empleador'); // Navegamos a la ruta para el empleador
+            }
+        } catch (error) {
+            console.error('Error en handleSubmit:', error);
+            setError('Error al procesar el formulario. Por favor, inténtelo de nuevo más tarde.');
         }
-    }, []);
-
-// Función para manejar el envío del formulario
-const handleSubmit = async  (event) => {
-    event.preventDefault();
-    // Verificar si todos los campos obligatorios están completos
-    if (!name || !email || !localidad || !direccion || !numeroTelefonico || !rol) {
-        setError('Por favor, complete todos los campos obligatorios.');
-        return;
-    }
-
-      // Obtener el ID único del usuario autenticado
-      const currentUser = auth.currentUser;
-      const userID = currentUser ? currentUser.uid : null;
-
-    // Crear un objeto con los datos del formulario
-    const formData = {
-        name,
-        email,
-        localidad,
-        direccion,
-        numeroTelefonico,
-        rol
     };
-
-    // Mostrar los datos del formulario en la consola
-    console.log("Datos del formulario:", formData);
-
-    // Obtener una referencia a la colección "personalData" utilizando el ID único del usuario como identificador del documento
-    const userFormDataRef = collection(db, `users/${userID}/personalData`);
-
-
-    try {
-      // Añadir un nuevo documento a la colección "personalData" utilizando el ID único del usuario como identificador del documento
-      await addDoc(userFormDataRef, formData);
-      console.log("Documento agregado correctamente a Firestore con el ID único del usuario como identificador.");
-      setError(""); // Limpiar el mensaje de error si la operación tiene éxito
-    } catch (error) {
-      console.error("Error al agregar el documento a Firestore:", error);
-      setError("Error al enviar el formulario. Por favor, inténtelo de nuevo más tarde.");
-    }
-
-    // Redireccionar según el rol seleccionado
-    if (rol === 'empleado') {
-        navigate('/Empleado'); // Navegamos a la ruta para el empleado
-    } else if (rol === 'empleador') {
-        navigate('/Empleador'); // Navegamos a la ruta para el empleador
-    }
-};
 
     return (
         <>
             <div>
-                <h1>Datos Personales, tu UID es {userID}</h1>
+                <h1>Datos Personales</h1>
             </div>
 
             <div>
@@ -163,8 +139,8 @@ const handleSubmit = async  (event) => {
                                     Empleador
                                 </label>
                             </div>
-                        </div>
-                        <button type="submit">Aceptar</button>
+                        </div> 
+                        <button type="submit">Aceptar y Subir a Firebase</button>
                         {error && <p style={{ color: 'red' }}>{error}</p>}
                     </form>
                 </section>
