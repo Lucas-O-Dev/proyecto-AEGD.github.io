@@ -1,152 +1,119 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Si estás usando React Router, si no lo estás usando, puedes eliminar esta importación
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import {setDoc, updateDoc, doc} from 'firebase/firestore'
+import {db} from '../../../Firebase/Config'
+import 'react-toastify/dist/ReactToastify.css';
 
-const PersonalData = ({ agregarDatos, subirDatosAFirebase }) => {
+const  Empleador = () => {
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [localidad, setLocalidad] = useState('');
-    const [direccion, setDireccion] = useState('');
-    const [numeroTelefonico, setNumeroTelefonico] = useState('');
-    const [rol, setRol] = useState('');
-    const [error, setError] = useState('');
-    const navigate = useNavigate(); // Si estás usando React Router, si no lo estás usando, puedes eliminar esta línea
-    
+    const [name,setName] = useState ("")
+    const [email, setEmail] = useState("")
+    const [localidad,setLocalidad] = useState ("")
+    const [direccion, setDireccion] = useState("")
+    const [numeroTelefonico, setNumeroTelefonico] = useState("")
 
-    const handleSubmit = async (event) => {
+    const navigate = useNavigate();
 
-        event.preventDefault();
-        
+    const setUpdateRef = doc(db, 'users/mediaId4');
+
+    const editButton = async () =>{
+
         try {
-            if (!name || !email || !localidad || !direccion || !numeroTelefonico || !rol) {
-                setError('Por favor, complete todos los campos obligatorios.');
-                return;
-            }
+            await updateDoc(setUpdateRef, {
+                name:name,
+                email:email,
+                localidad:localidad,
+                direccion:direccion,
+                numeroTelefonico:numeroTelefonico
+            })
 
-            const formData = {
-                name,
-                email,
-                localidad,
-                direccion,
-                numeroTelefonico,
-                rol
-            };
-
-            console.log("Datos del formulario:", formData);
-
-            // Agregamos los datos al estado para ser enviados al componente padre
-            agregarDatos(formData);
-
-            // Llamamos a la función para subir los datos a Firebase
-            await subirDatosAFirebase(formData); // Esperamos a que se complete la función subirDatosAFirebase
-
-            // Redireccionar según el rol seleccionado
-            if (rol === 'empleado') {
-                navigate('/Empleado'); // Navegamos a la ruta para el empleado
-            } else if (rol === 'empleador') {
-                navigate('/Empleador'); // Navegamos a la ruta para el empleador
-            }
+        // Mostrar notificación Toastify
+        toast.success('Datos Editados Correctamente.', {
+        onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
+        });
         } catch (error) {
-            console.error('Error en handleSubmit:', error);
-            setError('Error al procesar el formulario. Por favor, inténtelo de nuevo más tarde.');
+            console.log(error)
         }
-    };
+    }
+
+    const setButton = async () =>{
+        try {
+            await setDoc(setUpdateRef, {
+                name:name,
+                email:email,
+                localidad:localidad,
+                direccion:direccion,
+                numeroTelefonico:numeroTelefonico
+            })
+
+        // Mostrar notificación Toastify
+        toast.success('¡Formulario enviado con éxito!', {
+        onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
+        });
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
-        <>
-            <div>
-                <h1>Datos Personales</h1>
-            </div>
+        <div>
 
-            <div>
-                <section>
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <label htmlFor="name">Nombre y Apellido:</label>
-                            <input
-                                type="text"
-                                id="name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="email">Correo electrónico:</label>
-                            <input
-                                type="email"
-                                id="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="localidad">Localidad</label>
-                            <input
-                                type="text"
-                                id="localidad"
-                                value={localidad}
-                                onChange={(e) => setLocalidad(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="direccion">Dirección</label>
-                            <input
-                                type="text"
-                                id="direccion"
-                                value={direccion}
-                                onChange={(e) => setDireccion(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="numerotelefonico">Numero de celular</label>
-                            <input
-                                type="text"
-                                id="numerotelefonico"
-                                value={numeroTelefonico}
-                                onChange={(e) => setNumeroTelefonico(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label>Rol:</label>
-                            <div>
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="rol"
-                                        value="empleado"
-                                        checked={rol === 'empleado'}
-                                        onChange={() => setRol('empleado')}
-                                        required
-                                    />
-                                    Empleado
-                                </label>
-                            </div>
-                            <div>
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="rol"
-                                        value="empleador"
-                                        checked={rol === 'empleador'}
-                                        onChange={() => setRol('empleador')}
-                                        required
-                                    />
-                                    Empleador
-                                </label>
-                            </div>
-                        </div> 
-                        <button type="submit">Aceptar y Subir a Firebase</button>
-                        {error && <p style={{ color: 'red' }}>{error}</p>}
-                    </form>
-                </section>
-            </div>
-        </>
-    );
-};
+            <article>
+            <p>datos personales</p>
+            <p>A continuación te pediremos tus datos personales </p>
+            </article>
 
-export default PersonalData;
+            <section>
+            <div>
+                    <label htmlFor="name">Nombre y Apellido:</label>
+                    <input
+                        type="text"
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
+
+                    <label htmlFor="email">Correo electrónico:</label>
+                    <input
+                        type="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+
+                    <label htmlFor="email">Localidad</label>
+                    <input
+                    type="email"
+                    onChange={(e) => setLocalidad(e.target.value)}
+                    required
+                    />
+
+                    <label htmlFor="email">direccion</label>
+                    <input
+                    type="email"
+                    onChange={(e) => setDireccion(e.target.value)}
+                    required
+                    />
+
+                    <label htmlFor="email">numeroTelefonico</label>
+                    <input
+                    type="email"
+                    onChange={(e) => setNumeroTelefonico(e.target.value)}
+                    required
+                    />
+
+                </div>
+            </section>
+
+            <section>
+                <button onClick={editButton}>editButton</button>
+                <button onClick={setButton}>setButton</button>
+            </section>
+        </div>
+    )
+}
+
+export default Empleador
+
+
+
+

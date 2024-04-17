@@ -1,78 +1,136 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import {setDoc, updateDoc, doc} from 'firebase/firestore'
+import {db} from '../../../../Firebase/Config'
 import 'react-toastify/dist/ReactToastify.css';
 
-const Empleador = () => {
+ const  Empleador = () => {
+
+    const [name,setName] = useState ("")
+    const [email, setEmail] = useState("")
 
     const navigate = useNavigate();
 
-    // Definimos los estados para cada input del formulario
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const setUpdateRef = doc(db, 'users/mediaId1');
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Verificar si todos los campos obligatorios están completos
-        if (!name || !email ) {
-            setError('Por favor, complete todos los campos obligatorios.');
-            return;
+    const editButton = async () =>{
+
+        try {
+            await updateDoc(setUpdateRef, {
+                name:name,
+                email:email
+            })
+
+        // Mostrar notificación Toastify
+        toast.success('Datos Editados Correctamente.', {
+        onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
+        });
+        } catch (error) {
+            console.log(error)
         }
+    }
 
-    // Recopilar los valores de todos los inputs
-    const formData = {
-        name,
-        email
-        };
-        // Imprimir los valores en la consola
-        console.log('Datos enviados:', formData);
+    const setButton = async () =>{
+        try {
+            await setDoc(setUpdateRef, {
+                name:name,
+                email:email
+            })
 
         // Mostrar notificación Toastify
         toast.success('¡Formulario enviado con éxito!', {
-            onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
+        onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
         });
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-    };
+    return (
+        <div>
 
-  return (
-    <div>
-        <section>
             <article>
             <p>Perfecto, eres empleador.</p>
             <p>A continuación te pediremos los datos de tu empresa.</p>
             </article>
-            
-            <article>
-                <form onSubmit={handleSubmit}>
-                <div>
+
+            <section>
+            <div>
                     <label htmlFor="name">Nombre y Apellido:</label>
                     <input
                         type="text"
-                        id="name"
-                        value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
                     />
                 </div>
-
-                <div>
-                    <label htmlFor="email">Correo electrónico:</label>
+                <label htmlFor="email">Correo electrónico:</label>
                     <input
                         type="email"
-                        id="email"
-                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                </div>
+            </section>
 
-                <button type="submit">Enviar</button>
-
-                </form>
-            </article>
-        </section>
-    </div>
-  )
+            <section>
+                <button onClick={editButton}>editButton</button>
+                <button onClick={setButton}>setButton</button>
+            </section>
+        </div>
+    )
 }
 
 export default Empleador
+
+
+
+
+// import React, { useState } from 'react';
+
+// const Empleador = () => {
+
+//     const navigate = useNavigate();
+
+//     // Definimos los estados para cada input del formulario
+//     const [name, setName] = useState('');
+//     const [email, setEmail] = useState('');
+
+//     const handleSubmit = (event) => {
+//         event.preventDefault();
+//         // Verificar si todos los campos obligatorios están completos
+//         if (!name || !email ) {
+//             setError('Por favor, complete todos los campos obligatorios.');
+//             return;
+//         }
+
+//     // Recopilar los valores de todos los inputs
+//     const formData = {
+//         name,
+//         email
+//         };
+//         // Imprimir los valores en la consola
+//         console.log('Datos enviados:', formData);
+
+
+//     };
+
+//   return (
+//     <div>
+//         <section>
+            
+//             <article>
+//                 <form onSubmit={handleSubmit}>
+
+//                 <div>
+//                 </div>
+
+//                 <button type="submit">Enviar</button>
+
+//                 </form>
+//             </article>
+//         </section>
+//     </div>
+//   )
+// }
+
+// export default Empleador
