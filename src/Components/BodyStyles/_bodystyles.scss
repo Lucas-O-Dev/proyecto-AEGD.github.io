@@ -1,5 +1,12 @@
-body{
+// Importa la fuente
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+// Define una variable para la fuente
+$fuente-proyecto: 'Roboto', sans-serif;
+
+// Aplica la fuente al selector body
+body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+  font-family: $fuente-proyecto;
 }

@@ -1,61 +1,50 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import {setDoc, updateDoc, doc} from 'firebase/firestore'
+import {setDoc, doc} from 'firebase/firestore'
 import {db} from '../../../Firebase/Config'
 import 'react-toastify/dist/ReactToastify.css';
 
 const  Empleador = () => {
 
     const [name,setName] = useState ("")
-    const [email, setEmail] = useState("")
+    const [emailPersonal, setEmailPersonal] = useState("")
     const [localidad,setLocalidad] = useState ("")
     const [direccion, setDireccion] = useState("")
     const [numeroTelefonico, setNumeroTelefonico] = useState("")
+    const [rol, setRol] = useState(""); // Nuevo estado para el rol
 
     const navigate = useNavigate();
 
     const setUpdateRef = doc(db, 'users/mediaId4');
 
-    const editButton = async () =>{
-
-        try {
-            await updateDoc(setUpdateRef, {
-                name:name,
-                email:email,
-                localidad:localidad,
-                direccion:direccion,
-                numeroTelefonico:numeroTelefonico
-            })
-
-        // Mostrar notificación Toastify
-        toast.success('Datos Editados Correctamente.', {
-        onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
-        });
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const setButton = async () =>{
+    const setButton = async () => {
         try {
             await setDoc(setUpdateRef, {
-                name:name,
-                email:email,
-                localidad:localidad,
-                direccion:direccion,
-                numeroTelefonico:numeroTelefonico
+                name: name,
+                emailPersonal: emailPersonal,
+                localidad: localidad,
+                direccion: direccion,
+                numeroTelefonico: numeroTelefonico,
+                rol: rol // Incluir el rol en el nuevo documento
             })
-
-        // Mostrar notificación Toastify
-        toast.success('¡Formulario enviado con éxito!', {
-        onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
-        });
+    
+            // Determinar la ruta a la que se debe redirigir dependiendo del rol
+            let redirectTo = '/Home'; // Ruta por defecto
+            if (rol === 'empleado') {
+                redirectTo = '/empleado'; // Redirigir a la ruta del panel de administrador
+            } else if (rol === 'empleador') {
+                redirectTo = '/empleador'; // Redirigir a la ruta del panel de empleado
+            }
+    
+            // Mostrar notificación Toastify y redirigir a la ruta adecuada
+            toast.success('¡Formulario enviado con éxito!', {
+                onClose: () => navigate(redirectTo) // Navegar a la ruta especificada cuando se cierre la notificación
+            });
         } catch (error) {
             console.log(error)
         }
     }
-
     return (
         <div>
 
@@ -76,28 +65,36 @@ const  Empleador = () => {
                     <label htmlFor="email">Correo electrónico:</label>
                     <input
                         type="email"
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setEmailPersonal(e.target.value)}
                         required
                     />
 
-                    <label htmlFor="email">Localidad</label>
+                    <label htmlFor="localidad">Localidad</label>
                     <input
                     type="email"
                     onChange={(e) => setLocalidad(e.target.value)}
                     required
                     />
 
-                    <label htmlFor="email">direccion</label>
+                    <label htmlFor="direccion">direccion</label>
                     <input
                     type="email"
                     onChange={(e) => setDireccion(e.target.value)}
                     required
                     />
 
-                    <label htmlFor="email">numeroTelefonico</label>
+                    <label htmlFor="numerotelefonico">numeroTelefonico</label>
                     <input
                     type="email"
                     onChange={(e) => setNumeroTelefonico(e.target.value)}
+                    required
+                    />
+
+                    <label htmlFor="rol">Rol:</label>
+                    <input
+                    type="text"
+                    placeholder="'¿empleado o empleador?"
+                    onChange={(e) => setRol(e.target.value)}
                     required
                     />
 
@@ -105,7 +102,6 @@ const  Empleador = () => {
             </section>
 
             <section>
-                <button onClick={editButton}>editButton</button>
                 <button onClick={setButton}>setButton</button>
             </section>
         </div>

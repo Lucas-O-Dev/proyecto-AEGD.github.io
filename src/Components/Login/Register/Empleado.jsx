@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
-import {setDoc, updateDoc, doc} from 'firebase/firestore'
+import {updateDoc, doc} from 'firebase/firestore'
 import {db} from '../../../../Firebase/Config'
 import { toast } from 'react-toastify'; // Agrega esta línea
 
@@ -15,7 +15,7 @@ const Empleado = () => {
 
     const navigate = useNavigate()
 
-    const setUpdateRef = doc(db, 'users/empleado1');
+    const setUpdateRef = doc(db, 'users/mediaId4');
 
     const editButton = async () =>{
 
@@ -29,27 +29,9 @@ const Empleado = () => {
             })
 
         // Mostrar notificación Toastify
-        toast.success('Datos Editados Correctamente.', {
-        });
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const setButton = async () =>{
-        try {
-            await setDoc(setUpdateRef, {
-                estudiosPrimarios:estudiosPrimarios,
-                estudiosSecundarios:estudiosSecundarios,
-                estudiosTerciarios:estudiosTerciarios,
-                estudiosUniversitarios:estudiosUniversitarios,
-                experienciasLaborales:experienciasLaborales
-            })
-
-        // Mostrar notificación Toastify
         toast.success('¡Formulario enviado con éxito!', {
-        onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
-        });
+            onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
+            });
         } catch (error) {
             console.log(error)
         }
@@ -114,7 +96,6 @@ const Empleado = () => {
 
         <section>
         <button onClick={editButton}>editButton</button>
-        <button onClick={setButton}>setButton</button>
         </section></>
     )
 }

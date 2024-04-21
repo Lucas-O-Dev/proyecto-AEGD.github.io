@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { auth } from '../../../Firebase/Config';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import SignOutButton from './SignOutButton';
+import './StylesLogin/_login.scss'
 
 console.log('Auth inicializado:', auth); // Verifica si auth se está inicializando correctamente
 
@@ -33,13 +34,18 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <section>
-        <h3>Inicia Sesión</h3>
-        <article>
-          <form onSubmit={funcAutentication}>
-            <input type="text" placeholder="Ingresar Email" id="email" />
-            <input type="password" placeholder="Ingresar Pass" id="password" />
+    <div className='conteinerPrincipalLogin'>
+
+      <section className='sectionOneLogin'>
+        <h2>Inicia Sesión</h2>
+        <article className='articleOneLogin'>
+          <form onSubmit={funcAutentication} className='formOneLogin'>
+              <div className="coolinput">
+              <label for="input" className="text">Name:</label>
+              <input type="text" placeholder="Email" name="input" className="input" id='email'/>
+              <label for="contraseña" className="text">Contraseña</label>
+              <input type="text" placeholder="Contraseña" name="contraseña" className="input" id='password'/>
+              </div>
             <button type='submit'>Loguearse</button>
           </form>
           {error && <p>{error}</p>} {/* Mostrar mensaje de error si hay un error de autenticación */}
@@ -47,8 +53,8 @@ const Login = () => {
         </article>
       </section>
 
-      <section>
-      <Link to={'/Register'} >¿No tienes una cuenta?</Link>
+      <section className='sectionTwoLogin'>
+      <Link to={'/Register'} ><p>¿No tienes una cuenta?</p></Link>
       </section>
       
     </div>

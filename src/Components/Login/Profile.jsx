@@ -1,12 +1,13 @@
 import React from 'react'
+import './StylesLogin/_profile.scss'
 import { Link } from 'react-router-dom'
 
 const Profile = () => {
   return (
-    <div>
-        <section>
+    <div className='conteinerPrincipalProfile'>
+        <section className='sectionOneProfile'>
         <h1>Perfil</h1>
-        <Link to="/PersonalData">Datos Personales</Link>
+        <Link to="/EditInfoUserDatabase">¿Deseas realizar algún cambio en tus datos?</Link>
         </section>
     </div>
   )

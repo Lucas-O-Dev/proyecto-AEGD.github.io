@@ -1,4 +1,5 @@
 import React from 'react';
+import './StylesLogin/_signoutbutton.scss'
 import { auth } from '../../../Firebase/Config'; // Asegúrate de importar 'auth' desde tu configuración de Firebase
 
 const SignOutButton = () => {
@@ -13,7 +14,7 @@ const SignOutButton = () => {
   };
 
   return (
-    <button onClick={handleSignOut}>Sign Out</button>
+    <button onClick={handleSignOut} className='Btn'>Sign Out</button>
   );
 };
 

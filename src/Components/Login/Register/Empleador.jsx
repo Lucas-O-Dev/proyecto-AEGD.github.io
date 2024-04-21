@@ -1,136 +1,123 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import {setDoc, updateDoc, doc} from 'firebase/firestore'
+import {updateDoc, doc} from 'firebase/firestore'
 import {db} from '../../../../Firebase/Config'
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify'; // Agrega esta línea
 
- const  Empleador = () => {
+const Empleador = () => {
 
-    const [name,setName] = useState ("")
-    const [email, setEmail] = useState("")
+    const [cuit, setCuit] = useState("")
+    const [direccionEmpresa,setDireccionEmpresa] = useState("")
+    const [razonSocial,setRazonSocial] = useState("")
+    const [nombreDeFantasia,setNombreDeFantasia] = useState("")
+    const [emailEmpresa,setEmailEmpresa] = useState("")
+    const [numeroTelefonicoEmpresa,setNumeroTelefonicoEmpresa] = useState("")
+    const [nacimiento,setNacimiento] = useState("")
+    const [nacionalidad,setNacionalidad] = useState("")
+    const [dni,setDni] = useState("")
 
-    const navigate = useNavigate();
 
-    const setUpdateRef = doc(db, 'users/mediaId1');
+    const navigate = useNavigate()
+
+    const setUpdateRef = doc(db, 'users/mediaId4');
 
     const editButton = async () =>{
 
         try {
             await updateDoc(setUpdateRef, {
-                name:name,
-                email:email
-            })
-
-        // Mostrar notificación Toastify
-        toast.success('Datos Editados Correctamente.', {
-        onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
-        });
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const setButton = async () =>{
-        try {
-            await setDoc(setUpdateRef, {
-                name:name,
-                email:email
+                cuit:cuit,
+                direccionEmpresa:direccionEmpresa,
+                razonSocial,
+                nombreDeFantasia:nombreDeFantasia,
+                emailEmpresa:emailEmpresa,
+                numeroTelefonicoEmpresa:numeroTelefonicoEmpresa
             })
 
         // Mostrar notificación Toastify
         toast.success('¡Formulario enviado con éxito!', {
-        onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
-        });
+            onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
+            });
         } catch (error) {
             console.log(error)
         }
     }
 
-    return (
-        <div>
+    return(
 
+<>
+<section>
             <article>
-            <p>Perfecto, eres empleador.</p>
-            <p>A continuación te pediremos los datos de tu empresa.</p>
+                <p>Perfecto, eres empleador.</p>
+                <p>A continuación te pediremos los datos de tu empresa.</p>
             </article>
 
-            <section>
             <div>
-                    <label htmlFor="name">Nombre y Apellido:</label>
-                    <input
-                        type="text"
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-                </div>
-                <label htmlFor="email">Correo electrónico:</label>
-                    <input
-                        type="email"
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-            </section>
+            <label htmlFor="name">cuit</label>
+            <input
+            type="text"
+            onChange={(e) => setCuit(e.target.value)}
+            required
+            />
+            </div>
 
-            <section>
-                <button onClick={editButton}>editButton</button>
-                <button onClick={setButton}>setButton</button>
-            </section>
-        </div>
+            <div>
+            <label htmlFor="name">direccion de la Empresa</label>
+            <input
+            type="text"
+            onChange={(e) => setDireccionEmpresa(e.target.value)}
+            required
+            />
+            </div>
+
+            <div>
+            <label htmlFor="name">razonSocial</label>
+            <input
+            type="text"
+            onChange={(e) => setRazonSocial(e.target.value)}
+            />
+            </div>
+
+            <div>
+            <label htmlFor="name">nombreDeFantasia</label>
+            <input
+            type="text"
+            onChange={(e) => setNombreDeFantasia(e.target.value)}
+            required
+            />
+            </div>
+
+            <div>
+            <label htmlFor="name">emailEmpresa</label>
+            <input
+            type="text"
+            onChange={(e) => setEmailEmpresa(e.target.value)}
+            required
+            />
+            </div>
+
+            <div>
+            <label htmlFor="name">NumeroTelefonicoEmpresa</label>
+            <input
+            type="text"
+            onChange={(e) => setNumeroTelefonicoEmpresa(e.target.value)}
+            required
+            />
+            </div>
+
+            <div>
+            <label htmlFor="name">ComprobanteDeInscripcionAfip</label>
+            <input
+            type="file"
+            required
+            />
+            </div>
+
+        </section>
+
+        <section>
+        <button onClick={editButton}>editButton</button>
+        </section></>
     )
 }
 
 export default Empleador
-
-
-
-
-// import React, { useState } from 'react';
-
-// const Empleador = () => {
-
-//     const navigate = useNavigate();
-
-//     // Definimos los estados para cada input del formulario
-//     const [name, setName] = useState('');
-//     const [email, setEmail] = useState('');
-
-//     const handleSubmit = (event) => {
-//         event.preventDefault();
-//         // Verificar si todos los campos obligatorios están completos
-//         if (!name || !email ) {
-//             setError('Por favor, complete todos los campos obligatorios.');
-//             return;
-//         }
-
-//     // Recopilar los valores de todos los inputs
-//     const formData = {
-//         name,
-//         email
-//         };
-//         // Imprimir los valores en la consola
-//         console.log('Datos enviados:', formData);
-
-
-//     };
-
-//   return (
-//     <div>
-//         <section>
-            
-//             <article>
-//                 <form onSubmit={handleSubmit}>
-
-//                 <div>
-//                 </div>
-
-//                 <button type="submit">Enviar</button>
-
-//                 </form>
-//             </article>
-//         </section>
-//     </div>
-//   )
-// }
-
-// export default Empleador
