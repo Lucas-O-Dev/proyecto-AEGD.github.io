@@ -5,16 +5,18 @@ justify-content: center; /* Centra verticalmente */
 align-items: center; /* Centra horizontalmente */
 height: 100vh;
 background-color: #fefae0; /* Corrección de la sintaxis del color */
-
+background-image: url(../../../assets/pexels-krakograff-textures-124842124-9990209.jpg);
+background-position: center;
+background-size: cover;
 .sectionOneLogin {
     display: flex;
-    background-color: #faedcd; /* Corrección de la sintaxis del color */
-    justify-content: center;
-    align-items: center;
+    padding: 60px;
     flex-direction: column;
-    border: 1px solid black;
-    width: 80%;
-    padding: 0.75rem;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 2rem;
+    border-radius: 8%;
+    background-color: rgba(255, 255, 255, 0.5); /* Blanco semi-transparente */
 
     .articleOneLogin {
         display: flex;
@@ -44,7 +46,7 @@ background-color: #fefae0; /* Corrección de la sintaxis del color */
                 width: fit-content;
                 }
                 
-                .coolinput input[type=text].input {
+                .coolinput input.input {
                 padding: 11px 10px;
                 font-size: 0.75rem;
                 border: 2px #818CF8 solid;
@@ -52,7 +54,7 @@ background-color: #fefae0; /* Corrección de la sintaxis del color */
                 background: #e8e8e8;
                 }
                 
-                .coolinput input[type=text].input:focus {
+                .coolinput input.input:focus {
                 outline: none;
                 }
         }
@@ -71,7 +73,7 @@ background-color: #fefae0; /* Corrección de la sintaxis del color */
         }
         p {
             font-size: 1.25rem;
-            color: #9bb55f;
+            color: black;
         }
     }
 }

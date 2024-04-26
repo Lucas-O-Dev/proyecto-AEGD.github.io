@@ -14,6 +14,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './Components/Navbar/Navbar'; // Importa la Navbar
 import EditInfoUserDatabase from './Components/Login/EditInfoUserDatabase';
+import Jobs from './Components/Jobs/Jobs';
+import AddJobs from './Components/Jobs/AddJobs/AddJobs';
+import Courses from './Components/Courses/Courses';
+import CourseDetails from './Components/Courses/CourseDetails'
 
 function App() {
 
@@ -29,6 +33,10 @@ function App() {
           <Route path="/Empleado" element={<WithNavbar><Empleado /></WithNavbar>} />
           <Route path="/Empleador" element={<WithNavbar><Empleador /></WithNavbar>} />
           <Route path="/EditInfoUserDatabase" element={<WithNavbar><EditInfoUserDatabase /></WithNavbar>} />
+          <Route path="/Jobs" element={<WithNavbar><Jobs /></WithNavbar>} />
+          <Route path="/AddJobs" element={<WithNavbar><AddJobs /></WithNavbar>} />
+          <Route path="/Courses" element={<WithNavbar><Courses /></WithNavbar>} />
+          <Route path="/course/:id" element={<WithNavbar><CourseDetails /></WithNavbar>} />
           {/* Otras rutas */}
           <Route path="/" element={<Landing />} />
           <Route path="/Login" element={<Login />} />

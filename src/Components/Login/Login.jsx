@@ -44,7 +44,7 @@ const Login = () => {
               <label for="input" className="text">Name:</label>
               <input type="text" placeholder="Email" name="input" className="input" id='email'/>
               <label for="contraseña" className="text">Contraseña</label>
-              <input type="text" placeholder="Contraseña" name="contraseña" className="input" id='password'/>
+              <input type="password" placeholder="Contraseña" name="contraseña" className="input" id='password'/>
               </div>
             <button type='submit'>Loguearse</button>
           </form>

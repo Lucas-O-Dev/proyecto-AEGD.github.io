@@ -27,9 +27,6 @@ const Navbar = () => {
             <StyledLink to="/Courses"><h3>
             Cursos 
             </h3></StyledLink>
-            <StyledLink to="/curriculums"><h3>
-            Curriculums
-            </h3></StyledLink>
             <StyledLink to="/Jobs"><h3>
             Ofertas Laborales
             </h3></StyledLink>

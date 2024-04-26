@@ -1,13 +1,23 @@
-import React from "react"
-import './_home.scss'
+import React from "react";
+import "./_home.scss";
+import SecondContainerSonHome from "./SecondContainerSonHome";
+import ThirdContainerSonHome from "./ThirdContainerSonHome";
+import FirstContainerSonHome from "./FirstContainerSonHome";
+import FourthContainerSonHome from "./FourthContainerSonHome";
 
 const Home = () => {
-    return (
-        <div className="containerTitleHome">
-            <h1>Asociación Empresarial</h1>
-            <h2>¿Quiénes somos?</h2>
-        </div>
-    )
-}
 
-export default Home
+  return (
+<>
+<div className="containerPrincipalHome">
+
+      <FirstContainerSonHome/>
+      <SecondContainerSonHome/>
+      <ThirdContainerSonHome/>
+      <FourthContainerSonHome/>
+    </div>
+    </>
+  );
+};
+
+export default Home;
