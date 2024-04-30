@@ -4,6 +4,7 @@ import {signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import SignOutButton from './SignOutButton';
 import './StylesLogin/_login.scss'
+import LogInButton from './LogInButton';
 
 console.log('Auth inicializado:', auth); // Verifica si auth se está inicializando correctamente
 
@@ -46,15 +47,15 @@ const Login = () => {
               <label for="contraseña" className="text">Contraseña</label>
               <input type="password" placeholder="Contraseña" name="contraseña" className="input" id='password'/>
               </div>
-            <button type='submit'>Loguearse</button>
+              <LogInButton/>
           </form>
+          <p>¿Olvidaste tu contraseña?</p>
           {error && <p>{error}</p>} {/* Mostrar mensaje de error si hay un error de autenticación */}
           <SignOutButton />
+          <article className='sectionTwoLogin'>
+            <Link to={'/Register'} ><p>Crear cuenta.</p></Link>
+          </article>
         </article>
-      </section>
-
-      <section className='sectionTwoLogin'>
-      <Link to={'/Register'} ><p>¿No tienes una cuenta?</p></Link>
       </section>
       
     </div>

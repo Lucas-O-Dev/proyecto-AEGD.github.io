@@ -1,0 +1,23 @@
+.FirstContainerSonHome{
+    display: flex;
+    flex-direction: row;
+    section{
+        font-size: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 380px;
+        border: 2px solid red;
+    }
+    .sectionSecondFirstContainerSonHome{
+        .articleSecondFirstContainerSonHome{
+            height: 100%;
+            width: 100%;
+            background-image: url(../../assets/imghomeempleo.png);
+            background-position: center;
+            background-size: cover;
+        }
+    }
+}

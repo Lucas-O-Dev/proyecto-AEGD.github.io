@@ -2,7 +2,7 @@ import React from 'react'
 import {Link}  from 'react-router-dom'
 import logoIcon from '../../assets/slack.svg'
 import userIcon from '../../assets/user.svg'
-import loginIcon from '../../assets/icons8-connectivity-and-help-skin-type-1-100.png'
+import loginIcon from '../../assets/icons8-handshake-100.png'
 import './_sectiononelanding.scss'
 
 const SectionOneLanding = () => {
@@ -18,11 +18,12 @@ const SectionOneLanding = () => {
   </article>
 
   <article className='articleParrafoLanding '>
-  <p>Encuentra  tu próximo empleo!</p>
+  <p>Conectá con tu próximo empleo!</p>
   </article>
 
   <article className='articleButtonLoginLanding'>
   <Link to="/Login"><img src={loginIcon} alt="user-icon" height="60px" width="60px" /></Link>
+  <p>Click Aquí.</p>
   </article>
 
 </section>

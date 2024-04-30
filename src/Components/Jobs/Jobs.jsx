@@ -4,6 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../Firebase/Config";
 import '../Jobs/_jobs.scss'
 import FirstArticleJobs from "./FirstArticleJobs";
+import FirstSectionJobs from "./FirstSectionJobs";
 
 const Jobs = () => {
 
@@ -33,7 +34,9 @@ const Jobs = () => {
 return (
 <div className="conteinerJobs">
 
-<FirstArticleJobs/>
+{/* <FirstArticleJobs/> */}
+
+<FirstSectionJobs/>
 
 <p>Ofertas Laborales</p>
 <JobsList trabajos={jobs}/>

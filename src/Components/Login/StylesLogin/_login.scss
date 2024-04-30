@@ -14,7 +14,7 @@ background-size: cover;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 2rem;
+    margin-top: 12px;
     border-radius: 8%;
     background-color: rgba(255, 255, 255, 0.5); /* Blanco semi-transparente */
 
@@ -74,6 +74,7 @@ background-size: cover;
         p {
             font-size: 1.25rem;
             color: black;
+            font-weight: bold;
         }
     }
 }

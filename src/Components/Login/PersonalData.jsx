@@ -10,7 +10,6 @@ const  Empleador = () => {
     const [name,setName] = useState ("")
     const [emailPersonal, setEmailPersonal] = useState("")
     const [localidad,setLocalidad] = useState ("")
-    const [direccion, setDireccion] = useState("")
     const [numeroTelefonico, setNumeroTelefonico] = useState("")
     const [rol, setRol] = useState(""); // Nuevo estado para el rol
 
@@ -24,7 +23,6 @@ const  Empleador = () => {
                 name: name,
                 emailPersonal: emailPersonal,
                 localidad: localidad,
-                direccion: direccion,
                 numeroTelefonico: numeroTelefonico,
                 rol: rol // Incluir el rol en el nuevo documento
             })
@@ -73,13 +71,6 @@ const  Empleador = () => {
                     <input
                     type="email"
                     onChange={(e) => setLocalidad(e.target.value)}
-                    required
-                    />
-
-                    <label htmlFor="direccion">direccion</label>
-                    <input
-                    type="email"
-                    onChange={(e) => setDireccion(e.target.value)}
                     required
                     />
 

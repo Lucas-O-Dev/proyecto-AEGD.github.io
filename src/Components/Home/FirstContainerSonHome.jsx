@@ -1,4 +1,5 @@
 import React from 'react'
+import './_firstcontainersonhome.scss'
 
 const FirstContainerSonHome = () => {
   return (
@@ -11,9 +12,8 @@ const FirstContainerSonHome = () => {
       <article>En este momento: ¡Hay 99 oportunidades! Y contando...</article>
     </section>
 
-    <section>
-      <article>
-        <p>Imagen</p>
+    <section className='sectionSecondFirstContainerSonHome'>
+      <article className='articleSecondFirstContainerSonHome'>
       </article>
     </section>
 
