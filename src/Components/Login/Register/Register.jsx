@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -29,6 +29,9 @@ const Register = () => {
     try {
       const auth = getAuth();
       await createUserWithEmailAndPassword(auth, correo, contraseña);
+        await sendEmailVerification(auth.currentUser).then (() => {
+          console.log("email enviado")
+        })
       console.log('Usuario registrado con éxito');
       navigate('/PersonalData');
     } catch (error) {

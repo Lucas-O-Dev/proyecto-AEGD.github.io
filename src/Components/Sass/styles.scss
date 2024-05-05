@@ -1,19 +1,34 @@
 @import '../Courses/courses';
 @import '../Courses/courseslist';
 @import '../Courses/coursedetails';
+
 @import '../Home/home';
-@import '../Login/login';
+@import '../Home/firstcontainersonhome';
+@import '../Home/secondcontainersonhome';
+@import '../Home/thirdcontainersonhome';
+@import '../Home/fourthcontainersonhome';
+
 @import '../Navbar/navbar';
+
 @import '../BodyStyles/bodystyles';
+
 @import '../Cart/cart';
+
 @import '../Curriculums/curriculums';
+@import '../Curriculums/PDFS/pdf';
+
 @import '../Jobs/jobs';
 @import '../Jobs/jobslist';
 @import '../Jobs/AddJobs/addjobs';
-@import '../Curriculums/PDFS/pdf';
-@import '../Login/StylesLogin/loginview';
+@import '../Jobs/firstsectionjobs';
+
 @import '../Login/StylesLogin/dashboardwrapper';
-@import '../Landing/landing';
-@import '../Login//StylesLogin//login';
+@import '../Login/StylesLogin/login';
+@import '../Login/StylesLogin/loginbutton';
+@import '../Login/StylesLogin/loginview';
+@import '../Login/StylesLogin/profile';
 @import '../Login/StylesLogin/signoutbutton';
-@import '../Login//StylesLogin//profile';
+
+@import '../Landing/landing';
+@import '../Landing/sectiononelanding';
+@import '../Landing/sectionsecondlanding';

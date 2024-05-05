@@ -18,7 +18,9 @@
         display: flex;
     }
     .articleButtonLoginLanding {
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         padding: 10px;
         transition: transform 0.3s ease;
       
@@ -30,6 +32,15 @@
         // Estilos para la animación cuando el mouse sale del área
         &:not(:hover) {
           transition: transform 0.3s ease; // Aplica la misma transición cuando el hover no está activo
+        }
+
+        a{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+           img{
+            width: 100%;
+           }
         }
     }
 }

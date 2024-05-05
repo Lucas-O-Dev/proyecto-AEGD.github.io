@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
 import {updateDoc, doc} from 'firebase/firestore'
-import {db} from '../../../../Firebase/Config'
+import {db,auth} from '../../../../Firebase/Config'
 import { toast } from 'react-toastify'; // Agrega esta línea
 
 
@@ -12,10 +12,21 @@ const Empleado = () => {
     const [estudiosTerciarios, setEstudiosTerciarios] = useState("")
     const [estudiosUniversitarios, setEstudiosUniversitarios] = useState("")
     const [experienciasLaborales, setExperienciasLaborales] = useState("")
-
+    const [userUID, setUserUID] = useState(null); // Estado para almacenar el UID del usuario
     const navigate = useNavigate()
 
-    const setUpdateRef = doc(db, 'users/mediaId4');
+   // Obtener el UID del usuario actual al cargar el componente
+   useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+        if (user) {
+            setUserUID(user.uid);
+        }
+    });
+    return () => unsubscribe();
+}, []);
+
+// Referencia al documento en Firestore usando el UID del usuario
+const setUpdateRef = userUID ? doc(db, `users/${userUID}`) : null;
 
     const editButton = async () =>{
 
