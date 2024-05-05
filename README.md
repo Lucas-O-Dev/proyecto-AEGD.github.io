@@ -1,8 +1,17 @@
-# React + Vite
+# Proyecto Conectá
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+"We will help both companies and employees to fill a job position."
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Introduction](#introduction)
+- [Features](#features)
+
+## Introduction
+
+"We are committed to helping individuals have a positive experience when searching for job opportunities."
+
+## Features
+
+"You will be able to upload your Curriculum Vitae to our database to be found by employers."
+"You will be able to find job opportunities in the area where you live."
