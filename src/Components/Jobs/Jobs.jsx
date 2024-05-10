@@ -6,6 +6,7 @@ import '../Jobs/_jobs.scss'
 import FirstArticleJobs from "./FirstArticleJobs";
 import FirstSectionJobs from "./FirstSectionJobs";
 
+
 const Jobs = () => {
 
     const [jobs,setJobs] = useState([]);
@@ -34,7 +35,7 @@ const Jobs = () => {
 return (
 <div className="conteinerJobs">
 
-{/* <FirstArticleJobs/> */}
+<FirstArticleJobs/>
 
 <FirstSectionJobs/>
 

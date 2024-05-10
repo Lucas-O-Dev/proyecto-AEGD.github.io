@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
+import { Select } from '@chakra-ui/react'
 import './_addjobs.scss';
 import Company from '../Company';
+import ObtenerFechaActual from './ObtenerFechaActual';
 
 const AddJobs = () => {
     const [inputValues, setInputValues] = useState({
-        Empresa: '',
-        Puesto: '',
-        Tiempo: '',
-        Localidad: '',
-        Requerimientos: '',
-        Duración: ''
+        descripciondelpuesto: '',
+        jornadaLaboral: '',
+        experienciaRequerida: '',
+        duracion: '',
+        sueldo: '',
+        nivelEducativo: '',
+        modalidad: '',
+        localidad: '',
+        rubro: ''
     });
     const [showValuesInTemplate, setShowValuesInTemplate] = useState(false);
 
@@ -38,82 +43,120 @@ const AddJobs = () => {
                 <div className="containerAddJobs">
                     <div className="containerFormAddJobs">
                         <p>Agrega tu oferta laboral aquí.</p>
+                        <ObtenerFechaActual />
                         <form onSubmit={handleSubmit}>
                             <div className='containerInputAddJobs'>
-                                <label htmlFor="Empresa">Empresa</label>
+                                <label htmlFor="descripciondelpuesto">Descripción del puesto.</label>
                                 <input
                                     type="text"
-                                    id="Empresa"
-                                    name="Empresa"
-                                    value={inputValues.Empresa}
+                                    id="descripciondelpuesto"
+                                    name="descripciondelpuesto"
+                                    value={inputValues.descripciondelpuesto}
                                     onChange={handleInputChange}
-                                    placeholder="El nombre de tu empresa..."
+                                    placeholder="descripcion del puesto"
                                 />
                             </div>
                             <div className='containerInputAddJobs'>
-                                <label htmlFor="Puesto">Puesto</label>
+                                <label htmlFor="jornadaLaboral">Jornada Laboral</label>
                                 <input
                                     type="text"
-                                    id="Puesto"
-                                    name="Puesto"
-                                    value={inputValues.Puesto}
+                                    id="jornadaLaboral"
+                                    name="jornadaLaboral"
+                                    value={inputValues.jornadaLaboral}
                                     onChange={handleInputChange}
-                                    placeholder="Mantenimiento y Limpieza..."
+                                    placeholder="tiempo completo, medio-tiempo.."
                                 />
                             </div>
                             <div className='containerInputAddJobs'>
-                                <label htmlFor="Tiempo">Tiempo</label>
+                                <label htmlFor="experienciaRequerida">Experiencia Requerida</label>
                                 <input
                                     type="text"
-                                    id="Tiempo"
-                                    name="Tiempo"
-                                    value={inputValues.Tiempo}
+                                    id="experienciaRequerida"
+                                    name="experienciaRequerida"
+                                    value={inputValues.experienciaRequerida}
                                     onChange={handleInputChange}
-                                    placeholder="Tiempo Completo, Por Hora..."
+                                    placeholder="experiencia"
                                 />
                             </div>
                             <div className='containerInputAddJobs'>
-                                <label htmlFor="Localidad">Localidad</label>
+                                <label htmlFor="duracion">Duración</label>
                                 <input
                                     type="text"
-                                    id="Localidad"
-                                    name="Localidad"
-                                    value={inputValues.Localidad}
+                                    id="duracion"
+                                    name="duracion"
+                                    value={inputValues.duracion}
                                     onChange={handleInputChange}
-                                    placeholder="Tu Ubicación..."
+                                    placeholder="3 meses, 6 meses..."
                                 />
                             </div>
 
                             {/* Nuevos inputs */}
                             <div className='containerInputAddJobs'>
-                                <label htmlFor="Requerimientos">Requerimientos</label>
+                                <label htmlFor="sueldo">Sueldo. (opcional)</label>
                                 <input
                                     type="text"
-                                    id="Requerimientos"
-                                    name="Requerimientos"
-                                    value={inputValues.Requerimientos}
+                                    id="sueldo"
+                                    name="sueldo"
+                                    value={inputValues.sueldo}
                                     onChange={handleInputChange}
-                                    placeholder="Habilidades"
+                                    placeholder="870.000 $"
                                 />
                             </div>
                             <div className='containerInputAddJobs'>
-                                <label htmlFor="Duración">Duración</label>
+                                <label htmlFor="nivelEducativo">Nivel educativo mínimo</label>
                                 <input
                                     type="text"
-                                    id="Duración"
-                                    name="Duración"
-                                    value={inputValues.Duración}
+                                    id="nivelEducativo"
+                                    name="nivelEducativo"
+                                    value={inputValues.nivelEducativo}
                                     onChange={handleInputChange}
-                                    placeholder="3 Meses, 6 Meses, 1 Año o Más..."
+                                    placeholder="nivel Educativo"
                                 />
+                            </div>
+                            <div className='containerInputAddJobs'>
+                                <label htmlFor="modalidad">Modalidad</label>
+                                <input
+                                    type="text"
+                                    id="modalidad"
+                                    name="modalidad"
+                                    value={inputValues.modalidad}
+                                    onChange={handleInputChange}
+                                    placeholder="Presencial o a Distancia"
+                                />
+                            </div>
+
+                            <div className='containerInputAddJobs'>
+                                <label htmlFor="localidad">Localidad</label>
+                                <input
+                                    type="text"
+                                    id="localidad"
+                                    name="localidad"
+                                    value={inputValues.localidad}
+                                    onChange={handleInputChange}
+                                    placeholder="Zona"
+                                />
+                            </div>
+
+                            <div className="containerInputAddJobs">
+                            <Select
+    placeholder='Rubros'
+    value={inputValues.rubro} // Establece el valor seleccionado del Select
+    onChange={(e) => setInputValues({ ...inputValues, rubro: e.target.value })} // Actualiza inputValues con el valor seleccionado
+>
+    <option value="Agronomía">Agronomía</option>
+    <option value="Programación">Programación</option>
+    <option value="Construcción">Construcción</option>
+    <option value="Administración">Administración</option>
+    <option value="Metalúrgica">Metalúrgica</option>
+    <option value="Empleado de Comercio">Empleado de Comercio</option>
+    <option value="Varios">Varios</option>
+</Select>
+
                             </div>
 
                             <button type="submit">Aceptar</button>
                         </form>
-                        <p>Template</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
-                        </svg>
+
                     </div>
                 </div>
                 <div className="containerTemplate">
@@ -121,13 +164,16 @@ const AddJobs = () => {
                         <h3>Template</h3>
                         {showValuesInTemplate && (
                                 <article>
-                                    <h2>{inputValues.Empresa}</h2>
-                                    <p>{inputValues.Puesto}</p>
-                                    <p>{inputValues.Localidad}</p>
-                                    <p>{inputValues.Tiempo}</p>
+                                    <p>Descripción del puesto: {inputValues.descripciondelpuesto}</p>
+                                    <p>Jornada Laboral: {inputValues.jornadaLaboral}</p>
+                                    <p>Experiencia Requerida: {inputValues.experienciaRequerida}</p>
+                                    <p>Duracion: {inputValues.duracion}</p>
                                     {/* Mostrar otros campos */}
-                                    <p>{inputValues.Requerimientos}</p>
-                                    <p>{inputValues.Duración}</p>
+                                    <p>Sueldo: {inputValues.sueldo}</p>
+                                    <p>Nivel Educativo: {inputValues.nivelEducativo}</p>
+                                    <p>Modalidad: {inputValues.modalidad}</p>
+                                    <p>Localidad: {inputValues.localidad}</p>
+                                    <p>Rubro: {inputValues.rubro}</p>
                                 </article>
                         )}
                         <div className="containerButtonsTemplate">
@@ -144,7 +190,6 @@ const AddJobs = () => {
 };
 
 export default AddJobs;
-
 
 // import React, { useState } from 'react';
 // import './_addjobs.scss';

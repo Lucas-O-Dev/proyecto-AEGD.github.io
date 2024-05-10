@@ -1,4 +1,6 @@
 import React from 'react';
+// 1. import `ChakraProvider` component
+import { ChakraProvider } from '@chakra-ui/react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './Components/Context/CartContext'; // Importa el proveedor del contexto del carrito
 import './App.css';
@@ -18,10 +20,12 @@ import Jobs from './Components/Jobs/Jobs';
 import AddJobs from './Components/Jobs/AddJobs/AddJobs';
 import Courses from './Components/Courses/Courses';
 import CourseDetails from './Components/Courses/CourseDetails'
+import Curriculums from './Components/Curriculums/Curriculums'
 
 function App() {
 
   return (
+    <ChakraProvider>
     <CartProvider>
       <BrowserRouter>
       <ToastContainer />
@@ -35,6 +39,7 @@ function App() {
           <Route path="/AddJobs" element={<WithNavbar><AddJobs /></WithNavbar>} />
           <Route path="/Courses" element={<WithNavbar><Courses /></WithNavbar>} />
           <Route path="/course/:id" element={<WithNavbar><CourseDetails /></WithNavbar>} />
+          <Route path="/curriculum" element={<WithNavbar><Curriculums /></WithNavbar>} />
           {/* Otras rutas */}
           <Route path="/" element={<Landing />} />
           <Route path="/Login" element={<Login />} />
@@ -44,6 +49,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </CartProvider>
+    </ChakraProvider>
   );
 }
 

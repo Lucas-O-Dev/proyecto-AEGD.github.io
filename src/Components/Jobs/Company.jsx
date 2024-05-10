@@ -9,12 +9,15 @@ const Company = ({ inputValues }) => {
     const handleClick = async () => {
         try {
             await addDoc(collection(db, 'Jobs'), {
-                Empresa: inputValues.Empresa,
-                Puesto: inputValues.Puesto,
-                Localidad: inputValues.Localidad,
-                Tiempo: inputValues.Tiempo,
-                Requerimientos: inputValues.Requerimientos,
-                Duracion: inputValues.Duración
+                descripcion: inputValues.descripciondelpuesto,
+                jornadaLaboral: inputValues.jornadaLaboral,
+                experienciaRequerida: inputValues.experienciaRequerida,
+                duracion: inputValues.duracion,
+                sueldo: inputValues.sueldo,
+                nivelEducativo: inputValues.nivelEducativo,
+                modalidad: inputValues.modalidad,
+                localidad: inputValues.localidad,
+                rubro: inputValues.rubro
             });
             console.log('Documentos agregados correctamente');
             navigate('/Jobs'); // Utiliza navigate en lugar de history.push para redirigir
@@ -30,4 +33,5 @@ const Company = ({ inputValues }) => {
     );
 };
 
-export default Company;
+export default Company;                                 
+

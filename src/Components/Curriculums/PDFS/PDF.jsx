@@ -47,15 +47,27 @@
 // export default PDF
 
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom'
 import './_pdf.scss'
 import jsPDF from 'jspdf';
 
 const MyComponent = () => {
+
+  const navigate = useNavigate()
+  
   const [formData, setFormData] = useState({ 
     name: '', 
     lastName: '', 
     email: '', 
-    phone: ''
+    direccion: '',
+    localidad: '',
+    cp: '',
+    numeroTelefonico: '',
+    estudiosPrimarios: '',
+    estudiosSecundarios: '',
+    estudiosTerciarios: '',
+    estudiosUniversitarios: '',
+    experienciasLaborales: ''
   });
 
   const handleChange = (e) => {
@@ -76,11 +88,14 @@ const MyComponent = () => {
 
     // Mostrar un mensaje en la consola
     console.log('Formulario guardado como formulario.pdf');
+    navigate ('/')
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Nombre:</label>
+
+    <section>
+    <label htmlFor="name">Nombre:</label>
       <input
         type="text"
         id="name"
@@ -104,14 +119,83 @@ const MyComponent = () => {
         value={formData.email}
         onChange={handleChange}
       />
-      <label htmlFor="phone">Teléfono:</label>
+      <label htmlFor="direccion">Dirección:</label>
       <input
         type="text"
-        id="phone"
-        name="phone"
-        value={formData.phone}
+        id="direccion"
+        name="direccion"
+        value={formData.direccion}
         onChange={handleChange}
       />
+            <label htmlFor="localidad">Localidad:</label>
+      <input
+        type="text"
+        id="localidad"
+        name="localidad"
+        value={formData.localidad}
+        onChange={handleChange}
+      />
+            <label htmlFor="cp">Código Postal:</label>
+      <input
+        type="text"
+        id="cp"
+        name="cp"
+        value={formData.cp}
+        onChange={handleChange}
+      />
+    </section>
+
+
+    <section>
+    <label htmlFor="numeroTelefonico">Número Telefónico:</label>
+      <input
+        type="text"
+        id="numeroTelefonico"
+        name="numeroTelefonico"
+        value={formData.numeroTelefonico}
+        onChange={handleChange}
+      />
+      <label htmlFor="estudiosPrimarios">Estudios Primarios:</label>
+      <input
+        type="text"
+        id="estudiosPrimarios"
+        name="estudiosPrimarios"
+        value={formData.estudiosPrimarios}
+        onChange={handleChange}
+      />
+                  <label htmlFor="estudiosSecundarios">Estudios Secundarios:</label>
+      <input
+        type="text"
+        id="estudiosSecundarios"
+        name="estudiosSecundarios"
+        value={formData.estudiosSecundarios}
+        onChange={handleChange}
+      />
+                  <label htmlFor="estudiosTerciarios">Estudios Terciarios:</label>
+      <input
+        type="text"
+        id="estudiosTerciarios"
+        name="estudiosTerciarios"
+        value={formData.estudiosTerciarios}
+        onChange={handleChange}
+      />
+                  <label htmlFor="estudiosUniversitarios">Estudios Universitarios:</label>
+      <input
+        type="text"
+        id="estudiosUniversitarios"
+        name="estudiosUniversitarios"
+        value={formData.estudiosUniversitarios}
+        onChange={handleChange}
+      />
+                  <label htmlFor="experienciasLaborales">Experiencias Laborales:</label>
+      <input
+        type="text"
+        id="experienciasLaborales"
+        name="experienciasLaborales"
+        value={formData.experienciasLaborales}
+        onChange={handleChange}
+      />
+    </section>
       <button type="submit">Guardar y generar PDF</button>
     </form>
   );

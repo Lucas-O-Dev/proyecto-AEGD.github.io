@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 .containerCourses {
   display: flex;
   flex-direction: column;
@@ -108,27 +109,122 @@
   align-items: center;
 }
 
-.containerTitleHome {
+.containerPrincipalHome {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+}
+
+.FirstContainerSonHome {
+  display: flex;
+  flex-direction: row;
+}
+.FirstContainerSonHome section {
+  font-size: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  width: 100%;
+  width: 50%;
+  height: 380px;
+  border: 2px solid red;
 }
-.containerTitleHome h1 {
-  margin: 60px 0;
+.FirstContainerSonHome .sectionSecondFirstContainerSonHome .articleSecondFirstContainerSonHome {
+  height: 100%;
+  width: 100%;
+  background-image: url(../../assets/imghomeempleo.png);
+  background-position: center;
+  background-size: cover;
 }
 
-.containerLogin {
+.SecondContainerSonHome {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center; /* Añadido para centrar horizontalmente */
+  align-items: center; /* Añadido para centrar verticalmente */
+}
+.SecondContainerSonHome section {
+  padding: 16px;
+  margin-top: 20px;
+  font-size: 20px;
+  border: 2px solid blue;
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 9999;
+}
+.popup-content {
+  position: relative;
+}
+.popup .popup-content {
   display: flex;
   flex-direction: column;
-  text-align: center;
+  justify-content: center;
   align-items: center;
-  margin: 0;
-  padding: 0;
+}
+.popup .popup-content section article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.popup .popup-content button {
+  display: flex;
+}
+
+.containerPrincipalThirdContainerSonHome {
+  margin-top: 60px;
+  display: flex;
+  border: 4px solid red;
+  justify-content: space-evenly;
+}
+.containerPrincipalThirdContainerSonHome section {
+  border: 2px solid blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.containerPrincipalThirdContainerSonHome section article {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.containerPrincipalFourthContainerSonHome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 12.5rem;
+  border: 2px solid red;
+  margin-top: 6.25rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.containerPrincipalFourthContainerSonHome section {
+  height: 100%;
+  border: 2px solid green;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 33%;
+  margin: 0 0.625rem;
 }
 
 .conteinerNavbar {
@@ -144,7 +240,7 @@
   margin: 0;
 }
 .conteinerNavbar .containerCategories {
-  gap: 12px;
+  gap: 40px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -180,7 +276,7 @@
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 .containerRouteCurriculums {
@@ -207,6 +303,14 @@ body {
   align-items: center;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.875rem;
+}
+
 .conteinerJobs {
   display: flex;
   margin: 0;
@@ -214,14 +318,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-.conteinerJobs .firstArticleJobs {
-  border: 4px solid red;
-  width: 80%;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 200px;
 }
 
 .containerJobsList {
@@ -233,58 +329,9 @@ body {
   flex-wrap: wrap;
 }
 .containerJobsList .cardJobs {
-  width: 7em; /* Puedes mantener este tamaño fijo si lo deseas */
-  height: 10rem;
-  border-radius: 20px;
-  background: #f5f5f5;
-  position: relative;
-  padding: 1.8rem;
-  border: 2px solid #c3c6ce;
-  transition: 0.5s ease-out;
-  overflow: visible;
-  font-size: 1rem;
-}
-.containerJobsList .cardJobs:hover {
-  border-color: #6c00f8;
-  box-shadow: 10px 5px 18px 0 rgba(255, 255, 255, 0.877);
-}
-.containerJobsList .cardJobs:hover .card-button {
-  transform: translate(-50%, 50%);
-  opacity: 1;
-}
-.containerJobsList .cardJobsDetails {
-  color: rgb(162, 0, 255);
-  height: 100%;
-  gap: 0.5em;
-  display: grid;
-  place-content: center;
-  font-family: "Courier New", Courier, monospace;
-}
-.containerJobsList .card-button {
-  text-decoration: none;
-  text-align: center;
-  transform: translate(-50%, 125%);
-  width: 70%;
-  border-radius: 1rem;
-  border: none;
-  background-color: #6c00f8;
-  color: #fff;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  opacity: 0;
-  transition: 0.3s ease-out;
-  cursor: pointer;
-  font-family: "Courier New", Courier, monospace;
-}
-.containerJobsList .text-body {
-  color: rgb(134, 134, 134);
-}
-.containerJobsList .text-title {
-  font-size: 1.5em;
-  font-weight: bold;
+  display: flex;
+  border: 1px solid lightsalmon;
+  flex-direction: column;
 }
 
 .firstContainerAddJobs {
@@ -368,10 +415,318 @@ body {
   padding: 0.625rem;
 }
 
-form {
+.conteinerFirstSectionJobs {
+  width: 80%;
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.conteinerDashboardWrapper {
+  border: 2px solid blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+}
+.conteinerDashboardWrapper .navbarDashboardWrapper {
+  margin-top: 1.25rem;
+  border: 2px solid lightblue;
+  display: flex;
+  gap: 0.625rem;
+  justify-content: center;
+}
+.conteinerDashboardWrapper .navbarDashboardWrapper a {
+  text-decoration: none;
+  color: black;
+}
+.conteinerDashboardWrapper .conteinerBodyDashboard {
+  margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.875rem;
+}
+.conteinerDashboardWrapper .conteinerBodyDashboard .conteinerLinksDashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 0;
+  gap: 0.625rem;
+}
+.conteinerDashboardWrapper .conteinerBodyDashboard .conteinerLinksDashboard .conteinerTitleLinkDashboard {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 0.375rem;
+}
+.conteinerDashboardWrapper .conteinerBodyDashboard .conteinerLinksDashboard .conteinerUrlLinkDashboard {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 0.375rem;
+}
+
+.conteinerPrincipalLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  height: 100vh;
+  background-color: #fefae0; /* Corrección de la sintaxis del color */
+  background-image: url(../../../assets/pexels-krakograff-textures-124842124-9990209.jpg);
+  background-position: center;
+  background-size: cover;
+}
+.conteinerPrincipalLogin .sectionOneLogin {
+  display: flex;
+  padding: 60px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 12px;
+  border-radius: 8%;
+  background-color: rgba(255, 255, 255, 0.5); /* Blanco semi-transparente */
+}
+.conteinerPrincipalLogin .sectionOneLogin .articleOneLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.conteinerPrincipalLogin .sectionOneLogin .articleOneLogin .formOneLogin {
+  display: flex;
+  margin-bottom: 1.125rem;
+}
+.conteinerPrincipalLogin .sectionOneLogin .articleOneLogin .formOneLogin .coolinput {
+  display: flex;
+  flex-direction: column;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+  max-width: 240px;
+}
+.conteinerPrincipalLogin .sectionOneLogin .articleOneLogin .formOneLogin .coolinput label.text {
+  font-size: 0.75rem;
+  color: #818CF8;
+  font-weight: 700;
+  position: relative;
+  top: 0.5rem;
+  margin: 0 0 0 7px;
+  padding: 0 3px;
+  background: #e8e8e8;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.conteinerPrincipalLogin .sectionOneLogin .articleOneLogin .formOneLogin .coolinput input.input {
+  padding: 11px 10px;
+  font-size: 0.75rem;
+  border: 2px #818CF8 solid;
+  border-radius: 5px;
+  background: #e8e8e8;
+}
+.conteinerPrincipalLogin .sectionOneLogin .articleOneLogin .formOneLogin .coolinput input.input:focus {
+  outline: none;
+}
+.conteinerPrincipalLogin .sectionTwoLogin {
+  margin-top: 1.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+.conteinerPrincipalLogin .sectionTwoLogin a {
+  text-decoration: none;
+}
+.conteinerPrincipalLogin .sectionTwoLogin p {
+  font-size: 1.25rem;
+  color: black;
+  font-weight: bold;
+}
+
+.BtnLogin {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: 0.5s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(163, 142, 255);
+}
+
+/* plus sign */
+.sign {
+  width: 100%;
+  transition-duration: 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign svg {
+  width: 17px;
+}
+
+.sign svg path {
+  fill: white;
+}
+
+/* text */
+.text {
+  position: relative;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: 0.3s;
+}
+
+/* hover effect on button width */
+.BtnLogin:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: 0.3s;
+}
+
+.BtnLogin:hover .sign {
+  width: 30%;
+  transition-duration: 0.3s;
+  padding-left: 20px;
+}
+
+/* hover effect button's text */
+.BtnLogin:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: 0.3s;
+  padding-right: 10px;
+}
+
+/* button click effect*/
+.BtnLogin:active {
+  transform: translate(2px, 2px);
+}
+
+.conteinerLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+.conteinerLogin .signinWithGoogle {
+  margin-top: 3.75rem;
+  float: right;
+  max-width: 320px;
+  display: flex;
+  padding: 0.5rem 1.4rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  vertical-align: middle;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  gap: 0.75rem;
+  color: #c4d2dc;
+  background-color: #19242b;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0, 0.87, 0.12, 1);
+}
+.conteinerLogin .signin:hover {
+  transform: scale(1.025);
+}
+.conteinerLogin .signin:active {
+  transform: scale(0.975);
+}
+.conteinerLogin button svg {
+  height: 24px;
+  width: auto;
+}
+
+.principalConteinerLanding {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: black;
+  background-image: url(../../assets/pexels-krakograff-textures-124842124-20560363.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+.sectionOneLanding {
+  display: flex;
+  padding: 50px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 100px;
+  border-radius: 8%;
+  background-color: rgba(255, 255, 255, 0.5); /* Blanco semi-transparente */
+}
+.sectionOneLanding .articleTitleLanding {
+  font-size: 22px;
+  margin-bottom: 16px;
+  display: flex;
+  color: black;
+}
+.sectionOneLanding .articleParrafoLanding {
+  font-size: 20px;
+  display: flex;
+}
+.sectionOneLanding .articleButtonLoginLanding {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+.sectionOneLanding .articleButtonLoginLanding:hover {
+  transform: scale(1.2);
+}
+.sectionOneLanding .articleButtonLoginLanding:not(:hover) {
+  transition: transform 0.3s ease;
+}
+.sectionOneLanding .articleButtonLoginLanding a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sectionOneLanding .articleButtonLoginLanding a img {
+  width: 100%;
+}
+
+.containerPrincipalSectionSecondLanding {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 96%;
+}
+.containerPrincipalSectionSecondLanding section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.containerPrincipalSectionSecondLanding section article a {
+  color: black;
+  text-decoration: none;
 }/*# sourceMappingURL=styles.css.map */

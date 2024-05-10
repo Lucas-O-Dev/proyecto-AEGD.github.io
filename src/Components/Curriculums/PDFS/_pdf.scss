@@ -1,7 +1,15 @@
 form{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.875rem;
+    border: 2px solid red;
+    width: 90%;
+    section{
+        display: flex;
+        border: 2px solid blue;
+        width: 100%;
+        input{
+            display: flex;
+            width: 60%;
+        }
+    }
 }

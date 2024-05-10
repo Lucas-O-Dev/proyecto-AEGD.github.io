@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@react-pdf/renderer": "^3.3.8",
     "firebase": "^9.23.0",
+    "framer-motion": "^11.1.9",
     "jspdf": "^2.5.1",
     "pdfkit": "^0.14.0",
     "react": "^18.2.0",

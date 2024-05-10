@@ -18,6 +18,10 @@ background-size: cover;
     border-radius: 8%;
     background-color: rgba(255, 255, 255, 0.5); /* Blanco semi-transparente */
 
+    p {
+        margin-bottom: 14px;
+    }
+
     .articleOneLogin {
         display: flex;
         flex-direction: column;

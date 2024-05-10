@@ -22,11 +22,18 @@ const SectionOneLanding = () => {
   </article>
 
   <article className='articleButtonLoginLanding'>
-  <Link to="/Login"><img src={loginIcon} alt="user-icon" height="60px" width="60px" /></Link>
+  <Link to="/Login"><img src={loginIcon} alt="user-icon" height="30px" width="30px" /></Link>
   <p>Click Aquí.</p>
   </article>
 
+
+        <article>
+          <Link to='/curriculum' ><p>Crea tu curriculum ahora de manera gratuita!</p></Link>
+        </article>
+
+
 </section>
+
   )
 }
 
