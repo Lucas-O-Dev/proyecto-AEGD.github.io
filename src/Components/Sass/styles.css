@@ -306,9 +306,16 @@ body {
 form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.875rem;
+  width: 90%;
+}
+form section {
+  display: flex;
+  border: 2px solid blue;
+  width: 100%;
+}
+form section input {
+  display: flex;
+  width: 60%;
 }
 
 .conteinerJobs {
@@ -491,6 +498,9 @@ form {
   margin-top: 12px;
   border-radius: 8%;
   background-color: rgba(255, 255, 255, 0.5); /* Blanco semi-transparente */
+}
+.conteinerPrincipalLogin .sectionOneLogin p {
+  margin-bottom: 14px;
 }
 .conteinerPrincipalLogin .sectionOneLogin .articleOneLogin {
   display: flex;
@@ -699,7 +709,7 @@ form {
   transition: transform 0.3s ease;
 }
 .sectionOneLanding .articleButtonLoginLanding:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 .sectionOneLanding .articleButtonLoginLanding:not(:hover) {
   transition: transform 0.3s ease;
@@ -714,7 +724,6 @@ form {
 }
 
 .containerPrincipalSectionSecondLanding {
-  margin-top: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;

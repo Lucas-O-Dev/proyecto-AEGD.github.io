@@ -1,50 +1,4 @@
-// import {
-//     Document,
-//     Text,
-//     Page,
-//     StyleSheet,
-//     Image,
-//     View
-// } from '@react-pdf/renderer'
 
-// import myImage from './pngegg.png'
-
-// const styles = StyleSheet.create ({
-//     page: {
-//         display: "flex",
-//         backgroundColor:"#E4E4E4"
-//     },
-//     section: {
-//         display: "flex",
-//         flexDirection: "row",
-//         margin: 10,
-//         padding: 10,
-//         flexGrow: 1
-//     },
-//     title: {
-//         fontSize: 24,
-//         textAlign: "center",
-//         fontWeight: "bold"
-//     }
-// })
-// function PDF() {
-//     return (
-//         <Document>
-//             <Page style={styles.page}>
-//                 <Text style={styles.title}>Hello Word</Text>
-//                     <View style={styles.section}>
-//                         <Image src={myImage}/>
-//                         <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit fugiat, qui ad, reprehenderit quas aliquam maiores distinctio at ipsum voluptatem magnam. Saepe in distinctio, eius ducimus quam nam doloremque ea.</Text>
-//                     </View>
-//                     <View>
-//                         <Text render={({pageNumber, totalPages}) =>
-//                     `${pageNumber}/${totalPages}`}/>
-//                     </View>
-//             </Page>
-//         </Document>
-//     )
-// }
-// export default PDF
 
 import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
@@ -67,7 +21,9 @@ const MyComponent = () => {
     estudiosSecundarios: '',
     estudiosTerciarios: '',
     estudiosUniversitarios: '',
-    experienciasLaborales: ''
+    experienciasLaborales: '',
+    aptitudes: '',
+    motivo: ''
   });
 
   const handleChange = (e) => {
@@ -88,6 +44,8 @@ const MyComponent = () => {
 
     // Mostrar un mensaje en la consola
     console.log('Formulario guardado como formulario.pdf');
+    alert('Para que sus datos queden guardados, debe loguearse antes de crear el currículum. De lo contrario, después de generarlo, se borrará la información.');
+    alert('¿confirmas que los datos están ingresados correctamente?')
     navigate ('/')
   };
 
@@ -193,6 +151,22 @@ const MyComponent = () => {
         id="experienciasLaborales"
         name="experienciasLaborales"
         value={formData.experienciasLaborales}
+        onChange={handleChange}
+      />
+                        <label htmlFor="aptitudes">Aptitudes:</label>
+      <input
+        type="text"
+        id="aptitudes"
+        name="aptitudes"
+        value={formData.aptitudes}
+        onChange={handleChange}
+      />
+                              <label htmlFor="motivo">¿Por qué quieres trabajar?</label>
+      <input
+        type="text"
+        id="motivo"
+        name="motivo"
+        value={formData.motivo}
         onChange={handleChange}
       />
     </section>

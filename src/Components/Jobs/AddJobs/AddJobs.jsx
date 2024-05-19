@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
-import { Select } from '@chakra-ui/react'
+import { Select } from '@chakra-ui/react';
 import './_addjobs.scss';
 import Company from '../Company';
 import ObtenerFechaActual from './ObtenerFechaActual';
 
+// Estructura de datos que contiene los rubros y sus sub-rubros
+const rubros = {
+    Agronomía: ["Tractorista", "Tambero"],
+    Programación: ["Frontend", "Backend", "Fullstack"],
+    Construcción: ["Albañil", "Arquitecto"],
+    Administración: ["Contador", "Secretaria"],
+    Metalúrgica: ["Soldador", "Operario"],
+    "Empleado de Comercio": ["Cajero", "Reponedor"],
+    Varios: ["Subrubro 1", "Subrubro 2"]
+};
+
 const AddJobs = () => {
+    // Estado para almacenar los valores de los inputs
     const [inputValues, setInputValues] = useState({
         descripciondelpuesto: '',
         jornadaLaboral: '',
@@ -14,27 +26,43 @@ const AddJobs = () => {
         nivelEducativo: '',
         modalidad: '',
         localidad: '',
-        rubro: ''
+        rubro: '',
+        subRubro: '' // Añadimos subRubro al estado
     });
+
+    // Estado para mostrar u ocultar el template
     const [showValuesInTemplate, setShowValuesInTemplate] = useState(false);
 
+    // Maneja el cambio de los inputs de texto
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
+        const { name, value } = event.target; // Extrae el nombre y valor del input
         setInputValues({
-            ...inputValues,
-            [name]: value
+            ...inputValues, // Mantiene los valores anteriores
+            [name]: value // Actualiza el valor del input específico
         });
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('Valores de los inputs:', inputValues);
-        setShowValuesInTemplate(true);
+    // Maneja el cambio del Select de rubro
+    const handleRubroChange = (event) => {
+        const { value } = event.target; // Extrae el valor seleccionado
+        setInputValues({
+            ...inputValues, // Mantiene los valores anteriores
+            rubro: value, // Actualiza el rubro seleccionado
+            subRubro: '' // Reinicia subRubro al cambiar el rubro
+        });
     };
 
+    // Maneja el envío del formulario
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Previene el comportamiento predeterminado del formulario
+        console.log('Valores de los inputs:', inputValues); // Muestra los valores en la consola
+        setShowValuesInTemplate(true); // Muestra el template con los valores
+    };
+
+    // Maneja el clic en el botón de editar
     const handleEditClick = () => {
-        setShowValuesInTemplate(false);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setShowValuesInTemplate(false); // Oculta el template
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplaza la página hacia arriba
     };
 
     return (
@@ -137,50 +165,65 @@ const AddJobs = () => {
                                 />
                             </div>
 
+                            {/* Select para rubro */}
                             <div className="containerInputAddJobs">
-                            <Select
-    placeholder='Rubros'
-    value={inputValues.rubro} // Establece el valor seleccionado del Select
-    onChange={(e) => setInputValues({ ...inputValues, rubro: e.target.value })} // Actualiza inputValues con el valor seleccionado
->
-    <option value="Agronomía">Agronomía</option>
-    <option value="Programación">Programación</option>
-    <option value="Construcción">Construcción</option>
-    <option value="Administración">Administración</option>
-    <option value="Metalúrgica">Metalúrgica</option>
-    <option value="Empleado de Comercio">Empleado de Comercio</option>
-    <option value="Varios">Varios</option>
-</Select>
-
+                                <label htmlFor="rubro">Rubro</label>
+                                <Select
+                                    placeholder='Selecciona un rubro'
+                                    value={inputValues.rubro}
+                                    onChange={handleRubroChange} // Maneja el cambio del rubro
+                                >
+                                    {Object.keys(rubros).map((rubro) => (
+                                        <option key={rubro} value={rubro}>
+                                            {rubro}
+                                        </option>
+                                    ))}
+                                </Select>
                             </div>
+
+                            {/* Select para sub-rubro, se muestra solo si se selecciona un rubro */}
+                            {inputValues.rubro && (
+                                <div className="containerInputAddJobs">
+                                    <label htmlFor="subRubro">Sub-Rubro</label>
+                                    <Select
+                                        placeholder='Selecciona un sub-rubro'
+                                        value={inputValues.subRubro}
+                                        onChange={(e) => setInputValues({ ...inputValues, subRubro: e.target.value })} // Maneja el cambio del sub-rubro
+                                    >
+                                        {rubros[inputValues.rubro].map((subRubro) => (
+                                            <option key={subRubro} value={subRubro}>
+                                                {subRubro}
+                                            </option>
+                                        ))}
+                                    </Select>
+                                </div>
+                            )}
 
                             <button type="submit">Aceptar</button>
                         </form>
-
                     </div>
                 </div>
                 <div className="containerTemplate">
                     <div className="template">
                         <h3>Template</h3>
                         {showValuesInTemplate && (
-                                <article>
-                                    <p>Descripción del puesto: {inputValues.descripciondelpuesto}</p>
-                                    <p>Jornada Laboral: {inputValues.jornadaLaboral}</p>
-                                    <p>Experiencia Requerida: {inputValues.experienciaRequerida}</p>
-                                    <p>Duracion: {inputValues.duracion}</p>
-                                    {/* Mostrar otros campos */}
-                                    <p>Sueldo: {inputValues.sueldo}</p>
-                                    <p>Nivel Educativo: {inputValues.nivelEducativo}</p>
-                                    <p>Modalidad: {inputValues.modalidad}</p>
-                                    <p>Localidad: {inputValues.localidad}</p>
-                                    <p>Rubro: {inputValues.rubro}</p>
-                                </article>
+                            <article>
+                                <p>Descripción del puesto: {inputValues.descripciondelpuesto}</p>
+                                <p>Jornada Laboral: {inputValues.jornadaLaboral}</p>
+                                <p>Experiencia Requerida: {inputValues.experienciaRequerida}</p>
+                                <p>Duracion: {inputValues.duracion}</p>
+                                {/* Mostrar otros campos */}
+                                <p>Sueldo: {inputValues.sueldo}</p>
+                                <p>Nivel Educativo: {inputValues.nivelEducativo}</p>
+                                <p>Modalidad: {inputValues.modalidad}</p>
+                                <p>Localidad: {inputValues.localidad}</p>
+                                <p>Rubro: {inputValues.rubro}</p>
+                                <p>Sub-Rubro: {inputValues.subRubro}</p>
+                            </article>
                         )}
                         <div className="containerButtonsTemplate">
                             <button onClick={handleEditClick}>Editar</button>
-
                             <Company inputValues={inputValues} />
-
                         </div>
                     </div>
                 </div>
@@ -190,137 +233,3 @@ const AddJobs = () => {
 };
 
 export default AddJobs;
-
-// import React, { useState } from 'react';
-// import './_addjobs.scss';
-
-// const AddJobs = () => {
-//     const [inputValues, setInputValues] = useState({
-//         Empresa: '',
-//         Puesto: '',
-//         Tiempo: '',
-//         Localidad: ''
-//     });
-
-//     const handleInputChange = (event) => {
-//         const { name, value } = event.target;
-//         setInputValues({
-//             ...inputValues,
-//             [name]: value
-//         });
-//     };
-
-//     const handleSubmit = (event) => {
-//         event.preventDefault();
-//         console.log('Valores de los inputs:', inputValues);
-//     };
-
-//     const handleEditClick = () => {
-//         window.scrollTo({ top: 0, behavior: 'smooth' });
-//     };
-
-//     return (
-//         <>
-//             <div className="firstContainerAddJobs">
-//                 <div className="containerAddJobs">
-//                     <div className="containerFormAddJobs">
-
-//                         <p>Agrega tu oferta laboral aquí.</p>
-
-//                         <form onSubmit={handleSubmit}>
-
-//                             <div className='containerInputAddJobs'>
-
-//                                 <label htmlFor="input1">Empresa</label>
-//                                 <input
-//                                     type="text"
-//                                     id="input1"
-//                                     name="input1"
-//                                     value={inputValues.input1}
-//                                     onChange={handleInputChange}
-//                                     placeholder="El nombre de tu empresa..."
-//                                 />
-
-//                             </div>
-
-//                             <div className='containerInputAddJobs'>
-
-//                                 <label htmlFor="input2">Puesto</label>
-//                                 <input
-//                                     type="text"
-//                                     id="input2"
-//                                     name="input2"
-//                                     value={inputValues.input2}
-//                                     onChange={handleInputChange}
-//                                     placeholder="Mantenimiento y Limpieza..."
-//                                 />
-
-//                             </div>
-
-//                             <div className='containerInputAddJobs'>
-
-//                                 <label htmlFor="input3">Tiempo</label>
-//                                 <input
-//                                     type="text"
-//                                     id="input3"
-//                                     name="input3"
-//                                     value={inputValues.input3}
-//                                     onChange={handleInputChange}
-//                                     placeholder="Tiempo Completo, Por Hora..."
-//                                 />
-//                             </div>
-
-//                             <div className='containerInputAddJobs'>
-//                                 <label htmlFor="input4">Localidad</label>
-//                                 <input
-//                                     type="text"
-//                                     id="input4"
-//                                     name="input4"
-//                                     value={inputValues.input4}
-//                                     onChange={handleInputChange}
-//                                     placeholder="Tu Ubicación..."
-//                                 />
-//                             </div>
-
-//                             <button type="submit">Aceptar</button>
-
-//                         </form>
-
-//                         <p>Tu oferta laboral se verá así.</p>
-
-//                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-//                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
-//                         </svg>
-
-//                     </div>
-//                 </div>
-
-//                 <div className="containerTemplate">
-//                     <div className="template">
-
-//                     <h3>Template</h3>
-
-//                     <h2>Titulo</h2>
-
-//                     <article>
-
-//                         <p>Parrafo1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, repudiandae!</p>
-//                         <p>Parrafo2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, repudiandae</p>
-//                         <p>Parrafo3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, repudiandae</p>
-
-//                     </article>
-
-//                     <div className="containerButtonsTemplate">
-//                         <button onClick={handleEditClick}>Editar</button>
-//                         <button>Publicar</button>
-//                     </div>
-
-//                 </div>
-
-//                 </div>
-//             </div>
-//         </>
-//     );
-// };
-
-// export default AddJobs;
