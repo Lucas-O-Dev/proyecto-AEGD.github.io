@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import {setDoc, doc} from 'firebase/firestore'
 import {db, auth} from '../../../Firebase/Config'
 import 'react-toastify/dist/ReactToastify.css';
+import PhoneSignin from "./PhoneSignin";
 
 const  PersonalData = () => {
     // Estados para almacenar los datos personales
@@ -128,12 +129,19 @@ const handleRoleChange = (e) => {
                         required
                     />
 
-                    <label >Numero Telefónico</label>
+                    <section>
+
+                        <p>Por favor verifica tu numero de celular.</p>
+                        <PhoneSignin />
+
+
+                    {/* <label >Numero Telefónico</label>
                     <input
                         type="text"
                         onChange={(e) => setNumeroTelefonico(e.target.value)}
                         required
-                    />
+                    /> */}
+                    </section>
 
                 </div>
             </section>

@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { getAuth,  PhoneAuthProvider } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
@@ -22,7 +22,7 @@ const app = initializeApp(firebaseConfig);
 // Obtiene la referencia a Firestore
 const db = getFirestore(app);
 
-export { db };
+export { db, PhoneAuthProvider };
 
 // Exporta los servicios de Firebase que necesitas
 export const auth = getAuth(app);
