@@ -15,8 +15,19 @@ const rubros = {
     Varios: ["Subrubro 1", "Subrubro 2"]
 };
 
+const nivelesEducativos = {
+    secundariocompleto: null,
+    secundarioincompleto:null,
+    terciariocompleto:null,
+    terciarioincompleto:null,
+    universidadcompleta:null,
+    universidadincompleta:null
+}
+
 const AddJobs = () => {
     // Estado para almacenar los valores de los inputs
+
+    //inputvalues es un objeto con varias propiedades... descripciondelpuesto,jornadaLaboral, etc.
     const [inputValues, setInputValues] = useState({
         descripciondelpuesto: '',
         jornadaLaboral: '',
@@ -51,6 +62,14 @@ const AddJobs = () => {
             subRubro: '' // Reinicia subRubro al cambiar el rubro
         });
     };
+
+    const handleNivelEducativoChange = (event) => {
+        const  {value} = event.target
+        setInputValues({
+            ...inputValues,
+            nivelEducativo: value
+        })
+    }
 
     // Maneja el envío del formulario
     const handleSubmit = (event) => {
@@ -131,7 +150,7 @@ const AddJobs = () => {
                                 />
                             </div>
                             <div className='containerInputAddJobs'>
-                                <label htmlFor="nivelEducativo">Nivel educativo mínimo</label>
+                                {/* <label htmlFor="nivelEducativo">Nivel educativo mínimo</label>
                                 <input
                                     type="text"
                                     id="nivelEducativo"
@@ -139,7 +158,17 @@ const AddJobs = () => {
                                     value={inputValues.nivelEducativo}
                                     onChange={handleInputChange}
                                     placeholder="nivel Educativo"
-                                />
+                                /> */}
+                                <Select
+                                placeholder='Nivel Educativo Requerido'
+                                value={inputValues.nivelEducativo}
+                                onChange={handleNivelEducativoChange}>
+                                    {Object.keys(nivelesEducativos).map((nivelEducativo) => (
+                                        <option key={nivelEducativo} value={nivelEducativo}>
+                                            {nivelEducativo}
+                                        </option>
+                                    ))}
+                                </Select>
                             </div>
                             <div className='containerInputAddJobs'>
                                 <label htmlFor="modalidad">Modalidad</label>
@@ -206,7 +235,15 @@ const AddJobs = () => {
                 <div className="containerTemplate">
                     <div className="template">
                         <h3>Template</h3>
+                        {/* Condición showValuesInTemplate:
+La expresión {showValuesInTemplate && ( ... )} es una forma común en React de renderizar condicionalmente contenido. Aquí, showValuesInTemplate es una variable (probablemente un estado o una prop) que evalúa a true o false.
+Si showValuesInTemplate es true, entonces el contenido dentro de los paréntesis será renderizado. Si es false, nada será renderizado. */}
                         {showValuesInTemplate && (
+                            // Elemento <article>:
+
+// Si showValuesInTemplate es true, se renderiza un elemento HTML <article>. Este elemento es un contenedor semántico que suele usarse para encapsular contenido relacionado de manera independiente.
+
+// Dentro del <article> hay varios elementos <p>. Cada uno de estos elementos muestra una etiqueta o descripción seguida del valor correspondiente de inputValues.
                             <article>
                                 <p>Descripción del puesto: {inputValues.descripciondelpuesto}</p>
                                 <p>Jornada Laboral: {inputValues.jornadaLaboral}</p>

@@ -39,13 +39,13 @@ function App() {
           <Route path="/AddJobs" element={<WithNavbar><AddJobs /></WithNavbar>} />
           <Route path="/Courses" element={<WithNavbar><Courses /></WithNavbar>} />
           <Route path="/course/:id" element={<WithNavbar><CourseDetails /></WithNavbar>} />
-          <Route path="/curriculum" element={<WithNavbar><Curriculums /></WithNavbar>} />
           {/* Otras rutas */}
           <Route path="/" element={<Landing />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Empleado" element={<Empleado />} />
           <Route path="/Empleador" element={<Empleador />} />
+          <Route path="/curriculum" element={<Curriculums /> } />
         </Routes>
       </BrowserRouter>
     </CartProvider>
