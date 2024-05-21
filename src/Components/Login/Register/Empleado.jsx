@@ -3,6 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import {updateDoc, doc} from 'firebase/firestore'
 import {db,auth} from '../../../../Firebase/Config'
 import { toast } from 'react-toastify'; // Agrega esta línea
+import RubroSelect from '../../RubroSelect/RubroSelect'
+
+const rubros = {
+    Agronomía: ["Tractorista", "Tambero"],
+    Programación: ["Frontend", "Backend", "Fullstack"],
+    Construcción: ["Albañil", "Arquitecto"],
+    Administración: ["Contador", "Secretaria"],
+    Metalúrgica: ["Soldador", "Operario"],
+    "Empleado de Comercio": ["Cajero", "Reponedor"],
+    Varios: ["Subrubro 1", "Subrubro 2"]
+};
 
 
 const Empleado = () => {
@@ -13,6 +24,10 @@ const Empleado = () => {
     const [estudiosUniversitarios, setEstudiosUniversitarios] = useState("")
     const [experienciasLaborales, setExperienciasLaborales] = useState("")
     const [userUID, setUserUID] = useState(null); // Estado para almacenar el UID del usuario
+    const [inputValues, setInputValues] = useState({
+        rubro: '',
+        subRubro: '' // Añadimos subRubro al estado
+    });
     const navigate = useNavigate()
 
    // Obtener el UID del usuario actual al cargar el componente
@@ -24,6 +39,25 @@ const Empleado = () => {
     });
     return () => unsubscribe();
 }, []);
+
+
+    // Maneja el cambio del Select de rubro
+    const handleRubroChange = (event) => {
+        const { value } = event.target; // Extrae el valor seleccionado
+        setInputValues({
+            ...inputValues, // Mantiene los valores anteriores
+            rubro: value, // Actualiza el rubro seleccionado
+            subRubro: '' // Reinicia subRubro al cambiar el rubro
+        });
+    };
+
+    const handleSubRubroChange = (event) => {
+        const { value } = event.target;
+        setInputValues({
+            ...inputValues,
+            subRubro: value
+        });
+    };
 
 // Referencia al documento en Firestore usando el UID del usuario
 const setUpdateRef = userUID ? doc(db, `users/${userUID}`) : null;
@@ -101,6 +135,17 @@ const setUpdateRef = userUID ? doc(db, `users/${userUID}`) : null;
             cols="50"
             ></textarea>
             </div>
+
+
+            <div>
+                            <RubroSelect
+                                rubros={rubros}
+                                rubro={inputValues.rubro}
+                                subRubro={inputValues.subRubro}
+                                handleRubroChange={handleRubroChange}
+                                handleSubRubroChange={handleSubRubroChange}
+                            />
+                            </div>
 
 
         </section>

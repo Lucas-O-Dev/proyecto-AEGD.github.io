@@ -3,6 +3,7 @@ import { Select } from '@chakra-ui/react';
 import './_addjobs.scss';
 import Company from '../Company';
 import ObtenerFechaActual from './ObtenerFechaActual';
+import RubroSelect from '../../RubroSelect/RubroSelect';
 
 // Estructura de datos que contiene los rubros y sus sub-rubros
 const rubros = {
@@ -60,6 +61,14 @@ const AddJobs = () => {
             ...inputValues, // Mantiene los valores anteriores
             rubro: value, // Actualiza el rubro seleccionado
             subRubro: '' // Reinicia subRubro al cambiar el rubro
+        });
+    };
+
+    const handleSubRubroChange = (event) => {
+        const { value } = event.target;
+        setInputValues({
+            ...inputValues,
+            subRubro: value
         });
     };
 
@@ -194,39 +203,15 @@ const AddJobs = () => {
                                 />
                             </div>
 
-                            {/* Select para rubro */}
-                            <div className="containerInputAddJobs">
-                                <label htmlFor="rubro">Rubro</label>
-                                <Select
-                                    placeholder='Selecciona un rubro'
-                                    value={inputValues.rubro}
-                                    onChange={handleRubroChange} // Maneja el cambio del rubro
-                                >
-                                    {Object.keys(rubros).map((rubro) => (
-                                        <option key={rubro} value={rubro}>
-                                            {rubro}
-                                        </option>
-                                    ))}
-                                </Select>
+                            <div>
+                            <RubroSelect
+                                rubros={rubros}
+                                rubro={inputValues.rubro}
+                                subRubro={inputValues.subRubro}
+                                handleRubroChange={handleRubroChange}
+                                handleSubRubroChange={handleSubRubroChange}
+                            />
                             </div>
-
-                            {/* Select para sub-rubro, se muestra solo si se selecciona un rubro */}
-                            {inputValues.rubro && (
-                                <div className="containerInputAddJobs">
-                                    <label htmlFor="subRubro">Sub-Rubro</label>
-                                    <Select
-                                        placeholder='Selecciona un sub-rubro'
-                                        value={inputValues.subRubro}
-                                        onChange={(e) => setInputValues({ ...inputValues, subRubro: e.target.value })} // Maneja el cambio del sub-rubro
-                                    >
-                                        {rubros[inputValues.rubro].map((subRubro) => (
-                                            <option key={subRubro} value={subRubro}>
-                                                {subRubro}
-                                            </option>
-                                        ))}
-                                    </Select>
-                                </div>
-                            )}
 
                             <button type="submit">Aceptar</button>
                         </form>
