@@ -1,6 +1,5 @@
 import React from 'react';
 // 1. import `ChakraProvider` component
-import { ChakraProvider } from '@chakra-ui/react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './Components/Context/CartContext'; // Importa el proveedor del contexto del carrito
 import './App.css';
@@ -25,7 +24,7 @@ import Curriculums from './Components/Curriculums/Curriculums'
 function App() {
 
   return (
-    <ChakraProvider>
+
     <CartProvider>
       <BrowserRouter>
       <ToastContainer />
@@ -49,7 +48,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </CartProvider>
-    </ChakraProvider>
   );
 }
 

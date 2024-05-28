@@ -17,6 +17,7 @@ return (
 <p>{job.modalidad}</p>
 <p>{job.localidad}</p>
 <p>{job.rubro}</p>
+<p>{job.puesto}</p>
 </div>
 <Link className="card-button" to={`/`}>More info</Link>
 </div>

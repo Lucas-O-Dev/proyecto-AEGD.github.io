@@ -18,7 +18,8 @@ const Company = ({ inputValues }) => {
                 modalidad: inputValues.modalidad,
                 localidad: inputValues.localidad,
                 rubro: inputValues.rubro,
-                nivelEducativo: inputValues.nivelEducativo
+                nivelEducativo: inputValues.nivelEducativo,
+                puesto: inputValues.puesto
             });
             console.log('Documentos agregados correctamente');
             navigate('/Jobs'); // Utiliza navigate en lugar de history.push para redirigir
