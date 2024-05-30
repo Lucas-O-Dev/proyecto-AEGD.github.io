@@ -6,12 +6,12 @@ import SignOutButton from './SignOutButton';
 import './StylesLogin/_login.scss'
 import LogInButton from './LogInButton';
 
+
 console.log('Auth inicializado:', auth); // Verifica si auth se está inicializando correctamente
 
 const Login = () => {
 
   const navigate = useNavigate()
-  const [registrando, setRegistrando] = useState(false);
   const [error, setError] = useState(null);
 
   const funcAutentication = async (e) => {

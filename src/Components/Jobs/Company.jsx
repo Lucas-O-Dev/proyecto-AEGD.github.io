@@ -26,6 +26,8 @@ const Company = ({ inputValues }) => {
         } catch (error) {
             console.error('Error al agregar documentos:', error);
         }
+
+        
     };
 
     return (

@@ -5,14 +5,23 @@ import {db,auth} from '../../../../Firebase/Config'
 import { toast } from 'react-toastify'; // Agrega esta línea
 import RubroSelect from '../../RubroSelect/RubroSelect'
 
+// Estructura de datos que contiene los rubros y sus sub-rubros
 const rubros = {
-    Agronomía: ["Tractorista", "Tambero"],
-    Programación: ["Frontend", "Backend", "Fullstack"],
-    Construcción: ["Albañil", "Arquitecto"],
-    Administración: ["Contador", "Secretaria"],
-    Metalúrgica: ["Soldador", "Operario"],
-    "Empleado de Comercio": ["Cajero", "Reponedor"],
-    Varios: ["Subrubro 1", "Subrubro 2"]
+    Agronomía: ["Ingeniero Agronomo", "Tecnico Agricola", "Operador de Maquinaria Agricola", "Encargado de Estancia", "Peon Rural", "Veterinario", "Control de Plagas", "Fumigador", "Tractorista"],
+    "Tecnologia De La Informacion": ["Desarrollador de Software", "Administrador de Sistemas", "Especialista en Seguridad Informatica", "Tecnico en Redes", "Soporte Tecnico", "Analista de Datos", "Desarrollador Web", "Desarrollador de Software"],
+    Construcción: ["Albañil", "Electricista", "Plomero", "Carpintero", "Pintor", "Maestro Mayor de Obrasd", "Arquitecto", "Ingeniero Civil", "Obrero de Construccion", "Operador de Maquinaria Pesada"],
+    Administración: ["Secretario/a", "Asistente Administrativo" ,"Contador/a", "Analista de Recursos Humanos", "Recepcionista", "Analista de Datos", "Administrador de Oficina", "Administrador de Empresas", "Asesor Financiero"],
+    Metalúrgica: ["Soldador", "Tornero","Operador CNC", "Mecanico Industrial", "Inspector de Calidad", "Ingeniero Metalurgico", "Montaje", "Supervisor"],
+    "Empleado de Comercio": ["Cajero/a", "Vendedor/a", "Repositor/a", "Encargado de Tienda", "Personal de Atencion Al Cliente", "Jefe de Ventas", "Personal de Logistica y Almacen"],
+    "Servicio Domestico": ["Empleada Domestica", "Niñera", "Cuidador de Personas Mayores", "Jardinero", "Chofer Particular", "Cocinero/a", "Mantenimiento del Hogar"],
+    Salud: ["Medico/a", "Enfermero/a", "Asistente Medico", "Tecnico de Laboratorio", "Fisioterapeuta", "Psicologo/a", "Nutricionista"],
+    Educación: ["Maestro/a", "Profesor/a", "Director/a de Escuela", "Tutor", "Asistente de Educacion Especial", "Psicopedagogo", "Bibliotecario"],
+    "Transporte y Logistica": ["Chofer de Camion", "Conductor de Transporte Publico", "Operador de Montacargas", "Coordinador de Logistica", "Despachante de Aduana", "Encargado de Almacen"],
+    "Turismo y Hospitalidad": ["Guía Turístico", "Recepcionista de Hotel", "Cocinero/a", "Camarero/a", "Gerente de Hotel", "Coordinador de Eventos", "Personal de Mantenimiento de Hoteles"],
+    "Industria Alimentaria": ["Operario de Planta", "Ingeniero en Alimentos", "Técnico en Control de Calidad", "Encargado de Producción", "Desarrollador de Productos", "Personal de Logística"],
+    Textil: ["Diseñador de Moda", "Costurero/a", "Operario de Máquina de Coser", "Encargado de Producción", "Técnico en Confección", "Control de Calidad"],
+    "Energía y Minería": ["Ingeniero de Energía", "Técnico en Energías Renovables", "Minero", "Geólogo", "Técnico en Exploración", "Operador de Equipos Pesados"],
+    Automotriz: ["Mecánico de Autos", "Mecánico de Motos", "Electromecánico de Vehículos", "Chapista", "Pintor de Autos", "Técnico en Diagnóstico Automotriz", "Asesor de Servicio Automotriz", "Gerente de Taller Automotriz", "Vendedor de Repuestos Automotrices"]
 };
 
 
@@ -26,7 +35,7 @@ const Empleado = () => {
     const [userUID, setUserUID] = useState(null); // Estado para almacenar el UID del usuario
     const [inputValues, setInputValues] = useState({
         rubro: '',
-        subRubro: '' // Añadimos subRubro al estado
+        puesto: '' // Añadimos subRubro al estado
     });
     const navigate = useNavigate()
 
@@ -47,15 +56,15 @@ const Empleado = () => {
         setInputValues({
             ...inputValues, // Mantiene los valores anteriores
             rubro: value, // Actualiza el rubro seleccionado
-            subRubro: '' // Reinicia subRubro al cambiar el rubro
+            puesto: '' // Reinicia puesto al cambiar el rubro
         });
     };
 
-    const handleSubRubroChange = (event) => {
+    const handlePuestoChange = (event) => {
         const { value } = event.target;
         setInputValues({
             ...inputValues,
-            subRubro: value
+            puesto: value
         });
     };
 
@@ -143,7 +152,7 @@ const setUpdateRef = userUID ? doc(db, `users/${userUID}`) : null;
                                 rubro={inputValues.rubro}
                                 subRubro={inputValues.subRubro}
                                 handleRubroChange={handleRubroChange}
-                                handleSubRubroChange={handleSubRubroChange}
+                                handleSubRubroChange={handlePuestoChange}
                             />
                             </div>
 

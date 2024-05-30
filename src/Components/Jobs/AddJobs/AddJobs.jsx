@@ -10,7 +10,7 @@ import { MenuItem } from '@mui/material';
 const rubros = {
     Agronomía: ["Ingeniero Agronomo", "Tecnico Agricola", "Operador de Maquinaria Agricola", "Encargado de Estancia", "Peon Rural", "Veterinario", "Control de Plagas", "Fumigador", "Tractorista"],
     "Tecnologia De La Informacion": ["Desarrollador de Software", "Administrador de Sistemas", "Especialista en Seguridad Informatica", "Tecnico en Redes", "Soporte Tecnico", "Analista de Datos", "Desarrollador Web", "Desarrollador de Software"],
-    Construcción: ["Albañil", "Electricista", "Plomero", "Carpintero", "Pintor", "Maestro Mayor de Obrasd", "Arquitecto", "Ingeniero Civil", "Obrero de Construccion", "Operador de Maquinaria Pesada"],
+    Construcción: ["Albañil", "Electricista", "Plomero", "Carpintero", "Pintor", "Maestro Mayor de Obras", "Arquitecto", "Ingeniero Civil", "Obrero de Construccion", "Operador de Maquinaria Pesada"],
     Administración: ["Secretario/a", "Asistente Administrativo" ,"Contador/a", "Analista de Recursos Humanos", "Recepcionista", "Analista de Datos", "Administrador de Oficina", "Administrador de Empresas", "Asesor Financiero"],
     Metalúrgica: ["Soldador", "Tornero","Operador CNC", "Mecanico Industrial", "Inspector de Calidad", "Ingeniero Metalurgico", "Montaje", "Supervisor"],
     "Empleado de Comercio": ["Cajero/a", "Vendedor/a", "Repositor/a", "Encargado de Tienda", "Personal de Atencion Al Cliente", "Jefe de Ventas", "Personal de Logistica y Almacen"],
@@ -229,6 +229,7 @@ const AddJobs = () => {
                 {/* */}<div className="containerTemplate">
                     <div className="template">
                         <h3>Template</h3>
+                        <p>Así se va a ver tu oferta laboral...</p>
                         {/* Condición showValuesInTemplate:
 La expresión {showValuesInTemplate && ( ... )} es una forma común en React de renderizar condicionalmente contenido. Aquí, showValuesInTemplate es una variable (probablemente un estado o una prop) que evalúa a true o false.
 Si showValuesInTemplate es true, entonces el contenido dentro de los paréntesis será renderizado. Si es false, nada será renderizado. */}
