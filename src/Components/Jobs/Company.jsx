@@ -1,6 +1,7 @@
 import React from 'react';
 import { db } from '../../../Firebase/Config';
 import { addDoc, collection } from 'firebase/firestore';
+import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom'; // Importa useNavigate desde react-router-dom
 
 const Company = ({ inputValues }) => {
@@ -32,7 +33,7 @@ const Company = ({ inputValues }) => {
 
     return (
         <>
-            <button onClick={handleClick}>Submit</button>
+            <Button onClick={handleClick}>Submit</Button>
         </>
     );
 };

@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 .containerCourses {
   display: flex;
@@ -113,169 +112,69 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  width: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .FirstContainerSonHome {
   display: flex;
-  flex-direction: row;
-}
-.FirstContainerSonHome section {
-  font-size: 20px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
-  height: 380px;
-  border: 2px solid red;
-}
-.FirstContainerSonHome .sectionSecondFirstContainerSonHome .articleSecondFirstContainerSonHome {
-  height: 100%;
-  width: 100%;
-  background-image: url(../../assets/imghomeempleo.png);
+  margin-top: 4rem;
+  border-radius: 0.6rem;
+  width: 80%;
+  height: 7.5rem;
+  background-image: url("../../assets/pexels-krakograff-textures-124842124-20560363.jpg");
   background-position: center;
-  background-size: cover;
+  background-size: contain;
 }
 
 .SecondContainerSonHome {
-  margin-top: 60px;
+  border: 2px solid red;
+  margin-top: 8rem;
   display: flex;
-  justify-content: center; /* Añadido para centrar horizontalmente */
-  align-items: center; /* Añadido para centrar verticalmente */
-}
-.SecondContainerSonHome section {
-  padding: 16px;
-  margin-top: 20px;
-  font-size: 20px;
-  border: 2px solid blue;
-  width: 60%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  z-index: 9999;
-}
-.popup-content {
-  position: relative;
-}
-.popup .popup-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.popup .popup-content section article {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.popup .popup-content button {
-  display: flex;
+  width: 100%;
 }
 
 .containerPrincipalThirdContainerSonHome {
-  margin-top: 60px;
   display: flex;
-  border: 4px solid red;
-  justify-content: space-evenly;
-}
-.containerPrincipalThirdContainerSonHome section {
-  border: 2px solid blue;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.containerPrincipalThirdContainerSonHome section article {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 0.75rem;
 }
 
 .containerPrincipalFourthContainerSonHome {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-  height: 12.5rem;
-  border: 2px solid red;
-  margin-top: 6.25rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-.containerPrincipalFourthContainerSonHome section {
-  height: 100%;
-  border: 2px solid green;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  width: 33%;
-  margin: 0 0.625rem;
+  width: 94%;
+  gap: 1rem;
+  margin-top: 10rem;
+  padding: 0.25rem;
 }
 
-.conteinerNavbar {
-  display: flex;
-  background-color: #0466c8;
-  color: white;
-  width: 100%;
-  justify-content: space-evenly;
-  margin: 0;
-  align-items: center;
+@media (max-width: 425px) {
+  .containerPrincipalFourthContainerSonHome {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
+  .containerPrincipalFourthContainerSonHome .stackContainerPrincipalFourthContainerSonHome {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
 }
-.conteinerNavbar h3 {
-  margin: 0;
-}
-.conteinerNavbar .containerCategories {
-  gap: 40px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.conteinerNavbar .containerBrand {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; /* Agregado para centrar verticalmente */
-  text-align: center;
-  margin: 0;
-}
-.conteinerNavbar .containerBrand p {
-  /* Eliminado display: flex */
-  margin: 0; /* Ajustado el margen para evitar espacio extra */
-}
-.conteinerNavbar .containerBrand .logoIcon {
-  /* Eliminado display: flex */
-  width: 24px;
-  margin-right: 0.625rem; /* Ajustado margen derecho para separar el logo del texto */
-}
-.conteinerNavbar .conteinerLinks {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.875rem;
-}
-.conteinerNavbar .conteinerLinks img {
-  width: 20px;
-}
-
 body {
+  align-items: center;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
   font-family: "Roboto", sans-serif;
 }
 
@@ -306,6 +205,7 @@ body {
 form {
   display: flex;
   flex-direction: column;
+  border: 2px solid red;
   width: 90%;
 }
 form section {
@@ -346,7 +246,6 @@ form section input {
   width: 100%;
   justify-content: center;
   flex-direction: column;
-  border: 2px solid blue;
 }
 .firstContainerAddJobs .containerAddJobs {
   display: flex;
@@ -354,33 +253,54 @@ form section input {
 }
 .firstContainerAddJobs .containerAddJobs .containerFormAddJobs {
   display: flex;
-  border: 2px solid lightgreen;
   flex-direction: column;
   align-items: center;
-  width: 60%;
+  width: 80%;
+}
+.firstContainerAddJobs .containerAddJobs .containerFormAddJobs .conteinerArticleObtenerFechaActual {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 .firstContainerAddJobs .containerAddJobs .containerFormAddJobs .containerInputAddJobs {
   width: 100%;
-}
-.firstContainerAddJobs .containerAddJobs .containerFormAddJobs .containerInputAddJobs input {
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 .firstContainerAddJobs .containerAddJobs .containerFormAddJobs svg {
   width: 2.5rem;
   height: 2.5rem;
 }
 .firstContainerAddJobs .containerAddJobs .containerFormAddJobs form {
+  border: none;
+  margin-bottom: 120px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+.firstContainerAddJobs .containerAddJobs .containerFormAddJobs form input {
+  margin-left: 1.25rem;
+  width: 160px;
+}
+.firstContainerAddJobs .containerAddJobs .containerFormAddJobs form .conteinerRubroSelectAddJobs {
+  width: 100%;
+}
+.firstContainerAddJobs .containerAddJobs .containerFormAddJobs form .conteinerRenderInputField {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
+  width: 36%;
 }
-.firstContainerAddJobs .containerAddJobs .containerFormAddJobs button {
+.firstContainerAddJobs .containerAddJobs .containerFormAddJobs form .conteinerRubroSelectAddJobs {
+  height: 100%;
   display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 36%;
 }
 .firstContainerAddJobs .containerTemplate {
-  border: 2px solid lightcoral;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -389,7 +309,6 @@ form section input {
   width: 100%;
 }
 .firstContainerAddJobs .containerTemplate .template {
-  border: 2px solid limegreen;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -403,23 +322,9 @@ form section input {
   text-align: center;
   align-items: center;
 }
-.firstContainerAddJobs .containerTemplate .template h3 {
-  border: 2px solid lightskyblue;
-}
-.firstContainerAddJobs .containerTemplate .template h2 {
-  border: 2px solid lightgoldenrodyellow;
-}
-.firstContainerAddJobs .containerTemplate .template p {
-  border: 2px solid lightgreen;
-}
 .firstContainerAddJobs .containerTemplate .template .containerButtonsTemplate {
   display: flex;
   gap: 0.75rem;
-}
-.firstContainerAddJobs .containerTemplate .template .containerButtonsTemplate button {
-  border: 2px solid red;
-  border-radius: 0.625rem;
-  padding: 0.625rem;
 }
 
 .conteinerFirstSectionJobs {
@@ -429,6 +334,11 @@ form section input {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+}
+
+.containerInputAddJobs {
+  margin-top: 1.5rem;
+  width: 100%;
 }
 
 .conteinerDashboardWrapper {
@@ -478,84 +388,21 @@ form section input {
   gap: 0.375rem;
 }
 
-.conteinerPrincipalLogin {
+.conteinerLoginForm {
   display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centra verticalmente */
-  align-items: center; /* Centra horizontalmente */
-  height: 100vh;
-  background-color: #fefae0; /* Corrección de la sintaxis del color */
-  background-image: url(../../../assets/pexels-krakograff-textures-124842124-9990209.jpg);
-  background-position: center;
-  background-size: cover;
-}
-.conteinerPrincipalLogin .sectionOneLogin {
-  display: flex;
-  padding: 60px;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 12px;
-  border-radius: 8%;
-  background-color: rgba(255, 255, 255, 0.5); /* Blanco semi-transparente */
 }
-.conteinerPrincipalLogin .sectionOneLogin p {
-  margin-bottom: 14px;
-}
-.conteinerPrincipalLogin .sectionOneLogin .articleOneLogin {
+.conteinerLoginForm .containerImgLoginRight {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: 100%; /* Ajusta el ancho al 100% de su contenedor */
+  height: 100vh;
 }
-.conteinerPrincipalLogin .sectionOneLogin .articleOneLogin .formOneLogin {
+.conteinerLoginForm .containerImgLoginLeft {
   display: flex;
-  margin-bottom: 1.125rem;
-}
-.conteinerPrincipalLogin .sectionOneLogin .articleOneLogin .formOneLogin .coolinput {
-  display: flex;
-  flex-direction: column;
-  width: -moz-fit-content;
-  width: fit-content;
-  position: relative;
-  max-width: 240px;
-}
-.conteinerPrincipalLogin .sectionOneLogin .articleOneLogin .formOneLogin .coolinput label.text {
-  font-size: 0.75rem;
-  color: #818CF8;
-  font-weight: 700;
-  position: relative;
-  top: 0.5rem;
-  margin: 0 0 0 7px;
-  padding: 0 3px;
-  background: #e8e8e8;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-.conteinerPrincipalLogin .sectionOneLogin .articleOneLogin .formOneLogin .coolinput input.input {
-  padding: 11px 10px;
-  font-size: 0.75rem;
-  border: 2px #818CF8 solid;
-  border-radius: 5px;
-  background: #e8e8e8;
-}
-.conteinerPrincipalLogin .sectionOneLogin .articleOneLogin .formOneLogin .coolinput input.input:focus {
-  outline: none;
-}
-.conteinerPrincipalLogin .sectionTwoLogin {
-  margin-top: 1.75rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: auto;
-}
-.conteinerPrincipalLogin .sectionTwoLogin a {
-  text-decoration: none;
-}
-.conteinerPrincipalLogin .sectionTwoLogin p {
-  font-size: 1.25rem;
-  color: black;
-  font-weight: bold;
+  width: 100%; /* Ajusta el ancho al 100% de su contenedor */
+  height: 100vh;
 }
 
 .BtnLogin {
@@ -673,7 +520,7 @@ form section input {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   color: black;
   background-image: url(../../assets/pexels-krakograff-textures-124842124-20560363.jpg);
@@ -683,29 +530,33 @@ form section input {
 
 .sectionOneLanding {
   display: flex;
-  padding: 50px;
+  padding: 1rem 0.8rem;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 100px;
   border-radius: 8%;
   background-color: rgba(255, 255, 255, 0.5); /* Blanco semi-transparente */
 }
+.sectionOneLanding a {
+  color: black;
+  text-decoration: none;
+}
 .sectionOneLanding .articleTitleLanding {
   font-size: 22px;
-  margin-bottom: 16px;
   display: flex;
   color: black;
 }
+.sectionOneLanding .articleTitleLanding h1 {
+  margin: 0;
+}
 .sectionOneLanding .articleParrafoLanding {
-  font-size: 20px;
+  font-size: clamp(14px, 2vw, 16px);
   display: flex;
 }
 .sectionOneLanding .articleButtonLoginLanding {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10px;
   transition: transform 0.3s ease;
 }
 .sectionOneLanding .articleButtonLoginLanding:hover {
@@ -722,18 +573,31 @@ form section input {
 .sectionOneLanding .articleButtonLoginLanding a img {
   width: 100%;
 }
+.sectionOneLanding .articleButtonLinkToCurriculumLanding {
+  display: flex;
+}
+.sectionOneLanding .articleButtonLinkToCurriculumLanding Button {
+  padding: 0 0.375rem;
+  font-size: 12px;
+  width: 100%;
+}
 
 .containerPrincipalSectionSecondLanding {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 96%;
+  width: 100%;
 }
 .containerPrincipalSectionSecondLanding section {
+  margin: 0 0.4rem;
+  font-size: clamp(11px, 2vw, 14px);
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+.containerPrincipalSectionSecondLanding section article {
+  display: flex;
 }
 .containerPrincipalSectionSecondLanding section article a {
   color: black;

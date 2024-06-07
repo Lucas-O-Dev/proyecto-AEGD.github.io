@@ -1,6 +1,9 @@
-.containerPrincipalHome{
+
+.containerPrincipalHome {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    width: 100%;
 }

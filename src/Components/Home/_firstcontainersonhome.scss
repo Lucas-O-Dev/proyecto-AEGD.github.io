@@ -1,23 +1,17 @@
+#root{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 .FirstContainerSonHome{
     display: flex;
-    flex-direction: row;
-    section{
-        font-size: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 50%;
-        height: 380px;
-        border: 2px solid red;
-    }
-    .sectionSecondFirstContainerSonHome{
-        .articleSecondFirstContainerSonHome{
-            height: 100%;
-            width: 100%;
-            background-image: url(../../assets/imghomeempleo.png);
-            background-position: center;
-            background-size: cover;
-        }
-    }
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+    border-radius: 0.6rem;
+    width: 80%;
+    height: 7.5rem;
+    background-image: url('../../assets/pexels-krakograff-textures-124842124-20560363.jpg');
+    background-position: center;
+    background-size: contain;
 }

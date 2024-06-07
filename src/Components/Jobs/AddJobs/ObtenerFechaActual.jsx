@@ -26,7 +26,7 @@ const ObtenerFechaActual = () => {
       console.log("La fecha de hoy es:", fechaActual);
 
   return (
-    <div>Fecha de carga: {fechaActual}</div>
+    <p>Fecha de carga: {fechaActual}</p>
   )
 }
 

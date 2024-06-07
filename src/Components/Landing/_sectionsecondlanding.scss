@@ -2,13 +2,16 @@
     display: flex;
     justify-content:space-between;
     align-items: center;
-    width: 96%;
+    width: 100%;
     section{
+        margin: 0 0.4rem;
+        font-size: clamp(11px, 2vw, 14px); // El tamaño de la fuente se ajusta entre 12px y 24px según el ancho del viewport
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         article{
+            display: flex;
             a{
                 color: black;
                 text-decoration: none;

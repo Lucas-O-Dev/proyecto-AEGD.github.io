@@ -1,56 +1,62 @@
-import React, { useState } from 'react'
-import {auth} from '../../../Firebase/Config'
-import PhoneInput from 'react-phone-input-2'
-import './StylesLogin/_phonesignin.scss'
-import 'react-phone-input-2/lib/style.css'
-import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
+import React, { useState } from 'react';
+import { auth } from '../../../Firebase/Config';
+import PhoneInput from 'react-phone-input-2';
+import './StylesLogin/_phonesignin.scss';
+import 'react-phone-input-2/lib/style.css';
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 
 const PhoneSignin = () => {
+    const [phone, setPhone] = useState('');
+    const [user, setUser] = useState(null);
+    const [code, setCode] = useState('');
 
-  const [phone, setPhone] = useState ('')
-  const [user, setUser] = useState(null)
-  const [code, setCode] = useState("")
-
-  const SendCode = async () => {
-    try {
-      const recaptcha = new RecaptchaVerifier('recaptcha', {
+    // Instancia de RecaptchaVerifier
+    const recaptchaVerifier = new RecaptchaVerifier('recaptcha', {
         'size': 'invisible',
-        'callback': () => {},
-        'expired-callback': () => {},
-      });
-      const confirmation = await signInWithPhoneNumber(auth, phone, recaptcha);
-      setUser(confirmation);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
+        'callback': () => { },
+        'expired-callback': () => { },
+    });
 
-  const verifyCode = async () => {
-     try {
-      const data = await user.confirm(code)
-      console.log(data)
-     } catch (error) {
-      console.error(error)
-     }
-  }
+    const SendCode = async () => {
+        try {
+            // Enviar el código de verificación al número de teléfono
+            const confirmation = await signInWithPhoneNumber(auth, phone, recaptchaVerifier);
+            setUser(confirmation);
+        } catch (error) {
+            console.error('Error al enviar el código de verificación:', error);
+        }
+    };
 
-  return (
-    <div className='phone-signin'>
-      <div>
-      <PhoneInput
-         country={'ar'}
-         value={phone}
-         onChange={(phone) => setPhone ("+" + phone)}   
-         />
+    const verifyCode = async () => {
+        try {
+            if (!user) {
+                console.error('No hay usuario para verificar el código.');
+                return;
+            }
+            // Confirmar el código de verificación
+            const credential = await user.confirm(code);
+            console.log('Credencial de autenticación:', credential);
+        } catch (error) {
+            console.error('Error al verificar el código:', error);
+        }
+    };
 
-        <button onClick={SendCode}>Send</button>
-        
-      </div>
-      <input type="text" placeholder='Escribir código' onChange={(e) => setCode(e.target.value)} />
-      <button onClick={verifyCode} >verificar código</button>
-    </div>
-  )
-}
+    return (
+        <div className='phone-signin'>
+            <div>
+                <PhoneInput
+                    country={'ar'}
+                    value={phone}
+                    onChange={(phone) => setPhone("+" + phone)}
+                />
+                <button onClick={SendCode}>Enviar</button>
+            </div>
+            <input type="text" placeholder='Escribir código' onChange={(e) => setCode(e.target.value)} />
+            <button onClick={verifyCode}>Verificar código</button>
+            {/* Recaptcha */}
+            <div id="recaptcha"></div>
+        </div>
+    );
+};
 
-export default PhoneSignin
+export default PhoneSignin;

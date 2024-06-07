@@ -1,42 +1,169 @@
-import React from "react"
-import logoIcon from '../../assets/slack.svg'
-import userIcon from '../../assets/user.svg'
-import cartIcon from '../../assets/cart.svg'
-import {Link}  from 'react-router-dom'
-import styled from 'styled-components';
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom';  // Asegúrate de importar Link
 
+const pages = ['Cursos', 'Ofertas Laborales'];
+const settings = ['Perfil', 'Logout'];
 
-import './_navbar.scss'
+function ResponsiveAppBar() {
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
 
-const StyledLink = styled(Link)`
-  /* Aquí puedes aplicar tus propios estilos */
-  text-decoration: none; /* Quita el subrayado predeterminado */
-  color: inherit; /* Utiliza el color del texto heredado */
-`;
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
 
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
 
-const Navbar = () => {
-    return(
-        <div className="conteinerNavbar">
-            <div className="containerBrand">
-            <Link to="/home"><img src={logoIcon} alt="logo-icon" className="logoIcon"/></Link>
-            <p>AEGD</p>
-            </div>
-            <div className="containerCategories">
-            <StyledLink to="/Courses"><h3>
-            Cursos 
-            </h3></StyledLink>
-            <StyledLink to="/Jobs"><h3>
-            Ofertas Laborales
-            </h3></StyledLink>
-            </div>
-            <div className="conteinerLinks">
-            <Link to="/Profile"><img src={userIcon} alt="cart-icon" /></Link>
-            <Link to="/Cart"><img src={cartIcon} alt="cart-icon" /></Link>
-            </div>
-        </div>
-    )
+    return (
+        <AppBar position="static">
+            <Container maxWidth="xl">
+                <Toolbar disableGutters>
+                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/home"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        AEGD
+                    </Typography>
+
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleOpenNavMenu}
+                            color="inherit"
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorElNav}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            sx={{
+                                display: { xs: 'block', md: 'none' },
+                            }}
+                        >
+                            {pages.map((page) => (
+                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">{page}</Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </Box>
+                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <Typography
+                        variant="h5"
+                        noWrap
+                        component="a"
+                        href="#app-bar-with-responsive-menu"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'flex', md: 'none' },
+                            flexGrow: 1,
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        LOGO
+                    </Typography>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        {pages.map((page) => (
+                            <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                <Link to={`/${page.replace(' ', '')}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                    <Typography textAlign="center">{page}</Typography>
+                                </Link>
+                            </MenuItem>
+                        ))}
+                    </Box>
+
+                    <Box sx={{ flexGrow: 0 }}>
+                        <Tooltip title="Abrir Ajustes">
+                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                            <Avatar src="/broken-image.jpg" />
+                            </IconButton>
+                        </Tooltip>
+                        <Menu
+                            sx={{ mt: '45px' }}
+                            id="menu-appbar"
+                            anchorEl={anchorElUser}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={Boolean(anchorElUser)}
+                            onClose={handleCloseUserMenu}
+                        >
+                            {settings.map((setting) => (
+                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center">{setting}</Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </Box>
+                </Toolbar>
+            </Container>
+        </AppBar>
+    );
 }
+export default ResponsiveAppBar;
 
-export default Navbar
+
+//             <StyledLink to="/Courses"><h3>
+
+//             <StyledLink to="/Jobs"><h3>
+
+
+//             <Link to="/Profile"><img src={userIcon} alt="cart-icon" /></Link>

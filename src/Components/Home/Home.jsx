@@ -9,13 +9,15 @@ const Home = () => {
 
   return (
 <>
+
 <div className="containerPrincipalHome">
 
-      <FirstContainerSonHome/>
-      <SecondContainerSonHome/>
-      <ThirdContainerSonHome/>
-      <FourthContainerSonHome/>
-    </div>
+<FirstContainerSonHome/>
+
+<ThirdContainerSonHome/>
+<FourthContainerSonHome/>
+</div>
+
     </>
   );
 };

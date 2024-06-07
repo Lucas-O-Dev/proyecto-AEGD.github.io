@@ -13,7 +13,7 @@ import Empleado from './Components/Login/Register/Empleado';
 import Empleador from './Components/Login/Register/Empleador';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from './Components/Navbar/Navbar'; // Importa la Navbar
+import ResponsiveAppBar from './Components/Navbar/Navbar';
 import EditInfoUserDatabase from './Components/Login/EditInfoUserDatabase';
 import Jobs from './Components/Jobs/Jobs';
 import AddJobs from './Components/Jobs/AddJobs/AddJobs';
@@ -34,9 +34,9 @@ function App() {
           <Route path="/Profile" element={<WithNavbar><Profile /></WithNavbar>} />
           <Route path="/PersonalData" element={<WithNavbar><PersonalData /></WithNavbar>} />
           <Route path="/EditInfoUserDatabase" element={<WithNavbar><EditInfoUserDatabase /></WithNavbar>} />
-          <Route path="/Jobs" element={<WithNavbar><Jobs /></WithNavbar>} />
+          <Route path="/OfertasLaborales" element={<WithNavbar><Jobs /></WithNavbar>} />
           <Route path="/AddJobs" element={<WithNavbar><AddJobs /></WithNavbar>} />
-          <Route path="/Courses" element={<WithNavbar><Courses /></WithNavbar>} />
+          <Route path="/Cursos" element={<WithNavbar><Courses /></WithNavbar>} />
           <Route path="/course/:id" element={<WithNavbar><CourseDetails /></WithNavbar>} />
           {/* Otras rutas */}
           <Route path="/" element={<Landing />} />
@@ -55,7 +55,7 @@ function App() {
 const WithNavbar = ({ children }) => {
   return (
     <>
-      <Navbar />
+      <ResponsiveAppBar />
       {children}
     </>
   );
