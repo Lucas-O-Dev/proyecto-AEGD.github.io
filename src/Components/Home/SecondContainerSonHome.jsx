@@ -14,7 +14,6 @@ const SecondContainerSonHome = () => {
     color: theme.vars.palette.text.secondary,
     border: '1px solid',
     borderColor: theme.palette.divider,
-    padding: theme.spacing(1),
     borderRadius: theme.radius.md,
   }));
 

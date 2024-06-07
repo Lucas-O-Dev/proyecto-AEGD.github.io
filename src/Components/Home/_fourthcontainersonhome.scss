@@ -3,7 +3,11 @@
     width: 94%;
     gap: 1rem;
     margin-top: 10rem;
-    padding: 0.25rem;
+    padding: 1rem;
+    .stackContainerPrincipalFourthContainerSonHome{
+        display: flex;
+        gap: 1rem;
+    }
 }
 
 @media (max-width: 425px) {
@@ -15,7 +19,7 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            gap: 0.5rem;
+            gap: 1rem;
         }
     }
 }

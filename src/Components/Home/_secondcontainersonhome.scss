@@ -1,11 +1,18 @@
 
 
 .SecondContainerSonHome{
-    border: 2px solid red;
     margin-top: 8rem;
     display: flex;
     width: 100%;
-
+    justify-content: center;
+    align-items: center;
+    .containerStackSecondContainerSonHome{
+        display: flex;
+        width: 90%;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
 }
 // .popup {
 //     position: fixed;

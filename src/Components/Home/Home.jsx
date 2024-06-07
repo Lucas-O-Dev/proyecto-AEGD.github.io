@@ -13,7 +13,7 @@ const Home = () => {
 <div className="containerPrincipalHome">
 
 <FirstContainerSonHome/>
-
+<SecondContainerSonHome/>
 <ThirdContainerSonHome/>
 <FourthContainerSonHome/>
 </div>
