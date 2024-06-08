@@ -32,7 +32,6 @@ function App() {
           {/* Rutas donde se renderizará la Navbar */}
           <Route path="/Home" element={<WithNavbar><Home /></WithNavbar>} />
           <Route path="/Profile" element={<WithNavbar><Profile /></WithNavbar>} />
-          <Route path="/PersonalData" element={<WithNavbar><PersonalData /></WithNavbar>} />
           <Route path="/EditInfoUserDatabase" element={<WithNavbar><EditInfoUserDatabase /></WithNavbar>} />
           <Route path="/OfertasLaborales" element={<WithNavbar><Jobs /></WithNavbar>} />
           <Route path="/AddJobs" element={<WithNavbar><AddJobs /></WithNavbar>} />
@@ -42,6 +41,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/PersonalData" element={<PersonalData/>} />
           <Route path="/Empleado" element={<Empleado />} />
           <Route path="/Empleador" element={<Empleador />} />
           <Route path="/curriculum" element={<Curriculums /> } />

@@ -1,17 +1,23 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import {updateDoc, doc} from 'firebase/firestore'
-import {db,auth} from '../../../../Firebase/Config'
+import { updateDoc, doc } from 'firebase/firestore'
+import { db, auth } from '../../../../Firebase/Config'
 import { toast } from 'react-toastify'; // Agrega esta línea
 import RubroSelect from '../../RubroSelect/RubroSelect'
+import Input from '@mui/material/OutlinedInput';
+import { Button, InputLabel } from '@mui/material';
+import ArticleFirstEmpleado from "./ArticleFirstEmpleado";
+import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
+import { styled } from '@mui/system';
+import './_empleado.scss'
 
 // Estructura de datos que contiene los rubros y sus sub-rubros
 const rubros = {
     Agronomía: ["Ingeniero Agronomo", "Tecnico Agricola", "Operador de Maquinaria Agricola", "Encargado de Estancia", "Peon Rural", "Veterinario", "Control de Plagas", "Fumigador", "Tractorista"],
     "Tecnologia De La Informacion": ["Desarrollador de Software", "Administrador de Sistemas", "Especialista en Seguridad Informatica", "Tecnico en Redes", "Soporte Tecnico", "Analista de Datos", "Desarrollador Web", "Desarrollador de Software"],
     Construcción: ["Albañil", "Electricista", "Plomero", "Carpintero", "Pintor", "Maestro Mayor de Obrasd", "Arquitecto", "Ingeniero Civil", "Obrero de Construccion", "Operador de Maquinaria Pesada"],
-    Administración: ["Secretario/a", "Asistente Administrativo" ,"Contador/a", "Analista de Recursos Humanos", "Recepcionista", "Analista de Datos", "Administrador de Oficina", "Administrador de Empresas", "Asesor Financiero"],
-    Metalúrgica: ["Soldador", "Tornero","Operador CNC", "Mecanico Industrial", "Inspector de Calidad", "Ingeniero Metalurgico", "Montaje", "Supervisor"],
+    Administración: ["Secretario/a", "Asistente Administrativo", "Contador/a", "Analista de Recursos Humanos", "Recepcionista", "Analista de Datos", "Administrador de Oficina", "Administrador de Empresas", "Asesor Financiero"],
+    Metalúrgica: ["Soldador", "Tornero", "Operador CNC", "Mecanico Industrial", "Inspector de Calidad", "Ingeniero Metalurgico", "Montaje", "Supervisor"],
     "Empleado de Comercio": ["Cajero/a", "Vendedor/a", "Repositor/a", "Encargado de Tienda", "Personal de Atencion Al Cliente", "Jefe de Ventas", "Personal de Logistica y Almacen"],
     "Servicio Domestico": ["Empleada Domestica", "Niñera", "Cuidador de Personas Mayores", "Jardinero", "Chofer Particular", "Cocinero/a", "Mantenimiento del Hogar"],
     Salud: ["Medico/a", "Enfermero/a", "Asistente Medico", "Tecnico de Laboratorio", "Fisioterapeuta", "Psicologo/a", "Nutricionista"],
@@ -39,15 +45,15 @@ const Empleado = () => {
     });
     const navigate = useNavigate()
 
-   // Obtener el UID del usuario actual al cargar el componente
-   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-        if (user) {
-            setUserUID(user.uid);
-        }
-    });
-    return () => unsubscribe();
-}, []);
+    // Obtener el UID del usuario actual al cargar el componente
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                setUserUID(user.uid);
+            }
+        });
+        return () => unsubscribe();
+    }, []);
 
 
     // Maneja el cambio del Select de rubro
@@ -68,221 +74,153 @@ const Empleado = () => {
         });
     };
 
-// Referencia al documento en Firestore usando el UID del usuario
-const setUpdateRef = userUID ? doc(db, `users/${userUID}`) : null;
+    // Referencia al documento en Firestore usando el UID del usuario
+    const setUpdateRef = userUID ? doc(db, `users/${userUID}`) : null;
 
-    const editButton = async () =>{
+    const editButton = async () => {
 
         try {
             await updateDoc(setUpdateRef, {
-                estudiosPrimarios:estudiosPrimarios,
-                estudiosSecundarios:estudiosSecundarios,
-                estudiosTerciarios:estudiosTerciarios,
-                estudiosUniversitarios:estudiosUniversitarios,
-                experienciasLaborales:experienciasLaborales
+                estudiosPrimarios: estudiosPrimarios,
+                estudiosSecundarios: estudiosSecundarios,
+                estudiosTerciarios: estudiosTerciarios,
+                estudiosUniversitarios: estudiosUniversitarios,
+                experienciasLaborales: experienciasLaborales
             })
 
-        // Mostrar notificación Toastify
-        toast.success('¡Formulario enviado con éxito!', {
-            onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
+            // Mostrar notificación Toastify
+            toast.success('¡Formulario enviado con éxito!', {
+                onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
             });
         } catch (error) {
             console.log(error)
         }
     }
 
-    return(
+    const blue = {
+        100: '#DAECFF',
+        200: '#b6daff',
+        400: '#3399FF',
+        500: '#007FFF',
+        600: '#0072E5',
+        900: '#003A75',
+    };
 
-<>
-<section>
-            <article>
-                <p>Perfecto, eres empleado.</p>
-                <p>A continuación te pediremos los datos de tu curriculum.</p>
-            </article>
+    const grey = {
+        50: '#F3F6F9',
+        100: '#E5EAF2',
+        200: '#DAE2ED',
+        300: '#C7D0DD',
+        400: '#B0B8C4',
+        500: '#9DA8B7',
+        600: '#6B7A90',
+        700: '#434D5B',
+        800: '#303740',
+        900: '#1C2025',
+    };
 
-            <div>
-            <label htmlFor="name">estudiosPrimarios</label>
-            <input
-            type="text"
-            onChange={(e) => setEstudiosPrimarios(e.target.value)}
-            required
-            />
-            </div>
+    const Textarea = styled(BaseTextareaAutosize)(
+        ({ theme }) => `
+        box-sizing: border-box;
+        width: 320px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.5;
+        padding: 8px 12px;
+        border-radius: 8px;
+        color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+        background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+        border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+        box-shadow: 0px 2px 2px ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
+    
+        &:hover {
+          border-color: ${blue[400]};
+        }
+    
+        &:focus {
+          border-color: ${blue[400]};
+          box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
+        }
+    
+        // firefox
+        &:focus-visible {
+          outline: 0;
+        }
+      `,
+    );
 
-            <div>
-            <label htmlFor="name">estudiosSecundarios</label>
-            <input
-            type="text"
-            onChange={(e) => setEstudiosSecundarios(e.target.value)}
-            required
-            />
-            </div>
+    return (
 
-            <div>
-            <label htmlFor="name">estudiosTerciarios</label>
-            <input
-            type="text"
-            onChange={(e) => setEstudiosTerciarios(e.target.value)}
-            />
-            </div>
+        <>
+            <section>
+                <ArticleFirstEmpleado/>
+                <div className="containerFormEmpleado">
+                <div className="firstSectionEmpleado">
+                <div>
+                    <InputLabel htmlFor="name">Estudios Primarios</InputLabel>
+                    <Input
+                    size="small"
+                        type="text"
+                        onChange={(e) => setEstudiosPrimarios(e.target.value)}
+                        required />
+                </div>
 
-            <div>
-            <label htmlFor="name">estudiosUniversitarios</label>
-            <input
-            type="text"
-            onChange={(e) => setEstudiosUniversitarios(e.target.value)}
-            required
-            />
-            </div>
+                <div>
+                    <InputLabel htmlFor="name">Estudios Secundarios</InputLabel>
+                    <Input
+                                        size="small"
+                        type="text"
+                        onChange={(e) => setEstudiosSecundarios(e.target.value)}
+                        required />
+                </div>
 
-            <div>
-            <label htmlFor="name">experienciasLaborales</label>
-            <textarea
-            onChange={(e) => setExperienciasLaborales(e.target.value)}
-            placeholder="Ingresa tus experiencias laborales aquí teniendo en cuenta el año, dónde y las tareas realizadas..."
-            rows="4"
-            cols="50"
-            ></textarea>
-            </div>
+                <div>
+                    <InputLabel htmlFor="name">Estudios Terciarios</InputLabel>
+                    <Input
+                                        size="small"
+                        type="text"
+                        onChange={(e) => setEstudiosTerciarios(e.target.value)} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="name">Estudios Universitarios</InputLabel>
+                    <Input
+                    size="small"
+                        type="text"
+                        onChange={(e) => setEstudiosUniversitarios(e.target.value)}
+                        required />
+                </div>
+
+                </div>
+
+                <div className="secondSectionEmleado">
+                <div>
+                    <InputLabel htmlFor="name">Experiencias Laborales</InputLabel>
+                    <Textarea aria-label="minimum height" onChange={(e) => setExperienciasLaborales(e.target.value)}
+                        placeholder="Ingresa tus experiencias laborales aquí teniendo en cuenta el año, dónde y las tareas realizadas..."
+                        rows="4"
+                        cols="50" />
+
+                </div>
 
 
-            <div>
-                            <RubroSelect
-                                rubros={rubros}
-                                rubro={inputValues.rubro}
-                                subRubro={inputValues.subRubro}
-                                handleRubroChange={handleRubroChange}
-                                handleSubRubroChange={handlePuestoChange}
-                            />
-                            </div>
+                <div>
+                    <RubroSelect
+                        rubros={rubros}
+                        rubro={inputValues.rubro}
+                        subRubro={inputValues.subRubro}
+                        handleRubroChange={handleRubroChange}
+                        handleSubRubroChange={handlePuestoChange}
+                    />
+                </div>
 
-
-        </section>
-
-        <section>
-        <button onClick={editButton}>editButton</button>
-        </section></>
+                <Button onClick={editButton}>Aceptar</Button>
+                </div>
+                </div>
+            </section>
+</>
     )
 }
 
 export default Empleado
-
-
-// import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-
-// const Empleado = ({ agregarDatos, subirDatosAFirebase }) => {
-    
-//     const navigate = useNavigate();
-
-//     // Definimos los estados para cada input del formulario
-
-//     const [error, setError] = useState(''); // Define setError como un estado
-
-//     const handleSubmit = async (event) => {
-
-//         event.preventDefault();
-
-//         // Verificar si todos los campos obligatorios están completos
-//         if ( !estudiosPrimarios || !estudiosSecundarios || !experienciasLaborales  ) {
-//             setError('Por favor, complete todos los campos obligatorios.');
-//             return;
-//         }
-
-//             // Recopilar los valores de todos los inputs
-//         const formData = {
-//         estudiosPrimarios,
-//         estudiosSecundarios,
-//         estudiosTerciarios,
-//         estudiosUniversitarios,
-//         experienciasLaborales // Agrega aquí cualquier otro campo que desees incluir
-//         };
-
-//         // Imprimir los valores en la consola
-//         console.log('Datos enviados:', formData);
-
-//          // Agregamos los datos al estado para ser enviados al componente padre
-//          agregarDatos(formData);
-
-//          // Llamamos a la función para subir los datos a Firebase
-//          await subirDatosAFirebase(formData); // Esperamos a que se complete la función subirDatosAFirebase
-
-//         // Mostrar notificación Toastify
-//         toast.success('¡Formulario enviado con éxito!', {
-//             onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
-//         });
-
-//     };
-
-//   return (
-
-//     <div>
-//         <section>
-
-
-            
-//             <article>
-//                 <form onSubmit={handleSubmit}>
-
-//                 <div>
-//                     <label htmlFor="estudiosprimarios">Estudios Primarios</label>
-//                     <input
-//                         type="text"
-//                         id="estudiosprimarios"
-//                         value={estudiosPrimarios}
-//                         onChange={(e) => setEstudiosPrimarios(e.target.value)}
-//                         placeholder="Título y Fecha"
-//                         required
-//                     />
-//                 </div>
-
-//                 <div>
-//                     <label htmlFor="estudiossecundarios">Estudios Secundarios</label>
-//                     <input
-//                         type="text"
-//                         id="estudiossecundarios"
-//                         value={estudiosSecundarios}
-//                         onChange={(e) => setEstudiosSecundarios(e.target.value)}
-//                         placeholder="Título y Fecha"
-//                         required
-//                     />
-//                 </div>
-
-//                 <div>
-//                     <label htmlFor="estudiosterciarios">Estudios Terciarios. (Opcional)</label>
-//                     <input
-//                         type="text"
-//                         id="estudiosterciarios"
-//                         value={estudiosTerciarios}
-//                         onChange={(e) => setEstudiosTerciarios(e.target.value)}
-//                         placeholder="Título y Fecha"
-//                     />
-//                 </div>
-
-//                 <div>
-//                     <label htmlFor="estudiosuniversitarios">Estudios Universitarios. (Opcional)</label>
-//                     <input
-//                         type="text"
-//                         id="estudiosuniversitarios"
-//                         value={estudiosUniversitarios}
-//                         onChange={(e) => setEstudiosUniversitarios(e.target.value)}
-//                         placeholder="Título y Fecha"
-//                     />
-//                 </div>
-
-//                 <div>
-//                 <label htmlFor="experienciaslaborales">Experiencias Laborales</label>
-//                 </div>
-
-//                 <button type="submit">Aceptar y Subir a Firebase</button>
-
-//                 </form>
-//             </article>
-//         </section>
-//     </div>
-//   )
-// }
-
-// export default Empleado

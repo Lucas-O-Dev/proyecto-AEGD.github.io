@@ -209,39 +209,47 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid blue;
 }
-.containerRouteCurriculums .containerTitleRouteCurriculums {
+
+.containerTitleRouteCurriculums {
+  background-image: url("../../assets/pexels-krakograff-textures-124842124-20560363.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 100%;
   display: flex;
+  text-align: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid red;
-  height: 10em;
-}
-.containerRouteCurriculums .articleRouteCurriculums {
-  border: 2px solid lightblue;
-  height: 18em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 30rem;
 }
 
 form {
   display: flex;
-  flex-direction: column;
-  border: 2px solid red;
+  flex-direction: row;
   width: 90%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1rem;
 }
 form section {
   display: flex;
-  border: 2px solid blue;
-  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-form section input {
+form section label {
   display: flex;
-  width: 60%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 0.75rem;
+}
+form button {
+  margin-top: 0.75rem;
 }
 
 .conteinerJobs {

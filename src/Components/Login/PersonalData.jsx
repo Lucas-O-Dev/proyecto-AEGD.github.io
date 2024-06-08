@@ -132,7 +132,7 @@ const handleRoleChange = (e) => {
                     <section>
 
                         <p>Por favor verifica tu numero de celular.</p>
-                        <PhoneSignin />
+                        {/* <PhoneSignin /> */}
 
 
                     {/* <label >Numero Telefónico</label>

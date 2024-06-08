@@ -1,15 +1,27 @@
 form{
     display: flex;
-    flex-direction: column;
-    border: 2px solid red;
+    flex-direction: row;
     width: 90%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem;
     section{
         display: flex;
-        border: 2px solid blue;
-        width: 100%;
-        input{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        label{
             display: flex;
-            width: 60%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 0.75rem;
         }
+    }
+    button{
+        margin-top: 0.75rem;
     }
 }

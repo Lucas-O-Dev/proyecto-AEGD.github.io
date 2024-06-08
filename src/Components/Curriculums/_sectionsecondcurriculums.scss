@@ -1,0 +1,13 @@
+.articleRouteCurriculums{
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    ul{
+        li{
+            margin-top: 0.75rem;
+        }
+    }
+}

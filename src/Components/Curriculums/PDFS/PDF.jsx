@@ -1,18 +1,21 @@
 
 
 import React, { useState } from 'react';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import Input from '@mui/material/OutlinedInput';
+import { Button, InputLabel } from '@mui/material';
+
 import './_pdf.scss'
 import jsPDF from 'jspdf';
 
 const MyComponent = () => {
 
   const navigate = useNavigate()
-  
-  const [formData, setFormData] = useState({ 
-    name: '', 
-    lastName: '', 
-    email: '', 
+
+  const [formData, setFormData] = useState({
+    name: '',
+    lastName: '',
+    email: '',
     direccion: '',
     localidad: '',
     cp: '',
@@ -46,131 +49,131 @@ const MyComponent = () => {
     console.log('Formulario guardado como formulario.pdf');
     alert('Para que sus datos queden guardados, debe loguearse antes de crear el currículum. De lo contrario, después de generarlo, se borrará la información.');
     alert('¿confirmas que los datos están ingresados correctamente?')
-    navigate ('/')
+    navigate('/')
   };
 
   return (
     <form onSubmit={handleSubmit}>
 
-    <section>
-    <label htmlFor="name">Nombre:</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-      />
-      <label htmlFor="lastName">Apellido:</label>
-      <input
-        type="text"
-        id="lastName"
-        name="lastName"
-        value={formData.lastName}
-        onChange={handleChange}
-      />
-      <label htmlFor="email">Email:</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <label htmlFor="direccion">Dirección:</label>
-      <input
-        type="text"
-        id="direccion"
-        name="direccion"
-        value={formData.direccion}
-        onChange={handleChange}
-      />
-            <label htmlFor="localidad">Localidad:</label>
-      <input
-        type="text"
-        id="localidad"
-        name="localidad"
-        value={formData.localidad}
-        onChange={handleChange}
-      />
-            <label htmlFor="cp">Código Postal:</label>
-      <input
-        type="text"
-        id="cp"
-        name="cp"
-        value={formData.cp}
-        onChange={handleChange}
-      />
-    </section>
+      <section>
+        <InputLabel htmlFor="name">Nombre</InputLabel>
+        <Input
+          type="text"
+          size="small"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange} />
+        <InputLabel htmlFor="lastName">Apellido</InputLabel>
+        <Input
+          type="text"
+          size="small"
+          id="lastName"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange} />
+        <InputLabel htmlFor="email">Email</InputLabel>
+        <Input
+          type="email"
+          size="small"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange} />
+        <InputLabel htmlFor="direccion">Dirección</InputLabel>
+        <Input
+          type="text"
+          size="small"
+          id="direccion"
+          name="direccion"
+          value={formData.direccion}
+          onChange={handleChange} />
+        <InputLabel htmlFor="localidad">Localidad</InputLabel>
+        <Input
+          type="text"
+          size="small"
+          id="localidad"
+          name="localidad"
+          value={formData.localidad}
+          onChange={handleChange} />
+        <InputLabel htmlFor="cp">Código Postal</InputLabel>
+        <Input
+          type="text"
+          size="small"
+          id="cp"
+          name="cp"
+          value={formData.cp}
+          onChange={handleChange} />
+        <InputLabel htmlFor="numeroTelefonico">Número Telefónico</InputLabel>
+        <Input
+          type="text"
+          size="small"
+          id="numeroTelefonico"
+          name="numeroTelefonico"
+          value={formData.numeroTelefonico}
+          onChange={handleChange} />
+      </section>
 
 
-    <section>
-    <label htmlFor="numeroTelefonico">Número Telefónico:</label>
-      <input
-        type="text"
-        id="numeroTelefonico"
-        name="numeroTelefonico"
-        value={formData.numeroTelefonico}
-        onChange={handleChange}
-      />
-      <label htmlFor="estudiosPrimarios">Estudios Primarios:</label>
-      <input
-        type="text"
-        id="estudiosPrimarios"
-        name="estudiosPrimarios"
-        value={formData.estudiosPrimarios}
-        onChange={handleChange}
-      />
-                  <label htmlFor="estudiosSecundarios">Estudios Secundarios:</label>
-      <input
-        type="text"
-        id="estudiosSecundarios"
-        name="estudiosSecundarios"
-        value={formData.estudiosSecundarios}
-        onChange={handleChange}
-      />
-                  <label htmlFor="estudiosTerciarios">Estudios Terciarios:</label>
-      <input
-        type="text"
-        id="estudiosTerciarios"
-        name="estudiosTerciarios"
-        value={formData.estudiosTerciarios}
-        onChange={handleChange}
-      />
-                  <label htmlFor="estudiosUniversitarios">Estudios Universitarios:</label>
-      <input
-        type="text"
-        id="estudiosUniversitarios"
-        name="estudiosUniversitarios"
-        value={formData.estudiosUniversitarios}
-        onChange={handleChange}
-      />
-                  <label htmlFor="experienciasLaborales">Experiencias Laborales:</label>
-      <input
-        type="text"
-        id="experienciasLaborales"
-        name="experienciasLaborales"
-        value={formData.experienciasLaborales}
-        onChange={handleChange}
-      />
-                        <label htmlFor="aptitudes">Aptitudes:</label>
-      <input
-        type="text"
-        id="aptitudes"
-        name="aptitudes"
-        value={formData.aptitudes}
-        onChange={handleChange}
-      />
-                              <label htmlFor="motivo">¿Por qué quieres trabajar?</label>
-      <input
-        type="text"
-        id="motivo"
-        name="motivo"
-        value={formData.motivo}
-        onChange={handleChange}
-      />
-    </section>
-      <button type="submit">Guardar y generar PDF</button>
+      <section>
+        <InputLabel htmlFor="estudiosPrimarios">Estudios Primarios</InputLabel>
+        <Input
+          type="text"
+          size="small"
+          id="estudiosPrimarios"
+          name="estudiosPrimarios"
+          value={formData.estudiosPrimarios}
+          onChange={handleChange} />
+        <InputLabel htmlFor="estudiosSecundarios">Estudios Secundarios</InputLabel>
+        <Input
+          type="text"
+          size="small"
+          id="estudiosSecundarios"
+          name="estudiosSecundarios"
+          value={formData.estudiosSecundarios}
+          onChange={handleChange} />
+        <InputLabel htmlFor="estudiosTerciarios">Estudios Terciarios</InputLabel>
+        <Input
+          type="text"
+          size="small"
+          id="estudiosTerciarios"
+          name="estudiosTerciarios"
+          value={formData.estudiosTerciarios}
+          onChange={handleChange} />
+        <InputLabel htmlFor="estudiosUniversitarios">Estudios Universitarios</InputLabel>
+        <Input
+          type="text"
+          size="small"
+          id="estudiosUniversitarios"
+          name="estudiosUniversitarios"
+          value={formData.estudiosUniversitarios}
+          onChange={handleChange} />
+        <InputLabel htmlFor="experienciasLaborales">Experiencias Laborales</InputLabel>
+        <Input
+          type="text"
+          size="small"
+          id="experienciasLaborales"
+          name="experienciasLaborales"
+          value={formData.experienciasLaborales}
+          onChange={handleChange} />
+        <InputLabel htmlFor="aptitudes">Aptitudes</InputLabel>
+        <Input
+          size="small"
+          type="text"
+          id="aptitudes"
+          name="aptitudes"
+          value={formData.aptitudes}
+          onChange={handleChange} />
+        <InputLabel htmlFor="motivo">¿Por qué quieres trabajar?</InputLabel>
+        <Input
+          size="small"
+          type="text"
+          id="motivo"
+          name="motivo"
+          value={formData.motivo}
+          onChange={handleChange} />
+      </section>
+      <Button type="submit">Guardar y generar PDF</Button>
     </form>
   );
 };
