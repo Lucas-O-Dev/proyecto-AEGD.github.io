@@ -8,7 +8,6 @@ const Profile = () => {
     <div className='conteinerPrincipalProfile'>
         <section className='sectionOneProfile'>
         <h1>Perfil</h1>
-        <SignOutButton />
         <Link to="/EditInfoUserDatabase">¿Deseas realizar algún cambio en tus datos?</Link>
         </section>
     </div>

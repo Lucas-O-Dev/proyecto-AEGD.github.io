@@ -1,0 +1,20 @@
+.containerFormEmpleador{
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    .containerCheckboxRoleEmpleador{
+        display: flex;
+
+    }
+    .containerInputsEmpleador{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 70%;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+}

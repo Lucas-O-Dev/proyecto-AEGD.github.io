@@ -1,6 +1,6 @@
 import React from 'react';
 import FileUploadComponent from './FileUploadComponent';
-import SectionOneCurriculums from './sectionOneCurriculums';
+import SectionOneCurriculums from './SectionOneCurriculums';
 import SectionSecondCurriculums from './SectionSecondCurriculums';
 import './_curriculums.scss';
 import PDF from './PDFS/PDF';

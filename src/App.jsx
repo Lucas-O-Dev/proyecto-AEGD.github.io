@@ -13,13 +13,13 @@ import Empleado from './Components/Login/Register/Empleado';
 import Empleador from './Components/Login/Register/Empleador';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ResponsiveAppBar from './Components/Navbar/Navbar';
 import EditInfoUserDatabase from './Components/Login/EditInfoUserDatabase';
 import Jobs from './Components/Jobs/Jobs';
 import AddJobs from './Components/Jobs/AddJobs/AddJobs';
 import Courses from './Components/Courses/Courses';
 import CourseDetails from './Components/Courses/CourseDetails'
 import Curriculums from './Components/Curriculums/Curriculums'
+import Layout from './Components/Layout/Layout';
 
 function App() {
 
@@ -29,14 +29,14 @@ function App() {
       <BrowserRouter>
       <ToastContainer />
         <Routes>
-          {/* Rutas donde se renderizará la Navbar */}
-          <Route path="/Home" element={<WithNavbar><Home /></WithNavbar>} />
-          <Route path="/Profile" element={<WithNavbar><Profile /></WithNavbar>} />
-          <Route path="/EditInfoUserDatabase" element={<WithNavbar><EditInfoUserDatabase /></WithNavbar>} />
-          <Route path="/OfertasLaborales" element={<WithNavbar><Jobs /></WithNavbar>} />
-          <Route path="/AddJobs" element={<WithNavbar><AddJobs /></WithNavbar>} />
-          <Route path="/Cursos" element={<WithNavbar><Courses /></WithNavbar>} />
-          <Route path="/course/:id" element={<WithNavbar><CourseDetails /></WithNavbar>} />
+          {/* Rutas donde se renderizará la Navbar y el Footer */}
+          <Route path="/Home" element={<Layout><Home /></Layout>} />
+          <Route path="/Profile" element={<Layout><Profile /></Layout>} />
+          <Route path="/EditInfoUserDatabase" element={<Layout><EditInfoUserDatabase /></Layout>} />
+          <Route path="/OfertasLaborales" element={<Layout><Jobs /></Layout>} />
+          <Route path="/AddJobs" element={<Layout><AddJobs /></Layout>} />
+          <Route path="/Cursos" element={<Layout><Courses /></Layout>} />
+          <Route path="/course/:id" element={<Layout><CourseDetails /></Layout>} />
           {/* Otras rutas */}
           <Route path="/" element={<Landing />} />
           <Route path="/Login" element={<Login />} />
@@ -51,14 +51,7 @@ function App() {
   );
 }
 
-// Componente que envuelve los componentes con la Navbar
-const WithNavbar = ({ children }) => {
-  return (
-    <>
-      <ResponsiveAppBar />
-      {children}
-    </>
-  );
-};
+
+
 
 export default App;

@@ -12,12 +12,14 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Link } from 'react-router-dom';  // Asegúrate de importar Link
+import { Link, useNavigate } from 'react-router-dom';  // Asegúrate de importar Link
+import { auth } from '../../../Firebase/Config'
 
 const pages = ['Cursos', 'Ofertas Laborales'];
 const settings = ['Perfil', 'Logout'];
 
 function ResponsiveAppBar() {
+    const navigate = useNavigate()
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -33,6 +35,28 @@ function ResponsiveAppBar() {
     };
 
     const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
+    const handleProfileClick = () => {
+        // Lógica para redirigir a la página de perfil
+        console.log('Ir a perfil');
+        // Puedes usar `history.push('/profile')` si estás usando react-router-dom
+        navigate('/profile')
+        setAnchorElUser(null);
+    };
+
+    const handleLogoutClick = async () => {
+        // Lógica para cerrar sesión
+        console.log('Cerrar sesión');
+        try {
+            await auth.signOut(); // Cierre de sesión usando Firebase
+            console.log('Usuario cerró sesión correctamente');
+            navigate('/')
+            // Aquí podrías redirigir al usuario a la página de inicio de sesión o a cualquier otra página
+        } catch (error) {
+            console.error('Error al cerrar sesión:', error.message);
+        }
         setAnchorElUser(null);
     };
 
@@ -127,7 +151,7 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Abrir Ajustes">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar src="/broken-image.jpg" />
+                                <Avatar alt="Remy Sharp" src="/broken-image.jpg" />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -147,7 +171,7 @@ function ResponsiveAppBar() {
                             onClose={handleCloseUserMenu}
                         >
                             {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                <MenuItem key={setting} onClick={setting === 'Perfil' ? handleProfileClick : handleLogoutClick}>
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             ))}

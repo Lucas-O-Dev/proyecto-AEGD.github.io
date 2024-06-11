@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { updateDoc, doc } from 'firebase/firestore'
-import { db, auth } from '../../../../Firebase/Config'
-import { toast } from 'react-toastify'; // Agrega esta línea
-import RubroSelect from '../../RubroSelect/RubroSelect'
+import { updateDoc, doc } from 'firebase/firestore';
+import { db, auth } from '../../../../Firebase/Config';
+import { toast } from 'react-toastify';
+import RubroSelect from '../../RubroSelect/RubroSelect';
 import Input from '@mui/material/OutlinedInput';
 import { Button, InputLabel } from '@mui/material';
 import ArticleFirstEmpleado from "./ArticleFirstEmpleado";
 import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
 import { styled } from '@mui/system';
-import './_empleado.scss'
+import './_empleado.scss';
 
-// Estructura de datos que contiene los rubros y sus sub-rubros
 const rubros = {
+    // Estructura de datos que contiene los rubros y sus sub-rubros
     Agronomía: ["Ingeniero Agronomo", "Tecnico Agricola", "Operador de Maquinaria Agricola", "Encargado de Estancia", "Peon Rural", "Veterinario", "Control de Plagas", "Fumigador", "Tractorista"],
     "Tecnologia De La Informacion": ["Desarrollador de Software", "Administrador de Sistemas", "Especialista en Seguridad Informatica", "Tecnico en Redes", "Soporte Tecnico", "Analista de Datos", "Desarrollador Web", "Desarrollador de Software"],
     Construcción: ["Albañil", "Electricista", "Plomero", "Carpintero", "Pintor", "Maestro Mayor de Obrasd", "Arquitecto", "Ingeniero Civil", "Obrero de Construccion", "Operador de Maquinaria Pesada"],
@@ -30,22 +30,19 @@ const rubros = {
     Automotriz: ["Mecánico de Autos", "Mecánico de Motos", "Electromecánico de Vehículos", "Chapista", "Pintor de Autos", "Técnico en Diagnóstico Automotriz", "Asesor de Servicio Automotriz", "Gerente de Taller Automotriz", "Vendedor de Repuestos Automotrices"]
 };
 
-
 const Empleado = () => {
-
-    const [estudiosPrimarios, setEstudiosPrimarios] = useState("")
-    const [estudiosSecundarios, setEstudiosSecundarios] = useState("")
-    const [estudiosTerciarios, setEstudiosTerciarios] = useState("")
-    const [estudiosUniversitarios, setEstudiosUniversitarios] = useState("")
-    const [experienciasLaborales, setExperienciasLaborales] = useState("")
-    const [userUID, setUserUID] = useState(null); // Estado para almacenar el UID del usuario
-    const [inputValues, setInputValues] = useState({
-        rubro: '',
-        puesto: '' // Añadimos subRubro al estado
+    const [formData, setFormData] = useState({
+        estudiosPrimarios: "",
+        estudiosSecundarios: "",
+        estudiosTerciarios: "",
+        estudiosUniversitarios: "",
+        experienciasLaborales: "",
+        rubro: "",
+        puesto: ""
     });
-    const navigate = useNavigate()
+    const [userUID, setUserUID] = useState(null);
+    const navigate = useNavigate();
 
-    // Obtener el UID del usuario actual al cargar el componente
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
@@ -55,47 +52,33 @@ const Empleado = () => {
         return () => unsubscribe();
     }, []);
 
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevData => ({ ...prevData, [name]: value }));
+    };
 
-    // Maneja el cambio del Select de rubro
     const handleRubroChange = (event) => {
-        const { value } = event.target; // Extrae el valor seleccionado
-        setInputValues({
-            ...inputValues, // Mantiene los valores anteriores
-            rubro: value, // Actualiza el rubro seleccionado
-            puesto: '' // Reinicia puesto al cambiar el rubro
-        });
+        const { value } = event.target;
+        setFormData(prevData => ({ ...prevData, rubro: value, puesto: "" }));
     };
 
     const handlePuestoChange = (event) => {
         const { value } = event.target;
-        setInputValues({
-            ...inputValues,
-            puesto: value
-        });
+        setFormData(prevData => ({ ...prevData, puesto: value }));
     };
 
-    // Referencia al documento en Firestore usando el UID del usuario
-    const setUpdateRef = userUID ? doc(db, `users/${userUID}`) : null;
-
     const editButton = async () => {
-
+        if (!userUID) return;
         try {
-            await updateDoc(setUpdateRef, {
-                estudiosPrimarios: estudiosPrimarios,
-                estudiosSecundarios: estudiosSecundarios,
-                estudiosTerciarios: estudiosTerciarios,
-                estudiosUniversitarios: estudiosUniversitarios,
-                experienciasLaborales: experienciasLaborales
-            })
-
-            // Mostrar notificación Toastify
+            await updateDoc(doc(db, `users/${userUID}`), formData);
             toast.success('¡Formulario enviado con éxito!', {
-                onClose: () => navigate('/Home') // Navegar a la ruta especificada cuando se cierre la notificación
+                onClose: () => navigate('/Home')
             });
         } catch (error) {
-            console.log(error)
+            console.error("Error updating document: ", error);
+            toast.error('Error al enviar el formulario. Por favor, intenta nuevamente.');
         }
-    }
+    };
 
     const blue = {
         100: '#DAECFF',
@@ -151,76 +134,56 @@ const Empleado = () => {
     );
 
     return (
-
         <>
             <section>
-                <ArticleFirstEmpleado/>
+                <ArticleFirstEmpleado />
                 <div className="containerFormEmpleado">
-                <div className="firstSectionEmpleado">
-                <div>
-                    <InputLabel htmlFor="name">Estudios Primarios</InputLabel>
-                    <Input
-                    size="small"
-                        type="text"
-                        onChange={(e) => setEstudiosPrimarios(e.target.value)}
-                        required />
-                </div>
-
-                <div>
-                    <InputLabel htmlFor="name">Estudios Secundarios</InputLabel>
-                    <Input
-                                        size="small"
-                        type="text"
-                        onChange={(e) => setEstudiosSecundarios(e.target.value)}
-                        required />
-                </div>
-
-                <div>
-                    <InputLabel htmlFor="name">Estudios Terciarios</InputLabel>
-                    <Input
-                                        size="small"
-                        type="text"
-                        onChange={(e) => setEstudiosTerciarios(e.target.value)} />
-                </div>
-
-                <div>
-                    <InputLabel htmlFor="name">Estudios Universitarios</InputLabel>
-                    <Input
-                    size="small"
-                        type="text"
-                        onChange={(e) => setEstudiosUniversitarios(e.target.value)}
-                        required />
-                </div>
-
-                </div>
-
-                <div className="secondSectionEmleado">
-                <div>
-                    <InputLabel htmlFor="name">Experiencias Laborales</InputLabel>
-                    <Textarea aria-label="minimum height" onChange={(e) => setExperienciasLaborales(e.target.value)}
-                        placeholder="Ingresa tus experiencias laborales aquí teniendo en cuenta el año, dónde y las tareas realizadas..."
-                        rows="4"
-                        cols="50" />
-
-                </div>
-
-
-                <div>
-                    <RubroSelect
-                        rubros={rubros}
-                        rubro={inputValues.rubro}
-                        subRubro={inputValues.subRubro}
-                        handleRubroChange={handleRubroChange}
-                        handleSubRubroChange={handlePuestoChange}
-                    />
-                </div>
-
-                <Button onClick={editButton}>Aceptar</Button>
-                </div>
+                    <div className="firstSectionEmpleado">
+                        {[
+                            { label: "Estudios Primarios", name: "estudiosPrimarios" },
+                            { label: "Estudios Secundarios", name: "estudiosSecundarios" },
+                            { label: "Estudios Terciarios", name: "estudiosTerciarios" },
+                            { label: "Estudios Universitarios", name: "estudiosUniversitarios" }
+                        ].map(({ label, name }) => (
+                            <div key={name}>
+                                <InputLabel htmlFor={name}>{label}</InputLabel>
+                                <Input
+                                    size="small"
+                                    type="text"
+                                    name={name}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </div>
+                        ))}
+                    </div>
+                    <div className="secondSectionEmleado">
+                        <div>
+                            <InputLabel htmlFor="experienciasLaborales">Experiencias Laborales</InputLabel>
+                            <Textarea
+                                aria-label="minimum height"
+                                name="experienciasLaborales"
+                                onChange={handleInputChange}
+                                placeholder="Ingresa tus experiencias laborales aquí teniendo en cuenta el año, dónde y las tareas realizadas..."
+                                rows="4"
+                                cols="50"
+                            />
+                        </div>
+                        <div>
+                            <RubroSelect
+                                rubros={rubros}
+                                rubro={formData.rubro}
+                                subRubro={formData.puesto}
+                                handleRubroChange={handleRubroChange}
+                                handleSubRubroChange={handlePuestoChange}
+                            />
+                        </div>
+                        <Button onClick={editButton}>Aceptar</Button>
+                    </div>
                 </div>
             </section>
-</>
-    )
-}
+        </>
+    );
+};
 
-export default Empleado
+export default Empleado;

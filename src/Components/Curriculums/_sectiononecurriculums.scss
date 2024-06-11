@@ -1,4 +1,15 @@
-.containerTitleRouteCurriculums{
+/* Definición de la animación de opacidad */
+@keyframes fadeIn {
+    0% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.containerTitleRouteCurriculums {
     background-image: url('../../assets/pexels-krakograff-textures-124842124-20560363.jpg');
     background-position: center;
     background-size: cover;
@@ -9,4 +20,10 @@
     justify-content: center;
     align-items: center;
     height: 30rem;
+    h2{
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    p{
+        animation: fadeIn 0.3s ease-in-out;
+    }
 }
