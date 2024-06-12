@@ -1,157 +1,196 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import {setDoc, doc} from 'firebase/firestore'
-import {db, auth} from '../../../Firebase/Config'
+import Input from '@mui/material/OutlinedInput';
+import { Button, InputLabel, FormControlLabel, Checkbox, FormControl, FormLabel } from '@mui/material';
+import { setDoc, doc } from 'firebase/firestore';
+import { db, auth } from '../../../Firebase/Config';
 import 'react-toastify/dist/ReactToastify.css';
-import PhoneSignin from "./PhoneSignin";
+import './StylesLogin/_personaldata.scss'
+import PhoneSignin from './PhoneSignin'
+import Sheet from '@mui/joy/Sheet';
+import { styled } from '@mui/joy/styles';
 
-const  PersonalData = () => {
-    // Estados para almacenar los datos personales
-    const [nombre, setNombre] = useState ("")
-    const [apellido, setApellido] = useState ("")
-    const [direccion, setDireccion] = useState ("")
-    const [localidad, setLocalidad] = useState ("")
-    const [cp, setCp] = useState ("")
-    const [numeroTelefonico, setNumeroTelefonico] = useState("")
-    const [roles, setRoles] = useState([]); // Estado para almacenar múltiples roles
-    const [userUID, setUserUID] = useState(null); // Estado para almacenar el UID del usuario
+// Custom hook to handle authentication state
+const useAuth = () => {
+    const [userUID, setUserUID] = useState(null);
 
-    const navigate = useNavigate();
-
-   // Obtener el UID del usuario actual al cargar el componente
     useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-        if (user) {
-            setUserUID(user.uid);
-        }
-    });
-    return () => unsubscribe();
-}, []);
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                setUserUID(user.uid);
+            }
+        });
+        return () => unsubscribe();
+    }, []);
 
-// Referencia al documento en Firestore usando el UID del usuario
-const setUpdateRef = userUID ? doc(db, `users/${userUID}`) : null;
-
-const handleRoleChange = (e) => {
-    const role = e.target.value;
-    // Si el rol seleccionado ya está en roles, lo desmarca
-    if (roles.includes(role)) {
-        setRoles(roles.filter(r => r !== role));
-    } else {
-        // Si el rol seleccionado no está en roles, lo marca y desmarca los otros
-        setRoles([role]);
-    }
+    return userUID;
 };
 
+const PersonalData = () => {
+
+    const Item = styled(Sheet)(({ theme }) => ({
+        ...theme.typography['body-sm'],
+        textAlign: 'center',
+        fontWeight: theme.fontWeight.md,
+        color: theme.vars.palette.text.secondary,
+        border: '1px solid',
+        borderColor: theme.palette.divider,
+        padding: theme.spacing(1),
+        borderRadius: theme.radius.md,
+    }));
 
 
-    // Función para guardar los datos en Firestore
+    const navigate = useNavigate();
+    const userUID = useAuth();
+
+    const [formData, setFormData] = useState({
+        nombre: "",
+        apellido: "",
+        direccion: "",
+        localidad: "",
+        cp: "",
+        numeroTelefonico: "",
+        roles: []
+    });
+
+    const handleInputChange = useCallback((e) => {
+        const { name, value } = e.target;
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
+    }, []);
+
+    const handleRoleChange = (e) => {
+        const role = e.target.value;
+        setFormData(prevData => ({
+            ...prevData,
+            roles: prevData.roles === role ? "" : role
+        }));
+    };
+
     const setButton = async () => {
+        if (!userUID) {
+            toast.error('Usuario no autenticado');
+            return;
+        }
+
+        const { nombre, apellido, direccion, localidad, cp, numeroTelefonico, roles } = formData;
+
         try {
-            await setDoc(setUpdateRef, {
-                nombre: nombre,
-                apellido: apellido,
-                direccion: direccion,
-                localidad: localidad,
-                cp: cp,
-                numeroTelefonico: numeroTelefonico,
-                roles: roles // Cambiado a 'roles' en lugar de 'rol'
-            })
-    
-            // Determinar la ruta a la que se debe redirigir dependiendo del rol
-            let redirectTo = '/Home'; // Ruta por defecto
-            if (roles.includes('empleado')) {
-                redirectTo = '/empleado'; // Redirigir a la ruta del panel de empleado
-            } else if (roles.includes('empleador')) {
-                redirectTo = '/empleador'; // Redirigir a la ruta del panel de empleador
-            }
-    
-            // Mostrar notificación Toastify y redirigir a la ruta adecuada
+            await setDoc(doc(db, `users/${userUID}`), {
+                nombre,
+                apellido,
+                direccion,
+                localidad,
+                cp,
+                numeroTelefonico,
+                roles
+            });
+
+            const redirectTo = roles.includes('Empleado') ? '/empleado' : roles.includes('Empleador') ? '/empleador' : '/Home';
+
             toast.success('¡Formulario enviado con éxito!', {
-                onClose: () => navigate(redirectTo) // Navegar a la ruta especificada cuando se cierre la notificación
+                onClose: () => navigate(redirectTo)
             });
         } catch (error) {
-            console.log(error)
+            console.error('Error al guardar los datos:', error);
+            toast.error('Error al enviar el formulario');
         }
-    }
-    
-    // JSX que define la estructura y los elementos del componente
+    };
+
     return (
-        <div>
-            {/* Sección de datos personales */}
-            <article>
-                <p>datos personales</p>
-                <p>A continuación te pediremos tus datos personales </p>
+        <div className="containerPrincipalPersonalData">
+
+            <article className="firstArticlePersonalData">
+<Item sx={{marginTop: '12px'}}>Datos personales</Item>                
+<Item sx={{marginTop: '12px', marginBottom: '12px'}}>A continuación te pediremos tus datos personales</Item>
             </article>
 
-            {/* Sección de entrada de datos */}
-            <section>
-                <div>
-                    {/* Checkboxes para seleccionar roles */}
-                    <label>Roles:</label><br />
-                    <input type="checkbox" value="empleado" checked={roles.includes("empleado")} onChange={handleRoleChange} />empleado <br />
-                    <input type="checkbox" value="empleador" checked={roles.includes("empleador")} onChange={handleRoleChange} /> empleador<br />
+            <div className="containerSectionsPersonalData">
 
+                <section className="firstSectionPersonalData">
+                    <div>
+                        <FormControl component="fieldset" >
+                            <FormLabel component="legend" >¿Cúal es tu rol?</FormLabel>
+                            {["Empleado", "Empleador"].map(role => (
+                                <FormControlLabel
+                                    key={role}
+                                    control={
+                                        <Checkbox
+                                            value={role}
+                                            checked={formData.roles === role}
+                                            onChange={handleRoleChange}
+                                            inputProps={{ 'aria-label': role }}
+                                        />
+                                    }
+                                    label={role.charAt(0).toUpperCase() + role.slice(1)}
+                                />
+                            ))}
+                        </FormControl>
+                    </div>
 
-                    {/* Campos de entrada para nombre, apellido y número telefónico */}
-                    <label >Nombre</label>
-                    <input
+                    <InputLabel>Nombre</InputLabel>
+                    <Input
+                        size="small"
+
                         type="text"
-                        onChange={(e) => setNombre(e.target.value)}
-                        required
-                    />
+                        name="nombre"
+                        value={formData.nombre}
+                        onChange={handleInputChange}
+                        required />
 
-                    <label >Apellido</label>
-                    <input
+                    <InputLabel>Apellido</InputLabel>
+                    <Input
+                        size="small"
+
                         type="text"
-                        onChange={(e) => setApellido(e.target.value)}
-                        required
-                    />
+                        name="apellido"
+                        value={formData.apellido}
+                        onChange={handleInputChange}
+                        required />
 
-<label >direccion</label>
-                    <input
+                </section>
+
+                <section className="secondSectionPersonalData">
+                    <InputLabel>Dirección</InputLabel>
+                    <Input
                         type="text"
-                        onChange={(e) => setDireccion(e.target.value)}
-                        required
-                    />
+                        size="small"
+                        name="direccion"
+                        value={formData.direccion}
+                        onChange={handleInputChange}
+                        required />
 
-<label >localidad</label>
-                    <input
+                    <InputLabel>Localidad</InputLabel>
+                    <Input
+                        size="small"
                         type="text"
-                        onChange={(e) => setLocalidad(e.target.value)}
-                        required
-                    />
+                        name="localidad"
+                        value={formData.localidad}
+                        onChange={handleInputChange}
+                        required />
 
-<label >Código Postal</label>
-                    <input
+                    <InputLabel>Código Postal</InputLabel>
+                    <Input
+                        size="small"
                         type="text"
-                        onChange={(e) => setCp(e.target.value)}
-                        required
-                    />
+                        name="cp"
+                        value={formData.cp}
+                        onChange={handleInputChange}
+                        required />
+                </section>
+            </div>
 
-                    <section>
-
-                        <p>Por favor verifica tu numero de celular.</p>
-                        {/* <PhoneSignin /> */}
-
-
-                    {/* <label >Numero Telefónico</label>
-                    <input
-                        type="text"
-                        onChange={(e) => setNumeroTelefonico(e.target.value)}
-                        required
-                    /> */}
-                    </section>
-
-                </div>
+            <section className="containerPhoneSigninPersonalData">
+                <p>Por favor verifica tu número de celular.</p>
+                <PhoneSignin />
             </section>
 
-            {/* Botón para guardar los datos */}
-            <section>
-                <button onClick={setButton}>Guardar</button>
-            </section>
+            <Button onClick={setButton}>Guardar</Button>
         </div>
-    )
-}
+    );
+};
 
-export default PersonalData
+export default PersonalData;

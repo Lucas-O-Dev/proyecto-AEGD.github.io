@@ -1,0 +1,31 @@
+.containerPrincipalPersonalData{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .firstArticlePersonalData{
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .containerSectionsPersonalData{
+        justify-content: center;
+        gap: 40px;
+        display: flex;
+        .firstSectionPersonalData{
+            display: flex;
+            flex-direction: column;
+            }
+        .secondSectionPersonalData{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .containerPhoneSigninPersonalData{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

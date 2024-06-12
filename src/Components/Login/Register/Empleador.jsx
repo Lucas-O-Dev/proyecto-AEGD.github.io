@@ -65,23 +65,25 @@ const Empleador = () => {
                     <p>A continuación te pediremos los datos de tu empresa.</p>
                 </article>
                 <div className="containerCheckboxRoleEmpleador">
-      <FormControl component="fieldset">
+
+        <FormControl component="fieldset">
         <FormLabel component="legend">Situación Fiscal</FormLabel>
         {["responsable Inscripto", "monotributo", "personal"].map(role => (
-          <FormControlLabel
+            <FormControlLabel
             key={role}
             control={
-              <Checkbox
+                <Checkbox
                 value={role}
                 checked={formData.situacionFiscal === role}
                 onChange={handleRoleChange}
                 inputProps={{ 'aria-label': role }}
-              />
+                />
             }
             label={role.charAt(0).toUpperCase() + role.slice(1)}
-          />
+            />
         ))}
-      </FormControl>
+        </FormControl>
+
     </div>
                     <div className="containerInputsEmpleador">
                     {[

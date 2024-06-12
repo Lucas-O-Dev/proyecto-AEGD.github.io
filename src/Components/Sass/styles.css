@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 .containerCourses {
   display: flex;
@@ -211,6 +212,15 @@ body {
   align-items: center;
 }
 
+/* Definición de la animación de opacidad */
+@keyframes fadeIn {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .containerTitleRouteCurriculums {
   background-image: url("../../assets/pexels-krakograff-textures-124842124-20560363.jpg");
   background-position: center;
@@ -223,8 +233,15 @@ body {
   align-items: center;
   height: 30rem;
 }
+.containerTitleRouteCurriculums h2 {
+  animation: fadeIn 0.3s ease-in-out;
+}
+.containerTitleRouteCurriculums p {
+  animation: fadeIn 0.3s ease-in-out;
+}
 
 form {
+  background-color: #f8f9fa;
   display: flex;
   flex-direction: row;
   width: 90%;
