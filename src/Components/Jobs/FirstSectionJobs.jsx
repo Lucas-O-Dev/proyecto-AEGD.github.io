@@ -4,8 +4,8 @@ import './_firstsectionjobs.scss'
 const FirstSectionJobs = () => {
   return (
     <div className="conteinerFirstSectionJobs">
-  <section>
-    <p>buscador</p>
+  <section className='firstSectionJobs'>
+    <p>Publica tu anuncio de empleo para que lo vean millones de personas.</p>
   </section>
 </div>
   )

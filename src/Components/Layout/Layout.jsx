@@ -8,7 +8,6 @@ const Layout = ({ children }) => {
     <>
       <ResponsiveAppBar />
       <main>{children}</main>
-      <Footer />
     </>
   );
 };

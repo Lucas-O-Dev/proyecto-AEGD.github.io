@@ -6,8 +6,8 @@ import { Button, InputLabel, FormControlLabel, Checkbox, FormControl, FormLabel 
 import { setDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../../../Firebase/Config';
 import 'react-toastify/dist/ReactToastify.css';
-import './StylesLogin/_personaldata.scss'
-import PhoneSignin from './PhoneSignin'
+import './StylesLogin/_personaldata.scss';
+import PhoneSignin from './PhoneSignin';
 import Sheet from '@mui/joy/Sheet';
 import { styled } from '@mui/joy/styles';
 
@@ -32,6 +32,7 @@ const PersonalData = () => {
     const Item = styled(Sheet)(({ theme }) => ({
         ...theme.typography['body-sm'],
         textAlign: 'center',
+        background: 'rgba(255, 255, 255, 0.5)', // Fondo blanco con 50% de transparencia
         fontWeight: theme.fontWeight.md,
         color: theme.vars.palette.text.secondary,
         border: '1px solid',
@@ -39,7 +40,6 @@ const PersonalData = () => {
         padding: theme.spacing(1),
         borderRadius: theme.radius.md,
     }));
-
 
     const navigate = useNavigate();
     const userUID = useAuth();
@@ -51,7 +51,8 @@ const PersonalData = () => {
         localidad: "",
         cp: "",
         numeroTelefonico: "",
-        roles: []
+        roles: [],
+        email: ""  // Nuevo campo para el correo electrónico del usuario
     });
 
     const handleInputChange = useCallback((e) => {
@@ -64,10 +65,12 @@ const PersonalData = () => {
 
     const handleRoleChange = (e) => {
         const role = e.target.value;
-        setFormData(prevData => ({
-            ...prevData,
-            roles: prevData.roles === role ? "" : role
-        }));
+        setFormData(prevData => {
+            const newRoles = prevData.roles.includes(role)
+                ? prevData.roles.filter(r => r !== role)
+                : [...prevData.roles, role];
+            return { ...prevData, roles: newRoles };
+        });
     };
 
     const setButton = async () => {
@@ -78,16 +81,23 @@ const PersonalData = () => {
 
         const { nombre, apellido, direccion, localidad, cp, numeroTelefonico, roles } = formData;
 
+        // Obtener el correo electrónico del usuario actualmente autenticado
+        const userEmail = auth.currentUser.email;
+
+        // Actualizar formData para incluir el correo electrónico
+        const updatedFormData = {
+            nombre,
+            apellido,
+            direccion,
+            localidad,
+            cp,
+            numeroTelefonico,
+            roles,
+            email: userEmail  // Agregar el correo electrónico al formData
+        };
+
         try {
-            await setDoc(doc(db, `users/${userUID}`), {
-                nombre,
-                apellido,
-                direccion,
-                localidad,
-                cp,
-                numeroTelefonico,
-                roles
-            });
+            await setDoc(doc(db, `users/${userUID}`), updatedFormData);
 
             const redirectTo = roles.includes('Empleado') ? '/empleado' : roles.includes('Empleador') ? '/empleador' : '/Home';
 
@@ -104,82 +114,93 @@ const PersonalData = () => {
         <div className="containerPrincipalPersonalData">
 
             <article className="firstArticlePersonalData">
-<Item sx={{marginTop: '12px'}}>Datos personales</Item>                
-<Item sx={{marginTop: '12px', marginBottom: '12px'}}>A continuación te pediremos tus datos personales</Item>
+                <Item sx={{ marginTop: '12px' }}>Datos personales</Item>
+                <Item sx={{ marginTop: '12px', marginBottom: '12px' }}>A continuación te pediremos tus datos personales</Item>
+                <FormControl component="fieldset" sx={{ display: 'flex', flexDirection: 'row' }}>
+                    <FormLabel component="legend" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>¿Cuál es tu rol?</FormLabel>
+                    {["Empleado", "Empleador"].map(role => (
+                        <FormControlLabel
+                            key={role}
+                            control={
+                                <Checkbox
+                                    value={role}
+                                    checked={formData.roles.includes(role)}
+                                    onChange={handleRoleChange}
+                                    inputProps={{ 'aria-label': role }}
+                                />
+                            }
+                            label={role.charAt(0).toUpperCase() + role.slice(1)}
+                        />
+                    ))}
+                </FormControl>
             </article>
 
             <div className="containerSectionsPersonalData">
-
                 <section className="firstSectionPersonalData">
-                    <div>
-                        <FormControl component="fieldset" >
-                            <FormLabel component="legend" >¿Cúal es tu rol?</FormLabel>
-                            {["Empleado", "Empleador"].map(role => (
-                                <FormControlLabel
-                                    key={role}
-                                    control={
-                                        <Checkbox
-                                            value={role}
-                                            checked={formData.roles === role}
-                                            onChange={handleRoleChange}
-                                            inputProps={{ 'aria-label': role }}
-                                        />
-                                    }
-                                    label={role.charAt(0).toUpperCase() + role.slice(1)}
-                                />
-                            ))}
-                        </FormControl>
-                    </div>
-
-                    <InputLabel>Nombre</InputLabel>
+                    <InputLabel sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Nombre</InputLabel>
                     <Input
-                        size="small"
-
+                        sx={{ height: '1.8rem' }}
                         type="text"
                         name="nombre"
                         value={formData.nombre}
                         onChange={handleInputChange}
-                        required />
+                        required
+                    />
 
-                    <InputLabel>Apellido</InputLabel>
+                    <InputLabel sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Apellido</InputLabel>
                     <Input
-                        size="small"
-
+                        sx={{ height: '1.8rem' }}
                         type="text"
                         name="apellido"
                         value={formData.apellido}
                         onChange={handleInputChange}
-                        required />
+                        required
+                    />
 
-                </section>
-
-                <section className="secondSectionPersonalData">
-                    <InputLabel>Dirección</InputLabel>
+                    <InputLabel sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Dirección</InputLabel>
                     <Input
+                        sx={{ height: '1.8rem' }}
                         type="text"
-                        size="small"
                         name="direccion"
                         value={formData.direccion}
                         onChange={handleInputChange}
-                        required />
+                        required
+                    />
 
-                    <InputLabel>Localidad</InputLabel>
+                    <InputLabel sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Localidad</InputLabel>
                     <Input
-                        size="small"
+                        sx={{ height: '1.8rem' }}
                         type="text"
                         name="localidad"
                         value={formData.localidad}
                         onChange={handleInputChange}
-                        required />
+                        required
+                    />
 
-                    <InputLabel>Código Postal</InputLabel>
+                    <InputLabel sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Código Postal</InputLabel>
                     <Input
-                        size="small"
+                        sx={{ height: '1.8rem' }}
                         type="text"
                         name="cp"
                         value={formData.cp}
                         onChange={handleInputChange}
-                        required />
+                        required
+                    />
+                </section>
+
+                <section className="secondSectionPersonalData">
+                <Item>
+                    Buscar nuevas oportunidades profesionales
+                        es un proceso que, aunque desafiante,
+                        puede conducir a grandes logros.
+                        Es fundamental destacar la ética de trabajo,
+                        la capacidad para resolver problemas y la dedicación en cada aplicación
+                        y entrevista. Un currículum bien elaborado es una herramienta poderosa
+                        que puede demostrar no solo las habilidades, sino también la actitud profesional.
+                        Cada paso en esta búsqueda es una oportunidad para mostrar el mejor perfil a los
+                        posibles empleadores. Con la preparación adecuada y una actitud positiva,
+                        el éxito está al alcance.
+                    </Item>
                 </section>
             </div>
 
@@ -188,7 +209,7 @@ const PersonalData = () => {
                 <PhoneSignin />
             </section>
 
-            <Button onClick={setButton}>Guardar</Button>
+            <Button onClick={setButton} sx={{ marginTop: '12px', marginBottom: '8px' }}>Guardar</Button>
         </div>
     );
 };

@@ -66,7 +66,7 @@ const Empleador = () => {
                 </article>
                 <div className="containerCheckboxRoleEmpleador">
 
-        <FormControl component="fieldset">
+        <FormControl component="fieldset" sx={{ display: 'flex', flexDirection: 'row' }}>
         <FormLabel component="legend">Situación Fiscal</FormLabel>
         {["responsable Inscripto", "monotributo", "personal"].map(role => (
             <FormControlLabel
@@ -98,8 +98,7 @@ const Empleador = () => {
                                                 <div key={name}>
                                                     <InputLabel htmlFor={name}>{label}</InputLabel>
                                                     <Input
-                                                    size="small"
-                                                    type="text"
+                                                    sx={{ height: '1.8rem' }}
                                                     name={name}
                                                     onChange={handleInputChange}
                                                     required
@@ -116,7 +115,7 @@ const Empleador = () => {
                                             required  
                     />
                 </div>
-                        <Button onClick={editButton}>Enviar</Button>
+                        <Button sx={{margin: '1rem'}} onClick={editButton}>Enviar</Button>
                                     </section>
         </>
     );

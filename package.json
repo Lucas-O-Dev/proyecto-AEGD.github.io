@@ -17,7 +17,7 @@
     "@mui/material": "^5.15.19",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@react-pdf/renderer": "^3.3.8",
-    "firebase": "^9.23.0",
+    "firebase": "^10.12.2",
     "framer-motion": "^11.1.9",
     "jspdf": "^2.5.1",
     "pdfkit": "^0.14.0",

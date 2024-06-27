@@ -34,12 +34,14 @@ const RubroSelect = ({
         <>
             {/* Contenedor para el primer selector (Rubro) */}
             <div className="containerInputAddJobs">
+            <p>¿ En qué rubro y puesto deseas trabajar ?</p>
                 {/* Control de formulario que contiene el selector */}
-                <FormControl fullWidth>
+                <FormControl fullWidth  >
                     {/* Etiqueta del selector para indicar que se seleccionará un "Rubro" */}
-                    <InputLabel id="rubro-label">Rubro</InputLabel>
+                    <InputLabel id="rubro-label" >Rubro</InputLabel>
                     {/* Componente de selección de Material-UI */}
                     <Select
+                    
                         labelId="rubro-label" // Asignación de la etiqueta al selector mediante su ID
                         id="rubro" // ID único para el selector
                         value={rubro} // Valor seleccionado del rubro (vinculado a las props)

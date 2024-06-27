@@ -1,12 +1,12 @@
 import React from 'react'
-import backgroundImg from '../../assets/texturesHome.jpg';
+import Carousel from './Carousel'
 
 import './_firstcontainersonhome.scss'
 
 const FirstContainerSonHome = () => {
   return (
     <div className="FirstContainerSonHome">
-
+      <Carousel />
     </div>
   )
 }

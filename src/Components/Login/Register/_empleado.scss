@@ -1,11 +1,35 @@
-.containerFormEmpleado{
-    background-color: #f8f9fa;
+.sectionConteinerFormEmpleado{
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 2rem;
-    button{
-        margin-top: 1rem;
+    background-image: url('../../../assets/pexels-krakograff-textures-124842124-20560363.jpg');
+    background-position: center;
+    background-size: cover;
+    padding: 12px;
+    .containerFormEmpleado{
+        gap: 40px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 2rem;
+        width: 80%;
+        button{
+            margin-top: 1rem;
+        }
+        .firstSectionEmpleado{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 66%;
+        }
+        .prueba{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+        }
     }
 }

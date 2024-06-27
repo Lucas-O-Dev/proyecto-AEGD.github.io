@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';  // Asegúrate de importar Link
 import { auth } from '../../../Firebase/Config'
 
-const pages = ['Cursos', 'Ofertas Laborales'];
+const pages = ['Cursos', 'Trabajos'];
 const settings = ['Perfil', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -141,7 +141,7 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                <Link to={`/${page.replace(' ', '')}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <Link to={`/${page.replace('/courses ', '/Trabajos')}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </Link>
                             </MenuItem>

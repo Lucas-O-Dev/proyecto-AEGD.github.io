@@ -1,12 +1,12 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import Button from '@mui/material/Button';
 
 const FirstArticleJobs = () => {
   return (
     <article className="firstArticleJobs">
-    <h2>Jobs</h2>
-    <p>agregar oferta laboral</p>
-    <Link to='/AddJobs'><button>agregar</button></Link>
+    <p>Publica tu anuncio de empleo para que lo vean millones de personas.</p>
+    <Link to='/AddJobs'><Button>Agregar oferta laboral</Button></Link>
 </article>
   )
 }

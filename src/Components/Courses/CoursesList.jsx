@@ -7,7 +7,6 @@ const CoursesList = ({ courses }) => {
     return (
       <div className="containerList">
         {courses.map((course) => {
-          console.log("Course data:", course); // Agregar console.log con los datos del curso
           return (
             <div key={course.id} className="card">
               <div className="card-details">

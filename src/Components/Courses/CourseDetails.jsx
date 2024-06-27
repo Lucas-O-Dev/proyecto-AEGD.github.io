@@ -3,12 +3,10 @@ import './_coursedetails.scss';
 import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../Firebase/Config';
-import { CartContext } from '../Context/CartContext'; // Importa el contexto del carrito
 
 const CourseDetails = () => {
   const [course, setCourse] = useState(null);
   const { id } = useParams();
-  const { addToCart } = useContext(CartContext); // Obtén la función addToCart del contexto
 
   useEffect(() => {
     const fetchCourse = async () => {

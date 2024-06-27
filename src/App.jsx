@@ -1,7 +1,6 @@
 import React from 'react';
-// 1. import `ChakraProvider` component
+import Footer from './Components/Footer/Footer';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { CartProvider } from './Components/Context/CartContext'; // Importa el proveedor del contexto del carrito
 import './App.css';
 import Landing from './Components/Landing/Landing';
 import Login from './Components/Login/Login';
@@ -25,7 +24,6 @@ function App() {
 
   return (
 
-    <CartProvider>
       <BrowserRouter>
       <ToastContainer />
         <Routes>
@@ -33,7 +31,7 @@ function App() {
           <Route path="/Home" element={<Layout><Home /></Layout>} />
           <Route path="/Profile" element={<Layout><Profile /></Layout>} />
           <Route path="/EditInfoUserDatabase" element={<Layout><EditInfoUserDatabase /></Layout>} />
-          <Route path="/OfertasLaborales" element={<Layout><Jobs /></Layout>} />
+          <Route path="/Trabajos" element={<Layout><Jobs /></Layout>} />
           <Route path="/AddJobs" element={<Layout><AddJobs /></Layout>} />
           <Route path="/Cursos" element={<Layout><Courses /></Layout>} />
           <Route path="/course/:id" element={<Layout><CourseDetails /></Layout>} />
@@ -46,8 +44,8 @@ function App() {
           <Route path="/Empleador" element={<Empleador />} />
           <Route path="/curriculum" element={<Curriculums /> } />
         </Routes>
+        <Footer />
       </BrowserRouter>
-    </CartProvider>
   );
 }
 

@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import Select from '@mui/material/Select';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import MenuItem from '@mui/material/MenuItem';
+import ThirdSectionEmpleado from "./ThirdSectionEmpleado";
+import FormControl from '@mui/material/FormControl';
 import { useNavigate } from 'react-router-dom';
 import { updateDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../../../../Firebase/Config';
@@ -7,8 +12,6 @@ import RubroSelect from '../../RubroSelect/RubroSelect';
 import Input from '@mui/material/OutlinedInput';
 import { Button, InputLabel } from '@mui/material';
 import ArticleFirstEmpleado from "./ArticleFirstEmpleado";
-import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
-import { styled } from '@mui/system';
 import './_empleado.scss';
 
 const rubros = {
@@ -30,15 +33,22 @@ const rubros = {
     Automotriz: ["Mecánico de Autos", "Mecánico de Motos", "Electromecánico de Vehículos", "Chapista", "Pintor de Autos", "Técnico en Diagnóstico Automotriz", "Asesor de Servicio Automotriz", "Gerente de Taller Automotriz", "Vendedor de Repuestos Automotrices"]
 };
 
+const nivelesEducativos = {
+    secundariocompleto: 'Secundario Completo',
+    secundarioincompleto: 'Secundario Incompleto',
+    terciariocompleto: 'Terciario Completo',
+    terciarioincompleto: 'Terciario Incompleto',
+    universidadcompleta: 'Universidad Completa',
+    universidadincompleta: 'Universidad Incompleta'
+};
+
 const Empleado = () => {
     const [formData, setFormData] = useState({
-        estudiosPrimarios: "",
-        estudiosSecundarios: "",
-        estudiosTerciarios: "",
-        estudiosUniversitarios: "",
-        experienciasLaborales: "",
-        rubro: "",
-        puesto: ""
+        experienciasLaborales: "",  // Añadido: valor inicial vacío
+        nivelEducativo: "",         // Añadido: valor inicial vacío
+        tituloAcademico: "",         // Añadido: valor inicial vacío
+        rubro: "",                  // Añadido: valor inicial vacío
+        puesto: ""                  // Añadido: valor inicial vacío
     });
     const [userUID, setUserUID] = useState(null);
     const navigate = useNavigate();
@@ -54,18 +64,67 @@ const Empleado = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prevData => ({ ...prevData, [name]: value }));
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
     };
 
     const handleRubroChange = (event) => {
         const { value } = event.target;
-        setFormData(prevData => ({ ...prevData, rubro: value, puesto: "" }));
+        setFormData(prevData => ({
+            ...prevData,
+            rubro: value,
+            puesto: ""
+        }));
     };
 
     const handlePuestoChange = (event) => {
         const { value } = event.target;
-        setFormData(prevData => ({ ...prevData, puesto: value }));
+        setFormData(prevData => ({
+            ...prevData,
+            puesto: value
+        }));
     };
+
+    const handleNivelEducativoChange = (event) => {
+        const { value } = event.target;
+        setFormData((prevValues) => ({
+            ...prevValues,
+            nivelEducativo: value
+        }));
+    };
+
+        // Renderiza los elementos del menú de selección
+        const renderMenuItems = (items) => {
+            return items.map((item) => (
+                <MenuItem key={item} value={item}>
+                    {item}
+                </MenuItem>
+            ));
+        };
+
+    // Función para renderizar un campo de selección
+const renderSelectField = (label, value, onChange, options) => (
+    <div className='containerInputAddJobs'>
+        <FormControl fullWidth>
+            <InputLabel id={`${label}-label`}>{label}</InputLabel>
+            <Select
+                labelId={`${label}-label`}
+                value={value}
+                onChange={onChange}
+                input={<OutlinedInput label={label}
+                />}
+            >
+                {Object.keys(options).map((option) => (
+                    <MenuItem key={option} value={option}>
+                        {options[option]}
+                    </MenuItem>
+                ))}
+            </Select>
+        </FormControl>
+    </div>
+);
 
     const editButton = async () => {
         if (!userUID) return;
@@ -80,107 +139,48 @@ const Empleado = () => {
         }
     };
 
-    const blue = {
-        100: '#DAECFF',
-        200: '#b6daff',
-        400: '#3399FF',
-        500: '#007FFF',
-        600: '#0072E5',
-        900: '#003A75',
-    };
-
-    const grey = {
-        50: '#F3F6F9',
-        100: '#E5EAF2',
-        200: '#DAE2ED',
-        300: '#C7D0DD',
-        400: '#B0B8C4',
-        500: '#9DA8B7',
-        600: '#6B7A90',
-        700: '#434D5B',
-        800: '#303740',
-        900: '#1C2025',
-    };
-
-    const Textarea = styled(BaseTextareaAutosize)(
-        ({ theme }) => `
-        box-sizing: border-box;
-        width: 320px;
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-size: 0.875rem;
-        font-weight: 400;
-        line-height: 1.5;
-        padding: 8px 12px;
-        border-radius: 8px;
-        color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-        background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-        border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-        box-shadow: 0px 2px 2px ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
-    
-        &:hover {
-          border-color: ${blue[400]};
-        }
-    
-        &:focus {
-          border-color: ${blue[400]};
-          box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
-        }
-    
-        // firefox
-        &:focus-visible {
-          outline: 0;
-        }
-      `,
-    );
-
     return (
         <>
-            <section>
+            <section className="sectionConteinerFormEmpleado">
+
                 <ArticleFirstEmpleado />
+
                 <div className="containerFormEmpleado">
+
+                {/* <ThirdSectionEmpleado />
+ */}
+
+
                     <div className="firstSectionEmpleado">
-                        {[
-                            { label: "Estudios Primarios", name: "estudiosPrimarios" },
-                            { label: "Estudios Secundarios", name: "estudiosSecundarios" },
-                            { label: "Estudios Terciarios", name: "estudiosTerciarios" },
-                            { label: "Estudios Universitarios", name: "estudiosUniversitarios" }
-                        ].map(({ label, name }) => (
-                            <div key={name}>
-                                <InputLabel htmlFor={name}>{label}</InputLabel>
-                                <Input
-                                    size="small"
-                                    type="text"
-                                    name={name}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-                        ))}
-                    </div>
-                    <div className="secondSectionEmleado">
-                        <div>
-                            <InputLabel htmlFor="experienciasLaborales">Experiencias Laborales</InputLabel>
-                            <Textarea
-                                aria-label="minimum height"
-                                name="experienciasLaborales"
-                                onChange={handleInputChange}
-                                placeholder="Ingresa tus experiencias laborales aquí teniendo en cuenta el año, dónde y las tareas realizadas..."
-                                rows="4"
-                                cols="50"
-                            />
-                        </div>
-                        <div>
-                            <RubroSelect
-                                rubros={rubros}
-                                rubro={formData.rubro}
-                                subRubro={formData.puesto}
-                                handleRubroChange={handleRubroChange}
-                                handleSubRubroChange={handlePuestoChange}
-                            />
-                        </div>
-                        <Button onClick={editButton}>Aceptar</Button>
+                    {renderSelectField("Nivel Educativo", formData.nivelEducativo, handleNivelEducativoChange, nivelesEducativos)}
+                    {[
+                        {    label: "Título Académico", name: "tituloAcademico"},
+    { label: "Experiencias Laborales", name: "experienciasLaborales"}
+].map(({ label, name }) => (
+    <div key={name} className="prueba">
+        <InputLabel htmlFor={name}>{label}</InputLabel>
+        <Input
+sx={{ height: '1.8rem' }}
+            name={name}
+            value={formData[name]}  // Cambiado: utilizar el nombre dinámico
+            onChange={handleInputChange}
+            required
+        />
+    </div>
+))}
+
+                        <RubroSelect
+                            rubros={rubros}
+                            rubro={formData.rubro}
+                            subRubro={formData.puesto}
+                            handleRubroChange={handleRubroChange}
+                            handleSubRubroChange={handlePuestoChange}
+                        />
                     </div>
                 </div>
+                <div className="secondSectionEmleado">
+                        <Button onClick={editButton}>Aceptar</Button>
+                    </div>
             </section>
         </>
     );

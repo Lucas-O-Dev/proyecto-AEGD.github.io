@@ -64,7 +64,7 @@ const PhoneSignin = () => {
                     onChange={(phone) => setPhone("+" + phone)}
                 />
 <Button onClick={SendCode}>Enviar</Button>            </div>
-            <Input type="text" placeholder='Escribir código' onChange={(e) => setCode(e.target.value)} />
+            <Input type="text"  placeholder='Escribir código' onChange={(e) => setCode(e.target.value)} />
 <Button onClick={verifyCode} size='small'>Verificar código</Button>            {/* Recaptcha */}
             <div id="recaptcha"></div>
         </div>
