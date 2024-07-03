@@ -4,7 +4,6 @@ import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../../../Firebase/Config";
 import '../Jobs/_jobs.scss';
 import FirstArticleJobs from "./FirstArticleJobs";
-import FirstSectionJobs from "./FirstSectionJobs";
 import Sheet from '@mui/joy/Sheet';
 import { styled } from '@mui/joy/styles';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -18,11 +17,11 @@ const Jobs = () => {
         fontWeight: theme.fontWeight.md,
         color: theme.vars.palette.text.secondary,
         border: '1px solid',
-        width: '90%',
+        width: '100%',
         borderColor: theme.palette.divider,
         padding: theme.spacing(1),
         borderRadius: theme.radius.md,
-      }));
+    }));
 
     const [jobs, setJobs] = useState([]);
     const [userRoles, setUserRoles] = useState('');
@@ -79,23 +78,23 @@ const Jobs = () => {
     }
 
 
-    
-    return (
-            <div className="containerJobs">
 
-      <div className="containerImgJobs">
-        
-        <div className="imgJobs">
-          
+    return (
+        <div className="containerJobs">
+
+            <div className="containerImgJobs">
+
+                <div className="imgJobs">
+
+                </div>
+                <Item className="firstItemContainerImgJobs">Puedes seleccionar el empleo que mejor se adapte a tus objetivos profesionales y alcanzar el puesto de trabajo que deseas.</Item>
+            </div>
+            <Item sx={{ marginBottom: '10rem' }}>            {userRoles == 'Empleador' && <FirstArticleJobs />}</Item>
+            <div className="containerJobsList">
+                {/* Renderiza el componente CoursesList pasando la lista de cursos como prop */}
+                <JobsList trabajos={jobs} />
+            </div>
         </div>
-        <Item className="firstItemContainerImgJobs">Puedes seleccionar el empleo que mejor se adapte a tus objetivos profesionales y alcanzar el puesto de trabajo que deseas.</Item>
-      </div>
-      <Item sx={{marginBottom: '10rem'}}>            {userRoles == 'Empleador' && <FirstArticleJobs />}</Item>
-      <div className="containerJobsList">
-        {/* Renderiza el componente CoursesList pasando la lista de cursos como prop */}
-        <JobsList trabajos={jobs} />
-      </div>
-    </div>
     );
 };
 

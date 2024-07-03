@@ -7,7 +7,7 @@ import { setDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../../../Firebase/Config';
 import 'react-toastify/dist/ReactToastify.css';
 import './StylesLogin/_personaldata.scss';
-import PhoneSignin from './PhoneSignin';
+// import PhoneSignin from './PhoneSignin';
 import Sheet from '@mui/joy/Sheet';
 import { styled } from '@mui/joy/styles';
 
@@ -206,7 +206,7 @@ const PersonalData = () => {
 
             <section className="containerPhoneSigninPersonalData">
                 <p>Por favor verifica tu número de celular.</p>
-                <PhoneSignin />
+                {/* <PhoneSignin /> */}
             </section>
 
             <Button onClick={setButton} sx={{ marginTop: '12px', marginBottom: '8px' }}>Guardar</Button>

@@ -1,0 +1,66 @@
+.sectionOneProfile{
+    border: 1px solid blue;
+    width: 70%;
+    flex-direction: column;
+    display: flex;
+    .firstContainerSectionOneProfile{
+        background-color: lightcoral;
+        width: 100%;
+        height: 12rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        }
+        .secondContainerSectionOneProfile{
+            border: 1px solid green;
+            width: 50%;
+            .conteinerInfoUserProfile{
+                .firstArticleConteinerInfoUserProfile{
+                    .sectionFirstArticleConteinerInfoUserProfile{
+                        border: 1px solid black;
+                        padding: 0.2rem;
+                        display: flex;
+                        justify-content: space-around;
+                    }
+                    .sectionSecondArticleConteinerInfoUserProfile{
+                        border: 1px solid black;
+                        padding: 0.2rem;
+
+                        .containerUbicationAndButtonContactInformation{
+                            display: flex;
+                            border: 1px solid red;
+                        }
+                    }
+                    .sectionThirdArticleConteinerInfoUserProfile{
+                        border: 1px solid black;
+                        padding: 0.2rem;
+
+                        display: flex;
+                        justify-content: space-around;
+                    }
+                }
+            }
+        }
+        .ThirdConteinerSectionOneProfile{
+            border: 1px solid orangered;
+            .firstArticleThirdConteinerSectionOneProfile{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                .firstSectionFirstArticleThirdConteinerSectionOneProfile{
+                    border: 1px solid red;
+                    padding: 0.2rem;
+                    display: flex;
+                    flex-direction: column;
+                    width: 50%;
+                }
+                .secondSectionFirstArticleThirdConteinerSectionOneProfile{
+                    border: 1px solid red;
+                    padding: 0.2rem;
+
+                    width: 50%;
+
+                }
+            }
+        }
+}

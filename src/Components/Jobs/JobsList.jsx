@@ -4,17 +4,17 @@ import './_jobslist.scss'
 
 const JobsList = ({ trabajos }) => {
 return (
-<div className="containerJobsList">
+<div className="containerMapJobs">
 {trabajos.map((job) => (
 <div key={job.id} className="cardJobs">
-<div className="cardJobsDetails">
+<div className="card-details">
 <h3>{job.descripcion}</h3>
-<p>{job.jornadaLaboral}</p>
-<p>{job.experienciaRequerida}</p>
-<p>{job.duracion}</p>
-<p>{job.sueldo}</p>
+{/* <p>{job.jornadaLaboral}</p>
+<p>{job.experienciaRequerida}</p> */}
+{/* <p>{job.duracion}</p> */}
+{/* <p>{job.sueldo}</p>
 <p>{job.nivelEducativo}</p>
-<p>{job.modalidad}</p>
+<p>{job.modalidad}</p> */}
 <p>{job.localidad}</p>
 <p>{job.rubro}</p>
 <p>{job.puesto}</p>
