@@ -1,7 +1,6 @@
 import React from 'react'
 import {Link}  from 'react-router-dom'
-import logoIcon from '../../assets/slack.svg'
-import userIcon from '../../assets/user.svg'
+import myImage  from '../../assets/EmpleAR_logo_transparent.png'
 import loginIcon from '../../assets/icons8-handshake-100.png'
 import Button from '@mui/material/Button';
 import './_sectiononelanding.scss'
@@ -11,7 +10,7 @@ const SectionOneLanding = () => {
     <section className='sectionOneLanding'>
 
   <article className='articleTitleLanding'>
-  <h1>AEGD</h1>
+    <img src={myImage} alt="" />
   </article>
 
   {/* <article>

@@ -1,5 +1,15 @@
+@keyframes fadeIn {
+    0% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
 
 .containerPrincipalHome {
+    animation: fadeIn 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

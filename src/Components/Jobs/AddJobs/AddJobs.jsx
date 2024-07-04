@@ -130,6 +130,9 @@ const AddJobs = () => {
 
                     <form onSubmit={handleSubmit}>
                             <div className='conteinerRenderInputField'>
+
+                            {/* (label: any, id: any, value: any, onChange: any, placeholder: any) */}
+
                         {renderInputField("Descripción del puesto", "descripciondelpuesto", inputValues.descripciondelpuesto, handleInputChange, "Descripción")}
                         {renderInputField("Jornada Laboral", "jornadaLaboral", inputValues.jornadaLaboral, handleInputChange, "medio-tiempo..")}
                         {renderInputField("Experiencia Requerida", "experienciaRequerida", inputValues.experienciaRequerida, handleInputChange, "Experiencia")}

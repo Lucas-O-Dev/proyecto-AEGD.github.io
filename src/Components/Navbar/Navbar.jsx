@@ -7,19 +7,20 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
+import { Button } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Link, useNavigate } from 'react-router-dom';  // Asegúrate de importar Link
-import { auth } from '../../../Firebase/Config'
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../../../Firebase/Config';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const pages = ['Cursos', 'Trabajos'];
 const settings = ['Perfil', 'Logout'];
 
 function ResponsiveAppBar() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -39,21 +40,14 @@ function ResponsiveAppBar() {
     };
 
     const handleProfileClick = () => {
-        // Lógica para redirigir a la página de perfil
-        console.log('Ir a perfil');
-        // Puedes usar `history.push('/profile')` si estás usando react-router-dom
-        navigate('/profile')
+        navigate('/profile');
         setAnchorElUser(null);
     };
 
     const handleLogoutClick = async () => {
-        // Lógica para cerrar sesión
-        console.log('Cerrar sesión');
         try {
-            await auth.signOut(); // Cierre de sesión usando Firebase
-            console.log('Usuario cerró sesión correctamente');
-            navigate('/')
-            // Aquí podrías redirigir al usuario a la página de inicio de sesión o a cualquier otra página
+            await auth.signOut();
+            navigate('/');
         } catch (error) {
             console.error('Error al cerrar sesión:', error.message);
         }
@@ -61,7 +55,7 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" color='primary' sx={{height: '3rem', display: 'flex', justifyContent: 'center'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -80,7 +74,7 @@ function ResponsiveAppBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        AEGD
+                        EmpleAR
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -114,7 +108,9 @@ function ResponsiveAppBar() {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                    <Link to={`/${page.toLowerCase()}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <Typography textAlign="center">{page}</Typography>
+                                    </Link>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -124,7 +120,7 @@ function ResponsiveAppBar() {
                         variant="h5"
                         noWrap
                         component="a"
-                        href="#app-bar-with-responsive-menu"
+                        href="/home"
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -136,22 +132,25 @@ function ResponsiveAppBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        EmpleAR
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
-                            <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                <Link to={`/${page.replace('/courses ', '/Trabajos')}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </Link>
-                            </MenuItem>
+                            <Link key={page} to={`/${page.toLowerCase()}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                >
+                                    {page}
+                                </Button>
+                            </Link>
                         ))}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Abrir Ajustes">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/broken-image.jpg" />
+                                <AccountCircleIcon />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -182,12 +181,5 @@ function ResponsiveAppBar() {
         </AppBar>
     );
 }
+
 export default ResponsiveAppBar;
-
-
-//             <StyledLink to="/Courses"><h3>
-
-//             <StyledLink to="/Jobs"><h3>
-
-
-//             <Link to="/Profile"><img src={userIcon} alt="cart-icon" /></Link>

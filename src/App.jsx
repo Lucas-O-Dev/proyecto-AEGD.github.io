@@ -31,9 +31,9 @@ function App() {
           <Route path="/Home" element={<Layout><Home /></Layout>} />
           <Route path="/Profile" element={<Layout><Profile /></Layout>} />
           <Route path="/EditInfoUserDatabase" element={<Layout><EditInfoUserDatabase /></Layout>} />
-          <Route path="/Trabajos" element={<Layout><Jobs /></Layout>} />
+          <Route path="/trabajos" element={<Layout><Jobs /></Layout>} />
           <Route path="/AddJobs" element={<Layout><AddJobs /></Layout>} />
-          <Route path="/Cursos" element={<Layout><Courses /></Layout>} />
+          <Route path="/cursos" element={<Layout><Courses /></Layout>} />
           <Route path="/course/:id" element={<Layout><CourseDetails /></Layout>} />
           {/* Otras rutas */}
           <Route path="/" element={<Landing />} />
