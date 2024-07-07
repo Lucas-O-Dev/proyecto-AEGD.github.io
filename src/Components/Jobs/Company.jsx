@@ -57,7 +57,7 @@ const Company = ({ inputValues }) => {
             // funcion 
 
 
-            navigate('/Jobs'); // Utiliza navigate  para redirigir
+            navigate('/Trabajos'); // Utiliza navigate  para redirigir
         } catch (error) {
             console.error('Error al agregar documentos:', error);
         }

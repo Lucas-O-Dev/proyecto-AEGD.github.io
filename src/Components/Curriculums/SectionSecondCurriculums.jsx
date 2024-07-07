@@ -1,20 +1,25 @@
-import React from 'react'
-import './_sectionsecondcurriculums.scss'
+import React from 'react';
+import { Container, Typography, Box, List, ListItem, ListItemText } from '@mui/material';
 
 const SectionSecondCurriculums = () => {
   return (
-    <article className='articleRouteCurriculums'>
+    <Container sx={{ paddingTop: 4, margin: '4rem', backgroundColor: '#f7f7f7', borderRadius: '8px', padding: '20px', textAlign: 'left' }}>
+      <Typography variant="h4" gutterBottom>
+        Solo debes seguir estos pasos:
+      </Typography>
+      <List>
+        <ListItem>
+          <ListItemText primary="Paso 1:" secondary="Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus dignissimos facilis nihil. Cupiditate, sequi assumenda." />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Paso 2:" secondary="Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus dignissimos facilis nihil." />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Paso 3:" secondary="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
+        </ListItem>
+      </List>
+    </Container>
+  );
+};
 
-    <h4>Solo debes seguir estos pasos: </h4>
-
-    <ul>
-        <li>Paso 1: Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus dignissimos facilis nihil. Cupiditate, sequi assumenda.</li>
-        <li>Paso 2:Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus dignissimos facilis nihil.</li>
-        <li>Paso 3:Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-    </ul>
-
-    </article>
-  )
-}
-
-export default SectionSecondCurriculums
+export default SectionSecondCurriculums;

@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Input from '@mui/material/OutlinedInput';
-import { Button, InputLabel, FormControlLabel, Checkbox, FormControl, FormLabel } from '@mui/material';
+import { Button, Input, InputLabel, FormControlLabel, Checkbox, FormControl, FormLabel, Container } from '@mui/material';
 import { setDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../../../Firebase/Config';
 import 'react-toastify/dist/ReactToastify.css';
 import './StylesLogin/_personaldata.scss';
-// import PhoneSignin from './PhoneSignin';
-import Sheet from '@mui/joy/Sheet';
 import { styled } from '@mui/joy/styles';
 
 // Custom hook to handle authentication state
@@ -28,19 +25,6 @@ const useAuth = () => {
 };
 
 const PersonalData = () => {
-
-    const Item = styled(Sheet)(({ theme }) => ({
-        ...theme.typography['body-sm'],
-        textAlign: 'center',
-        background: 'rgba(255, 255, 255, 0.5)', // Fondo blanco con 50% de transparencia
-        fontWeight: theme.fontWeight.md,
-        color: theme.vars.palette.text.secondary,
-        border: '1px solid',
-        borderColor: theme.palette.divider,
-        padding: theme.spacing(1),
-        borderRadius: theme.radius.md,
-    }));
-
     const navigate = useNavigate();
     const userUID = useAuth();
 
@@ -50,7 +34,6 @@ const PersonalData = () => {
         direccion: "",
         localidad: "",
         cp: "",
-        numeroTelefonico: "",
         roles: [],
         email: ""  // Nuevo campo para el correo electrónico del usuario
     });
@@ -73,13 +56,26 @@ const PersonalData = () => {
         });
     };
 
+    const Item = styled('div')(({ theme }) => ({
+        ...theme.typography.body,
+        textAlign: 'center',
+        background: 'rgba(255, 255, 255, 0.5)', // Fondo blanco con 50% de transparencia
+        fontWeight: theme.typography.fontWeightMedium,
+        color: theme.palette.text.secondary,
+        border: '1px solid',
+        borderColor: theme.palette.divider,
+        padding: theme.spacing(1),
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+    }));
+
     const setButton = async () => {
         if (!userUID) {
             toast.error('Usuario no autenticado');
             return;
         }
 
-        const { nombre, apellido, direccion, localidad, cp, numeroTelefonico, roles } = formData;
+        const { nombre, apellido, direccion, localidad, cp, roles } = formData;
 
         // Obtener el correo electrónico del usuario actualmente autenticado
         const userEmail = auth.currentUser.email;
@@ -91,7 +87,6 @@ const PersonalData = () => {
             direccion,
             localidad,
             cp,
-            numeroTelefonico,
             roles,
             email: userEmail  // Agregar el correo electrónico al formData
         };
@@ -111,106 +106,99 @@ const PersonalData = () => {
     };
 
     return (
-        <div className="containerPrincipalPersonalData">
+        <Container sx={{ paddingTop: 4, margin: '2rem', backgroundColor: '#f7f7f7', borderRadius: '8px', padding: '20px' }}>
+            <div className="containerPrincipalPersonalData">
 
-            <article className="firstArticlePersonalData">
-                <Item sx={{ marginTop: '12px' }}>Datos personales</Item>
-                <Item sx={{ marginTop: '12px', marginBottom: '12px' }}>A continuación te pediremos tus datos personales</Item>
-                <FormControl component="fieldset" sx={{ display: 'flex', flexDirection: 'row' }}>
-                    <FormLabel component="legend" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>¿Cuál es tu rol?</FormLabel>
-                    {["Empleado", "Empleador"].map(role => (
-                        <FormControlLabel
-                            key={role}
-                            control={
-                                <Checkbox
-                                    value={role}
-                                    checked={formData.roles.includes(role)}
-                                    onChange={handleRoleChange}
-                                    inputProps={{ 'aria-label': role }}
-                                />
-                            }
-                            label={role.charAt(0).toUpperCase() + role.slice(1)}
+                <article className="firstArticlePersonalData">
+                    <Item>Datos personales</Item>
+                    <Item>A continuación te pediremos tus datos personales</Item>
+                    <FormControl component="fieldset" sx={{ display: 'flex', flexDirection: 'row', marginBottom: 2 }}>
+                        <FormLabel component="legend" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>¿Cuál es tu rol?</FormLabel>
+                        {["Empleado", "Empleador"].map(role => (
+                            <FormControlLabel
+                                key={role}
+                                control={
+                                    <Checkbox
+                                        value={role}
+                                        checked={formData.roles.includes(role)}
+                                        onChange={handleRoleChange}
+                                        inputProps={{ 'aria-label': role }}
+                                    />
+                                }
+                                label={role.charAt(0).toUpperCase() + role.slice(1)}
+                            />
+                        ))}
+                    </FormControl>
+                </article>
+
+                <div className="containerSectionsPersonalData">
+                    <section className="firstSectionPersonalData">
+                        <InputLabel>Nombre</InputLabel>
+                        <Input
+                            sx={{ height: '1.8rem' }}
+                            type="text"
+                            name="nombre"
+                            value={formData.nombre}
+                            onChange={handleInputChange}
+                            required
                         />
-                    ))}
-                </FormControl>
-            </article>
 
-            <div className="containerSectionsPersonalData">
-                <section className="firstSectionPersonalData">
-                    <InputLabel sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Nombre</InputLabel>
-                    <Input
-                        sx={{ height: '1.8rem' }}
-                        type="text"
-                        name="nombre"
-                        value={formData.nombre}
-                        onChange={handleInputChange}
-                        required
-                    />
+                        <InputLabel>Apellido</InputLabel>
+                        <Input
+                            sx={{ height: '1.8rem' }}
+                            type="text"
+                            name="apellido"
+                            value={formData.apellido}
+                            onChange={handleInputChange}
+                            required
+                        />
 
-                    <InputLabel sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Apellido</InputLabel>
-                    <Input
-                        sx={{ height: '1.8rem' }}
-                        type="text"
-                        name="apellido"
-                        value={formData.apellido}
-                        onChange={handleInputChange}
-                        required
-                    />
+                        <InputLabel>Dirección</InputLabel>
+                        <Input
+                            sx={{ height: '1.8rem' }}
+                            type="text"
+                            name="direccion"
+                            value={formData.direccion}
+                            onChange={handleInputChange}
+                            required
+                        />
 
-                    <InputLabel sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Dirección</InputLabel>
-                    <Input
-                        sx={{ height: '1.8rem' }}
-                        type="text"
-                        name="direccion"
-                        value={formData.direccion}
-                        onChange={handleInputChange}
-                        required
-                    />
+                        <InputLabel>Localidad</InputLabel>
+                        <Input
+                            sx={{ height: '1.8rem' }}
+                            type="text"
+                            name="localidad"
+                            value={formData.localidad}
+                            onChange={handleInputChange}
+                            required
+                        />
 
-                    <InputLabel sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Localidad</InputLabel>
-                    <Input
-                        sx={{ height: '1.8rem' }}
-                        type="text"
-                        name="localidad"
-                        value={formData.localidad}
-                        onChange={handleInputChange}
-                        required
-                    />
+                        <InputLabel>Código Postal</InputLabel>
+                        <Input
+                            sx={{ height: '1.8rem' }}
+                            type="text"
+                            name="cp"
+                            value={formData.cp}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </section>
 
-                    <InputLabel sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Código Postal</InputLabel>
-                    <Input
-                        sx={{ height: '1.8rem' }}
-                        type="text"
-                        name="cp"
-                        value={formData.cp}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </section>
+                    <section className="secondSectionPersonalData">
+                        <Item>
+                            Buscar nuevas oportunidades profesionales es un proceso que, aunque desafiante,
+                            puede conducir a grandes logros. Es fundamental destacar la ética de trabajo,
+                            la capacidad para resolver problemas y la dedicación en cada aplicación y entrevista.
+                            Un currículum bien elaborado es una herramienta poderosa que puede demostrar no solo las habilidades,
+                            sino también la actitud profesional. Cada paso en esta búsqueda es una oportunidad para mostrar el mejor perfil
+                            a los posibles empleadores. Con la preparación adecuada y una actitud positiva, el éxito está al alcance.
+                        </Item>
+                    </section>
+                </div>
 
-                <section className="secondSectionPersonalData">
-                <Item>
-                    Buscar nuevas oportunidades profesionales
-                        es un proceso que, aunque desafiante,
-                        puede conducir a grandes logros.
-                        Es fundamental destacar la ética de trabajo,
-                        la capacidad para resolver problemas y la dedicación en cada aplicación
-                        y entrevista. Un currículum bien elaborado es una herramienta poderosa
-                        que puede demostrar no solo las habilidades, sino también la actitud profesional.
-                        Cada paso en esta búsqueda es una oportunidad para mostrar el mejor perfil a los
-                        posibles empleadores. Con la preparación adecuada y una actitud positiva,
-                        el éxito está al alcance.
-                    </Item>
-                </section>
+                <Button onClick={setButton} sx={{ marginTop: '12px', marginBottom: '8px' }} variant="contained">Guardar</Button>
             </div>
-
-            <section className="containerPhoneSigninPersonalData">
-                <p>Por favor verifica tu número de celular.</p>
-                {/* <PhoneSignin /> */}
-            </section>
-
-            <Button onClick={setButton} sx={{ marginTop: '12px', marginBottom: '8px' }}>Guardar</Button>
-        </div>
+        </Container>
     );
 };
 

@@ -1,13 +1,18 @@
-import React from 'react'
-import './_sectiononecurriculums.scss'
+import React from 'react';
+import { Container, Typography } from '@mui/material';
 
-const sectionOneCurriculums = () => {
+
+const SectionOneCurriculums = () => {
   return (
-    <div className="containerTitleRouteCurriculums">
-    <h2>Curriculums</h2>
-    <p>Crea ahora mismo tu curriculum y comienza a buscar empleo!</p>
-    </div>
-  )
-}
+    <Container sx={{ paddingTop: 4, textAlign: 'center', backgroundColor: '#f0f0f0', borderRadius: '8px', padding: '20px', marginTop: '3rem' }}>
+      <Typography variant="h2" gutterBottom>
+        Curriculums
+      </Typography>
+      <Typography variant="body1">
+        Crea ahora mismo tu curriculum y comienza a buscar empleo!
+      </Typography>
+    </Container>
+  );
+};
 
-export default sectionOneCurriculums
+export default SectionOneCurriculums;

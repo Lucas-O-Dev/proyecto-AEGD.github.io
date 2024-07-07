@@ -1,7 +1,6 @@
 import React from 'react'
 import {Link}  from 'react-router-dom'
 import myImage  from '../../assets/EmpleAR_logo_transparent.png'
-import loginIcon from '../../assets/icons8-handshake-100.png'
 import Button from '@mui/material/Button';
 import './_sectiononelanding.scss'
 
@@ -22,8 +21,10 @@ const SectionOneLanding = () => {
   </article>
 
   <article className='articleButtonLoginLanding'>
-  <Link to="/Login"><img src={loginIcon} alt="user-icon" height="60px" width="30px" /></Link>
-  <p>Click Aquí.</p>
+  <Button  variant="contained" sx={{padding: '0.4rem', margin: '1.2rem'}}>
+  <Link to="/Login">Comenzar</Link>
+  </Button>
+
   </article>
 
 

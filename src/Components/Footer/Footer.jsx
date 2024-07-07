@@ -57,7 +57,7 @@ const Footer = () => {
       </Box>
       
       <Typography variant="body2" sx={{ mt: 2 }}>
-        © 2024 Pulse. Todos los derechos reservados.
+        © 2024 EmpleAR. Todos los derechos reservados.
       </Typography>
     </Box>
   );

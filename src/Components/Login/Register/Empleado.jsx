@@ -126,24 +126,28 @@ const renderSelectField = (label, value, onChange, options) => (
     </div>
 );
 
-    const editButton = async () => {
-        if (!userUID) return;
-        try {
-            await updateDoc(doc(db, `users/${userUID}`), formData);
-            toast.success('¡Formulario enviado con éxito!', {
-                onClose: () => navigate('/Home')
-            });
-        } catch (error) {
-            console.error("Error updating document: ", error);
-            toast.error('Error al enviar el formulario. Por favor, intenta nuevamente.');
+const editButton = async () => {
+    if (!userUID) return;
+    try {
+      await updateDoc(doc(db, `users/${userUID}`), formData);
+      toast.success('¡Formulario enviado con éxito!', {
+        onClose: () => {
+          navigate('/Home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-    };
+      });
+    } catch (error) {
+      console.error("Error updating document: ", error);
+      toast.error('Error al enviar el formulario. Por favor, intenta nuevamente.');
+    }
+  };
 
     return (
         <>
             <section className="sectionConteinerFormEmpleado">
 
                 <ArticleFirstEmpleado />
+                <ThirdSectionEmpleado />
 
                 <div className="containerFormEmpleado">
 
@@ -179,7 +183,7 @@ sx={{ height: '1.8rem' }}
                     </div>
                 </div>
                 <div className="secondSectionEmleado">
-                        <Button onClick={editButton}>Aceptar</Button>
+                        <Button onClick={editButton} sx={{margin: '1rem'}}>Aceptar</Button>
                     </div>
             </section>
         </>
