@@ -1,4 +1,3 @@
-// Components/Footer/Footer.js
 import React from 'react';
 import { Box, IconButton, Typography, Link } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -16,22 +15,31 @@ const Footer = () => {
   return (
     <Box 
       sx={{ 
-        p: 4, 
+        p: { xs: 2, sm: 4 }, 
         backgroundColor: '#282c34', 
         color: 'white', 
         display: 'flex', 
         flexDirection: 'column', 
-        alignItems: 'center' 
+        alignItems: 'center',
+        textAlign: 'center'
       }}
     >
       <Typography variant="h6" gutterBottom>
         Acerca de Nosotros
       </Typography>
-      <Typography variant="body2" sx={{ maxWidth: 600, textAlign: 'center', mb: 2 }}>
+      <Typography variant="body2" sx={{ maxWidth: 600, mb: 2 }}>
         Somos una empresa dedicada a ofrecer soluciones innovadoras en el campo de la tecnología y el desarrollo profesional. Nuestra misión es conectar a profesionales con oportunidades excepcionales.
       </Typography>
       
-      <Box sx={{ display: 'flex', gap: 3, mb: 2 }}>
+      <Box 
+        sx={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          flexWrap: 'wrap', 
+          gap: 2, 
+          mb: 2 
+        }}
+      >
         {icons.map(({ icon, url, color }) => (
           <motion.div
             key={url}
@@ -51,7 +59,7 @@ const Footer = () => {
         ))}
       </Box>
       
-      <Box sx={{ display: 'flex', gap: 2 }}>
+      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2 }}>
         <Link href="/terms" color="inherit" sx={{ textDecoration: 'none' }}>Términos y Condiciones</Link>
         <Link href="/privacy" color="inherit" sx={{ textDecoration: 'none' }}>Política de Privacidad</Link>
       </Box>

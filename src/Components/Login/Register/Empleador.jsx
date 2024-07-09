@@ -64,7 +64,7 @@ const Empleador = () => {
                     <p>A continuación te pediremos los datos de tu empresa.</p>
                 </article>
                 <div className="containerCheckboxRoleEmpleador">
-                    <FormControl component="fieldset" sx={{ display: 'flex', flexDirection: 'row', marginBottom: '1rem' }}>
+                    <FormControl component="fieldset" sx={{ display: 'flex', flexDirection: 'row', marginBottom: '1rem', flexWrap: "wrap" }}>
                         <FormLabel component="legend">Situación Fiscal</FormLabel>
                         {["responsable Inscripto", "monotributo", "personal"].map(role => (
                             <FormControlLabel
@@ -112,7 +112,7 @@ const Empleador = () => {
                         required
                     />
                 </div>
-                <Button sx={{ margin: '1rem' }} onClick={editButton}>Enviar</Button>
+                <Button sx={{ margin: '1rem' }} onClick={editButton} variant="outlined">Aceptar</Button>
             </section>
         </>
     );

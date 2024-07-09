@@ -14,7 +14,6 @@ const ArticleFirstEmpleado = () => {
     border: '1px solid',
     borderColor: theme.palette.divider,
     padding: theme.spacing(1),
-    marginLeft: theme.spacing(4),
     marginTop: theme.spacing(4),
   }));
 

@@ -5,11 +5,10 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 38rem;
     margin-bottom: 2rem;
     .containerCheckboxRoleEmpleador{
         display: flex;
-
+flex-wrap: wrap;
     }
     .containerInputsEmpleador{
         display: flex;
@@ -19,5 +18,8 @@
         height: 100%;
         gap: 12px;
         flex-wrap: wrap;
+    }
+    .articleFormEmpleador{
+        display: flex;
     }
 }

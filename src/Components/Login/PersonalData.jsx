@@ -106,7 +106,6 @@ const PersonalData = () => {
     };
 
     return (
-        <Container sx={{ paddingTop: 4, margin: '2rem', backgroundColor: '#f7f7f7', borderRadius: '8px', padding: '20px' }}>
             <div className="containerPrincipalPersonalData">
 
                 <article className="firstArticlePersonalData">
@@ -194,11 +193,13 @@ const PersonalData = () => {
                             a los posibles empleadores. Con la preparación adecuada y una actitud positiva, el éxito está al alcance.
                         </Item>
                     </section>
-                </div>
 
-                <Button onClick={setButton} sx={{ marginTop: '12px', marginBottom: '8px' }} variant="contained">Guardar</Button>
+                </div>
+                <section className="thirdContainerPersonalData">
+                    <Button onClick={setButton} sx={{ marginTop: '12px', marginBottom: '8px', width: '12%', paddingLeft: '4rem', paddingRight: '4rem' }} variant="outlined"> Aceptar </Button>
+
+                    </section>
             </div>
-        </Container>
     );
 };
 

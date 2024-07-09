@@ -183,7 +183,7 @@ sx={{ height: '1.8rem' }}
                     </div>
                 </div>
                 <div className="secondSectionEmleado">
-                        <Button onClick={editButton} sx={{margin: '1rem'}}>Aceptar</Button>
+                        <Button onClick={editButton} sx={{margin: '1rem'}} variant="outlined">Aceptar</Button>
                     </div>
             </section>
         </>

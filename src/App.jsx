@@ -19,7 +19,8 @@ import Courses from './Components/Courses/Courses';
 import CourseDetails from './Components/Courses/CourseDetails'
 import Curriculums from './Components/Curriculums/Curriculums'
 import Layout from './Components/Layout/Layout';
-import JobDetails from './Components/Jobs/JobDetails'
+import Documentation from './Components/Documentation/Documentation';
+import JobDetails from './Components/Jobs/JobDetails';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           {/* Rutas donde se renderizará la Navbar y el Footer */}
           <Route path="/Home" element={<Layout><Home /></Layout>} />
+          <Route path="/Documentation" element={<Layout><Documentation /></Layout>} />
           <Route path="/Profile" element={<Layout><Profile /></Layout>} />
           <Route path="/EditInfoUserDatabase" element={<Layout><EditInfoUserDatabase /></Layout>} />
           <Route path="/trabajos" element={<Layout><Jobs /></Layout>} />
