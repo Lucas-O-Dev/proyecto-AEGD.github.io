@@ -31,7 +31,6 @@ const Company = ({ inputValues }) => {
         fetchData();
     }, [inputValues.rubro]);
     
-
     const prueba = () => {
         console.log(users)
     }
@@ -48,14 +47,11 @@ const Company = ({ inputValues }) => {
                 modalidad: inputValues.modalidad,
                 localidad: inputValues.localidad,
                 rubro: inputValues.rubro,
-                nivelEducativo: inputValues.nivelEducativo,
                 puesto: inputValues.puesto
             });
             console.log('Documentos agregados correctamente');
 
-
             // funcion 
-
 
             navigate('/Trabajos'); // Utiliza navigate  para redirigir
         } catch (error) {

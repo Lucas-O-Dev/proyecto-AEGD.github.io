@@ -3,7 +3,6 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../../../Firebase/Config';
 import { toast } from 'react-toastify';
 import { useNavigate, Link } from 'react-router-dom';
-import EmailAndNumberPhoneIsVerified from './EmailAndNumberPhoneIsVerified';
 import { TextField, Button, Container, Box, Typography, Paper } from '@mui/material';
 
 const EditInfoUserDatabase = () => {
@@ -101,7 +100,6 @@ const EditInfoUserDatabase = () => {
                 <Button variant="text" color="primary">Volver al Home</Button>
               </Link>
             </Box>
-            <EmailAndNumberPhoneIsVerified />
           </form>
         )}
       </Paper>

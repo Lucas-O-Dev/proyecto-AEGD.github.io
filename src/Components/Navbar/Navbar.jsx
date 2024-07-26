@@ -46,6 +46,7 @@ function ResponsiveAppBar() {
     const handleLogoutClick = async () => {
         try {
             await auth.signOut();
+            alert('Has cerrado sesión exitosamente.');
             navigate('/');
         } catch (error) {
             console.error('Error al cerrar sesión:', error.message);

@@ -9,7 +9,7 @@ const SectionOneLanding = () => {
     <section className='sectionOneLanding'>
 
   <article className='articleTitleLanding'>
-    <img src={myImage} alt="" />
+    <img src={myImage} alt="logo-de-la-empresa" />
   </article>
 
   {/* <article>

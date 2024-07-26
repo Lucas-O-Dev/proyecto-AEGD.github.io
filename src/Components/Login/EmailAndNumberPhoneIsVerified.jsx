@@ -1,42 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import { auth } from '../../../Firebase/Config'; // Importa la configuración de Firebase
-import { onAuthStateChanged } from 'firebase/auth'; // Importa la función para detectar cambios en el estado de autenticación
+import { onAuthStateChanged, sendEmailVerification } from 'firebase/auth'; // Importa funciones necesarias de Firebase
+import { Button, Card, CardContent, Typography, Grid, CircularProgress } from '@mui/material'; // Importa componentes de Material-UI
+import MailOutlineIcon from '@mui/icons-material/MailOutline'; // Icono de correo
 
 const EmailAndNumberPhoneIsVerified = () => {
-  // Estado local para almacenar si el email está verificado
   const [isEmailVerified, setIsEmailVerified] = useState(false);
-  // Estado local para almacenar si el número de teléfono está verificado
-  const [isPhoneNumberVerified, setIsPhoneNumberVerified] = useState(false);
+  const [loading, setLoading] = useState(true); // Estado para indicar carga inicial
 
-  // useEffect se usa para ejecutar código cuando el componente se monta y cuando el estado de autenticación cambia
   useEffect(() => {
-    // onAuthStateChanged escucha cambios en el estado de autenticación del usuario
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // Si hay un usuario autenticado, actualiza el estado con la verificación del email y el número de teléfono
         setIsEmailVerified(user.emailVerified);
-        // Suponemos que si user.phoneNumber existe, el número de teléfono está verificado
-        setIsPhoneNumberVerified(!!user.phoneNumber);
       } else {
-        // Si no hay usuario autenticado, resetea los estados a false
         setIsEmailVerified(false);
-        setIsPhoneNumberVerified(false);
       }
+      setLoading(false); // Finaliza la carga una vez que se ha verificado el estado inicial
     });
 
-    // Limpia el efecto para evitar fugas de memoria
     return () => unsubscribe();
-  }, []); // El array vacío significa que esto solo se ejecuta cuando el componente se monta y desmonta
+  }, []);
+
+  const handleResendVerificationEmail = () => {
+    const user = auth.currentUser;
+    if (user) {
+      sendEmailVerification(user)
+        .then(() => {
+          console.log('Email de verificación reenviado');
+          alert('Email de verificación reenviado. Por favor, revisa tu bandeja de entrada.');
+        })
+        .catch((error) => {
+          console.error('Error al reenviar el email de verificación:', error.message);
+          alert('Error al reenviar el email de verificación. Por favor, inténtalo nuevamente más tarde.');
+        });
+    }
+  };
 
   return (
-    <div>
-      <section>
-        {/* Muestra si el email está verificado o no */}
-        <p>Email {isEmailVerified ? 'Verificado' : 'Sin Verificar'}</p>
-        {/* Muestra si el número de teléfono está verificado o no */}
-        <p>Número De Teléfono {isPhoneNumberVerified ? 'Verificado' : 'Sin Verificar'}</p>
-      </section>
-    </div>
+    <Grid container justifyContent="center" sx={{margin: '10rem 0'}}>
+      <Grid item xs={12} sm={8} md={6}>
+        <Card variant="outlined" sx={{ p: 3, mt: 4 }}>
+          <CardContent>
+            <Typography variant="h5" gutterBottom>
+              Verificación de Email 
+            </Typography>
+            {loading ? (
+              <CircularProgress color="primary" />
+            ) : (
+              <>
+                <Typography variant="body1" gutterBottom>
+                  Tu email está {isEmailVerified ? 'verificado' : 'sin verificar'}.
+                </Typography>
+                {!isEmailVerified && (
+                  <Button
+                    variant="contained"
+                    onClick={handleResendVerificationEmail}
+                    startIcon={<MailOutlineIcon />}
+                    sx={{ mt: 2 }}
+                  >
+                    Reenviar Email de Verificación
+                  </Button>
+                )}
+                                  <Typography sx={{marginTop:'1rem'}}>
+                    No olvides mirar tu casilla de spam!
+                  </Typography>
+              </>
+            )}
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
   );
 };
 

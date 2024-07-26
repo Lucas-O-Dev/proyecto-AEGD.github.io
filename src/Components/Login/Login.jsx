@@ -1,21 +1,13 @@
-// export default Login;
 import * as React from 'react';
 import { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import backgroundImg from './StylesLogin/pexelssteve1266808.jpg';
 import { auth } from '../../../Firebase/Config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+
 console.log('Auth inicializado:', auth); // Verifica si auth se está inicializando correctamente
 
 function Copyright(props) {
@@ -89,7 +81,7 @@ const Login = () => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Login
+            Iniciar Sesión
             </Typography>
             <Box
               component="form"
@@ -121,11 +113,11 @@ const Login = () => {
                 variant="contained"
                 sx={{ mt: 1, mb: 1 }}
               >
-                Login
-              </Button>
+              Aceptar 
+             </Button>
               <Grid item xs display={'flex'} justifyContent={'center'} alignItems={'center'} textAlign={'center'}>
 
-<Link href="#" variant="body2" margin={4}>
+<Link href="/ResetPasswordFirebase" variant="body2" margin={4}>
   ¿Olvidaste tu clave?
 </Link>
 
