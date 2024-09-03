@@ -13,7 +13,9 @@ const ThirdSectionEmpleado = () => {
     color: theme.palette.text.secondary,
     border: '1px solid',
     borderColor: theme.palette.divider,
+    padding: '1rem',
     marginTop: '2rem',
+    marginBottom: '2rem',
     width: '100%',
   }));
 

@@ -84,16 +84,14 @@ const Jobs = () => {
 
             <div className="containerImgJobs">
 
-                <div className="imgJobs">
-
-                </div>
                 <Item className="firstItemContainerImgJobs">Puedes seleccionar el empleo que mejor se adapte a tus objetivos profesionales y alcanzar el puesto de trabajo que deseas.</Item>
             </div>
-            <Item sx={{ marginBottom: '10rem' }}>            {userRoles == 'Empleador' && <FirstArticleJobs />}</Item>
             <div className="containerJobsList">
                 {/* Renderiza el componente CoursesList pasando la lista de cursos como prop */}
                 <JobsList trabajos={jobs} />
             </div>
+            <Item sx={{ marginBottom: '10rem' }}>            {userRoles == 'Empleador' && <FirstArticleJobs />}</Item>
+
         </div>
     );
 };

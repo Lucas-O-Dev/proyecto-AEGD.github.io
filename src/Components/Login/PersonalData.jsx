@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Button, Input, InputLabel, FormControlLabel, Checkbox, FormControl, FormLabel } from '@mui/material';
+import { Button, InputLabel, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel } from '@mui/material';
+import Input from '@mui/material/OutlinedInput';
 import { setDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../../../Firebase/Config';
 import 'react-toastify/dist/ReactToastify.css';
@@ -35,7 +36,7 @@ const PersonalData = () => {
         direccion: "",
         localidad: "",
         cp: "",
-        roles: [],
+        rol: "",  // Cambia roles a rol ya que ahora solo es uno
         email: ""  // Nuevo campo para el correo electrónico del usuario
     });
 
@@ -49,22 +50,18 @@ const PersonalData = () => {
 
     const handleRoleChange = (e) => {
         const role = e.target.value;
-        setFormData(prevData => {
-            const newRoles = prevData.roles.includes(role)
-                ? prevData.roles.filter(r => r !== role)
-                : [...prevData.roles, role];
-            return { ...prevData, roles: newRoles };
-        });
+        setFormData(prevData => ({
+            ...prevData,
+            rol: role // Solo un rol puede ser seleccionado
+        }));
     };
 
     const Item = styled('div')(({ theme }) => ({
         ...theme.typography.body,
         textAlign: 'center',
-        background: 'rgba(255, 255, 255, 0.5)', // Fondo blanco con 50% de transparencia
+        alignItems: 'center',
         fontWeight: theme.typography.fontWeightMedium,
         color: theme.palette.text.secondary,
-        border: '1px solid',
-        borderColor: theme.palette.divider,
         padding: theme.spacing(1),
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
@@ -76,26 +73,24 @@ const PersonalData = () => {
             return;
         }
 
-        const { nombre, apellido, direccion, localidad, cp, roles } = formData;
+        const { nombre, apellido, direccion, localidad, cp, rol } = formData;
 
-        // Obtener el correo electrónico del usuario actualmente autenticado
         const userEmail = auth.currentUser.email;
 
-        // Actualizar formData para incluir el correo electrónico
         const updatedFormData = {
             nombre,
             apellido,
             direccion,
             localidad,
             cp,
-            roles,
+            rol,
             email: userEmail  // Agregar el correo electrónico al formData
         };
 
         try {
             await setDoc(doc(db, `users/${userUID}`), updatedFormData);
 
-            const redirectTo = roles.includes('Empleado') ? '/empleado' : roles.includes('Empleador') ? '/empleador' : '/Home';
+            const redirectTo = rol === 'Empleado' ? '/empleado' : rol === 'Empleador' ? '/empleador' : '/Home';
 
             toast.success('¡Formulario enviado con éxito!', {
                 onClose: () => navigate(redirectTo)
@@ -110,24 +105,25 @@ const PersonalData = () => {
         <div className="containerPrincipalPersonalData">
 
             <article className="firstArticlePersonalData">
-                <Item>Datos personales</Item>
                 <Item>A continuación te pediremos tus datos personales</Item>
                 <FormControl component="fieldset" sx={{ display: 'flex', flexDirection: 'row', marginBottom: 2 }}>
                     <FormLabel component="legend" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>¿Cuál es tu rol?</FormLabel>
-                    {["Empleado", "Empleador"].map(role => (
-                        <FormControlLabel
-                            key={role}
-                            control={
-                                <Checkbox
-                                    value={role}
-                                    checked={formData.roles.includes(role)}
-                                    onChange={handleRoleChange}
-                                    inputProps={{ 'aria-label': role }}
-                                />
-                            }
-                            label={role.charAt(0).toUpperCase() + role.slice(1)}
-                        />
-                    ))}
+                    <RadioGroup
+                        row
+                        aria-label="role"
+                        name="rol"
+                        value={formData.rol}
+                        onChange={handleRoleChange}
+                    >
+                        {["Empleado", "Empleador"].map(role => (
+                            <FormControlLabel
+                                key={role}
+                                value={role}
+                                control={<Radio />}
+                                label={role.charAt(0).toUpperCase() + role.slice(1)}
+                            />
+                        ))}
+                    </RadioGroup>
                 </FormControl>
             </article>
 
@@ -135,7 +131,7 @@ const PersonalData = () => {
                 <section className="firstSectionPersonalData">
                     <InputLabel>Nombre</InputLabel>
                     <Input
-                        sx={{ height: '1.8rem' }}
+                        sx={{ height: '1.8rem', marginTop: '0.2rem' }}
                         type="text"
                         name="nombre"
                         value={formData.nombre}
@@ -145,7 +141,7 @@ const PersonalData = () => {
 
                     <InputLabel>Apellido</InputLabel>
                     <Input
-                        sx={{ height: '1.8rem' }}
+                        sx={{ height: '1.8rem', marginTop: '0.2rem' }}
                         type="text"
                         name="apellido"
                         value={formData.apellido}
@@ -155,7 +151,7 @@ const PersonalData = () => {
 
                     <InputLabel>Dirección</InputLabel>
                     <Input
-                        sx={{ height: '1.8rem' }}
+                        sx={{ height: '1.8rem', marginTop: '0.2rem' }}
                         type="text"
                         name="direccion"
                         value={formData.direccion}
@@ -165,7 +161,7 @@ const PersonalData = () => {
 
                     <InputLabel>Localidad</InputLabel>
                     <Input
-                        sx={{ height: '1.8rem' }}
+                        sx={{ height: '1.8rem', marginTop: '0.2rem' }}
                         type="text"
                         name="localidad"
                         value={formData.localidad}
@@ -175,7 +171,7 @@ const PersonalData = () => {
 
                     <InputLabel>Código Postal</InputLabel>
                     <Input
-                        sx={{ height: '1.8rem' }}
+                        sx={{ height: '1.8rem', marginTop: '0.2rem' }}
                         type="text"
                         name="cp"
                         value={formData.cp}
@@ -189,15 +185,12 @@ const PersonalData = () => {
                         Buscar nuevas oportunidades profesionales es un proceso que, aunque desafiante,
                         puede conducir a grandes logros. Es fundamental destacar la ética de trabajo,
                         la capacidad para resolver problemas y la dedicación en cada aplicación y entrevista.
-                        Un currículum bien elaborado es una herramienta poderosa que puede demostrar no solo las habilidades,
-                        sino también la actitud profesional. Cada paso en esta búsqueda es una oportunidad para mostrar el mejor perfil
-                        a los posibles empleadores. Con la preparación adecuada y una actitud positiva, el éxito está al alcance.
                     </Item>
                 </section>
 
             </div>
             <section className="thirdContainerPersonalData">
-                <Button onClick={setButton} sx={{ marginTop: '12px', marginBottom: '8px', width: '12%', paddingLeft: '4rem', paddingRight: '4rem' }} variant="outlined"> Aceptar </Button>
+                <Button onClick={setButton} sx={{ marginTop: '1.2rem', marginBottom: '1.2rem', width: '12%', paddingLeft: '4rem', paddingRight: '4rem' }} variant="outlined"> Aceptar </Button>
 
             </section>
         </div>

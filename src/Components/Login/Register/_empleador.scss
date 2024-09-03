@@ -1,25 +1,46 @@
+@keyframes fadeIn {
+    0% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 .containerFormEmpleador{
-    background-color: #f8f9fa;
+    animation: fadeIn 0.5s ease-in-out;
+    background-color: #edede9;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-bottom: 2rem;
+    padding: 3rem;
     .containerCheckboxRoleEmpleador{
         display: flex;
-flex-wrap: wrap;
+        flex-wrap: wrap;
     }
     .containerInputsEmpleador{
+        border-radius: 1rem;
+        background-color: white;
+        padding: 2rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 50%;
-        height: 100%;
-        gap: 12px;
         flex-wrap: wrap;
+        gap: 2.4rem;
+        width: 85%;
     }
     .articleFormEmpleador{
         display: flex;
+        flex-wrap: wrap;
+        background-color: white;
+        padding: 0 1rem;
+        border-radius: 1rem;
+        margin-bottom: 0.4rem;
+        p{
+            margin: 1rem 0.4rem;
+        }
     }
 }

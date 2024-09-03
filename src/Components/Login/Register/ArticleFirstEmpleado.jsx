@@ -8,12 +8,12 @@ const ArticleFirstEmpleado = () => {
   const Item = styled(Sheet)(({ theme }) => ({
     ...theme.typography.body,
     textAlign: 'center',
-    background: 'rgba(255, 255, 255, 0.5)', // Fondo blanco con 50% de transparencia
     fontWeight: theme.typography.fontWeightMedium,
     color: theme.palette.text.secondary,
     border: '1px solid',
     borderColor: theme.palette.divider,
-    padding: theme.spacing(1),
+    borderRadius:'0.5rem',
+    padding: theme.spacing(2),
     marginTop: theme.spacing(4),
   }));
 

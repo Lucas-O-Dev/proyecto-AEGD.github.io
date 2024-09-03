@@ -3,7 +3,7 @@ import "./_home.scss";
 import SecondContainerSonHome from "./SecondContainerSonHome";
 import FirstContainerSonHome from "./FirstContainerSonHome";
 import FourthContainerSonHome from "./FourthContainerSonHome";
-import Carousel from './Carousel'
+// import Carousel from './Carousel'
 
 const Home = () => {
 
@@ -12,9 +12,9 @@ const Home = () => {
 
 <div className="containerPrincipalHome">
 
-<Carousel />
-<FirstContainerSonHome/>
+{/* <Carousel /> */}
 <SecondContainerSonHome/>
+<FirstContainerSonHome/>
 <FourthContainerSonHome/>
 </div>
 

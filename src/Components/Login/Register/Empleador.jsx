@@ -5,7 +5,9 @@ import { updateDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../../../../Firebase/Config';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Input, Button, InputLabel, FormControlLabel, Checkbox, FormControl, FormLabel } from '@mui/material';
+import { Button, InputLabel, FormControlLabel, Checkbox, FormControl, FormLabel } from '@mui/material';
+import Input from '@mui/material/OutlinedInput';
+
 
 const Empleador = () => {
     const [formData, setFormData] = useState({
@@ -103,7 +105,7 @@ const Empleador = () => {
                     ))}
                 </div>
                 <div className="containerFileUploadEmpleador">
-                    <InputLabel htmlFor="comprobanteDeInscripcionAfip">Comprobante de Inscripción AFIP</InputLabel>
+                    <InputLabel htmlFor="comprobanteDeInscripcionAfip" sx={{marginTop: '1rem', marginBottom: '0'}}>Comprobante de Inscripción AFIP</InputLabel>
                     <Input
 
                         sx={{margin: '1rem'}}

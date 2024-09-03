@@ -147,7 +147,6 @@ const editButton = async () => {
             <section className="sectionConteinerFormEmpleado">
 
                 <ArticleFirstEmpleado />
-                <ThirdSectionEmpleado />
 
                 <div className="containerFormEmpleado">
 
@@ -183,7 +182,11 @@ sx={{ height: '1.8rem' }}
                     </div>
                 </div>
                 <div className="secondSectionEmleado">
+                    
                         <Button onClick={editButton} sx={{margin: '1rem'}} variant="outlined">Aceptar</Button>
+
+                        <ThirdSectionEmpleado />
+                        
                     </div>
             </section>
         </>

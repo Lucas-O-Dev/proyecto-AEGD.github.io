@@ -28,9 +28,9 @@ const SectionOneLanding = () => {
   </article>
 
 
-        <article className='articleButtonLinkToCurriculumLanding'>
+        {/* <article className='articleButtonLinkToCurriculumLanding'>
         <Button variant="outlined" ><Link to='/curriculum'  className='linkToCurriculum'><p>CREA TU CURRICULUM GRATIS!</p></Link></Button>
-        </article>
+        </article> */}
 
 
 </section>

@@ -52,10 +52,6 @@ const Courses = () => {
     <div className="containerCourses">
       <div className="containerInfoCourses">
         <Item>Cursos En Línea - Asociación Empresarial</Item>
-        <div className="containerImgContainerInfoCourses">
-          
-        </div>
-        <Item className="secondItemInfoCourses">Puedes seleccionar el curso que mejor se adapte a tus objetivos profesionales y alcanzar el puesto de trabajo que deseas.</Item>
       </div>
       <div className="containerCoursesList">
         {/* Renderiza el componente CoursesList pasando la lista de cursos como prop */}
