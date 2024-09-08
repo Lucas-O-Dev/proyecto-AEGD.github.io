@@ -1,31 +1,31 @@
-.containerJobs{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    width: 100%;
-    .containerImgJobs{
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        display: flex;
-        flex-direction: column;
-        margin: 4rem 1rem 4rem 1rem;
-        .imgJobs{
-            display: flex;
-            width: 80%;
-            background-image: url('../../assets/pexels-krakograff-textures-124842124-20560363.jpg');
-            background-position: center;
-            background-size: contain;
-            border-radius: 8px;
-            height: 200px;
-        }
-    }
-    .containerJobsList{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-}
+// .containerJobs{
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     text-align: center;
+//     align-items: center;
+//     width: 100%;
+//     .containerImgJobs{
+//         justify-content: center;
+//         align-items: center;
+//         gap: 10px;
+//         display: flex;
+//         flex-direction: column;
+//         margin: 4rem 1rem 4rem 1rem;
+//         .imgJobs{
+//             display: flex;
+//             width: 80%;
+//             background-image: url('../../assets/pexels-krakograff-textures-124842124-20560363.jpg');
+//             background-position: center;
+//             background-size: contain;
+//             border-radius: 8px;
+//             height: 200px;
+//         }
+//     }
+//     .containerJobsList{
+//         width: 100%;
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//     }
+// }

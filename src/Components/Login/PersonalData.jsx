@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Button, InputLabel, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel } from '@mui/material';
-import Input from '@mui/material/OutlinedInput';
+import { Button, InputLabel, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel, OutlinedInput, Box, Grid } from '@mui/material';
 import { setDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../../../Firebase/Config';
 import 'react-toastify/dist/ReactToastify.css';
-import './StylesLogin/_personaldata.scss';
-import { styled } from '@mui/joy/styles';
+import { styled } from '@mui/material/styles';
 
 // Custom hook to handle authentication state
 const useAuth = () => {
@@ -26,7 +24,6 @@ const useAuth = () => {
 };
 
 const PersonalData = () => {
-
     const navigate = useNavigate();
     const userUID = useAuth();
 
@@ -36,8 +33,8 @@ const PersonalData = () => {
         direccion: "",
         localidad: "",
         cp: "",
-        rol: "",  // Cambia roles a rol ya que ahora solo es uno
-        email: ""  // Nuevo campo para el correo electrónico del usuario
+        rol: "",
+        email: ""
     });
 
     const handleInputChange = useCallback((e) => {
@@ -52,19 +49,21 @@ const PersonalData = () => {
         const role = e.target.value;
         setFormData(prevData => ({
             ...prevData,
-            rol: role // Solo un rol puede ser seleccionado
+            rol: role
         }));
     };
 
-    const Item = styled('div')(({ theme }) => ({
-        ...theme.typography.body,
+    const Item = styled(Box)(({ theme }) => ({
+        ...theme.typography.body1,
         textAlign: 'center',
-        alignItems: 'center',
         fontWeight: theme.typography.fontWeightMedium,
         color: theme.palette.text.secondary,
-        padding: theme.spacing(1),
+        padding: theme.spacing(2),
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[1],
     }));
 
     const setButton = async () => {
@@ -74,7 +73,6 @@ const PersonalData = () => {
         }
 
         const { nombre, apellido, direccion, localidad, cp, rol } = formData;
-
         const userEmail = auth.currentUser.email;
 
         const updatedFormData = {
@@ -84,7 +82,7 @@ const PersonalData = () => {
             localidad,
             cp,
             rol,
-            email: userEmail  // Agregar el correo electrónico al formData
+            email: userEmail
         };
 
         try {
@@ -102,98 +100,57 @@ const PersonalData = () => {
     };
 
     return (
-        <div className="containerPrincipalPersonalData">
+        <Box sx={{ maxWidth: 600, margin: 'auto', padding: 2, display: 'flex', flexDirection:'column', alignItems: 'center' }}>
+            <Item>A continuación te pediremos tus datos personales</Item>
+            <FormControl component="fieldset" sx={{ display: 'flex', flexDirection: 'column', marginBottom: 2 }}>
+                <FormLabel component="legend">¿Cuál es tu rol?</FormLabel>
+                <RadioGroup
+                    aria-label="role"
+                    name="rol"
+                    value={formData.rol}
+                    onChange={handleRoleChange}
+                >
+                    {["Empleado", "Empleador"].map(role => (
+                        <FormControlLabel
+                            key={role}
+                            value={role}
+                            control={<Radio />}
+                            label={role.charAt(0).toUpperCase() + role.slice(1)}
+                        />
+                    ))}
+                </RadioGroup>
+            </FormControl>
 
-            <article className="firstArticlePersonalData">
-                <Item>A continuación te pediremos tus datos personales</Item>
-                <FormControl component="fieldset" sx={{ display: 'flex', flexDirection: 'row', marginBottom: 2 }}>
-                    <FormLabel component="legend" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>¿Cuál es tu rol?</FormLabel>
-                    <RadioGroup
-                        row
-                        aria-label="role"
-                        name="rol"
-                        value={formData.rol}
-                        onChange={handleRoleChange}
-                    >
-                        {["Empleado", "Empleador"].map(role => (
-                            <FormControlLabel
-                                key={role}
-                                value={role}
-                                control={<Radio />}
-                                label={role.charAt(0).toUpperCase() + role.slice(1)}
-                            />
-                        ))}
-                    </RadioGroup>
-                </FormControl>
-            </article>
+            <Grid container spacing={2}>
+                {["nombre", "apellido", "direccion", "localidad", "cp"].map(field => (
+                    <Grid item xs={12} key={field}>
+                        <InputLabel>{field.charAt(0).toUpperCase() + field.slice(1)}</InputLabel>
+                        <OutlinedInput
+                            sx={{ width: '100%', height:'2rem' }}
+                            type="text"
+                            name={field}
+                            value={formData[field]}
+                            onChange={handleInputChange}
+                            required
+                        />
+                    </Grid>
+                ))}
+            </Grid>
 
-            <div className="containerSectionsPersonalData">
-                <section className="firstSectionPersonalData">
-                    <InputLabel>Nombre</InputLabel>
-                    <Input
-                        sx={{ height: '1.8rem', marginTop: '0.2rem' }}
-                        type="text"
-                        name="nombre"
-                        value={formData.nombre}
-                        onChange={handleInputChange}
-                        required
-                    />
-
-                    <InputLabel>Apellido</InputLabel>
-                    <Input
-                        sx={{ height: '1.8rem', marginTop: '0.2rem' }}
-                        type="text"
-                        name="apellido"
-                        value={formData.apellido}
-                        onChange={handleInputChange}
-                        required
-                    />
-
-                    <InputLabel>Dirección</InputLabel>
-                    <Input
-                        sx={{ height: '1.8rem', marginTop: '0.2rem' }}
-                        type="text"
-                        name="direccion"
-                        value={formData.direccion}
-                        onChange={handleInputChange}
-                        required
-                    />
-
-                    <InputLabel>Localidad</InputLabel>
-                    <Input
-                        sx={{ height: '1.8rem', marginTop: '0.2rem' }}
-                        type="text"
-                        name="localidad"
-                        value={formData.localidad}
-                        onChange={handleInputChange}
-                        required
-                    />
-
-                    <InputLabel>Código Postal</InputLabel>
-                    <Input
-                        sx={{ height: '1.8rem', marginTop: '0.2rem' }}
-                        type="text"
-                        name="cp"
-                        value={formData.cp}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </section>
-
-                <section className="secondSectionPersonalData">
-                    <Item>
-                        Buscar nuevas oportunidades profesionales es un proceso que, aunque desafiante,
-                        puede conducir a grandes logros. Es fundamental destacar la ética de trabajo,
-                        la capacidad para resolver problemas y la dedicación en cada aplicación y entrevista.
-                    </Item>
-                </section>
-
-            </div>
-            <section className="thirdContainerPersonalData">
-                <Button onClick={setButton} sx={{ marginTop: '1.2rem', marginBottom: '1.2rem', width: '12%', paddingLeft: '4rem', paddingRight: '4rem' }} variant="outlined"> Aceptar </Button>
-
-            </section>
-        </div>
+            <Button
+                onClick={setButton}
+                sx={{ marginTop: 2, width: '40%', display: 'flex'}}
+                variant="contained"
+                color="primary"
+            >
+                Aceptar
+            </Button>
+                        <Item>
+                Buscar nuevas oportunidades profesionales es un proceso que, aunque desafiante,
+                puede conducir a grandes logros. Es fundamental destacar la ética de trabajo,
+                la capacidad para resolver problemas y la dedicación en cada aplicación y entrevista.
+            </Item>
+        </Box>
     );
 };
 

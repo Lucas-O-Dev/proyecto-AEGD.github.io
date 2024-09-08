@@ -9,7 +9,7 @@ import { updateDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../../../../Firebase/Config';
 import { toast } from 'react-toastify';
 import RubroSelect from '../../RubroSelect/RubroSelect';
-import Input from '@mui/material/OutlinedInput';
+import TextField from '@mui/material/TextField';
 import { Button, InputLabel } from '@mui/material';
 import ArticleFirstEmpleado from "./ArticleFirstEmpleado";
 import './_empleado.scss';
@@ -142,55 +142,50 @@ const editButton = async () => {
     }
   };
 
-    return (
-        <>
-            <section className="sectionConteinerFormEmpleado">
-
-                <ArticleFirstEmpleado />
-
-                <div className="containerFormEmpleado">
-
-                {/* <ThirdSectionEmpleado />
- */}
-
-
-                    <div className="firstSectionEmpleado">
-                    {renderSelectField("Nivel Educativo", formData.nivelEducativo, handleNivelEducativoChange, nivelesEducativos)}
-                    {[
-                        {    label: "Título Académico", name: "tituloAcademico"},
-    { label: "Experiencias Laborales", name: "experienciasLaborales"}
-].map(({ label, name }) => (
-    <div key={name} className="prueba">
-        <InputLabel htmlFor={name}>{label}</InputLabel>
-        <Input
-sx={{ height: '1.8rem' }}
-            name={name}
-            value={formData[name]}  // Cambiado: utilizar el nombre dinámico
-            onChange={handleInputChange}
-            required
-        />
-    </div>
-))}
-
-                        <RubroSelect
-                            rubros={rubros}
-                            rubro={formData.rubro}
-                            subRubro={formData.puesto}
-                            handleRubroChange={handleRubroChange}
-                            handleSubRubroChange={handlePuestoChange}
-                        />
-                    </div>
-                </div>
-                <div className="secondSectionEmleado">
-                    
-                        <Button onClick={editButton} sx={{margin: '1rem'}} variant="outlined">Aceptar</Button>
-
-                        <ThirdSectionEmpleado />
-                        
-                    </div>
-            </section>
-        </>
-    );
+  return (
+    <section className="sectionConteinerFormEmpleado">
+        <ArticleFirstEmpleado />
+        <div className="containerFormEmpleado">
+            <div className="firstSectionEmpleado">
+                {renderSelectField("Nivel Educativo", formData.nivelEducativo, handleNivelEducativoChange, nivelesEducativos)}
+                {[
+                    { label: "Título Académico", name: "tituloAcademico" },
+                    { label: "Experiencias Laborales", name: "experienciasLaborales" }
+                ].map(({ label, name }) => (
+                    <TextField
+                        key={name}
+                        name={name}
+                        value={formData[name]}
+                        onChange={handleInputChange}
+                        label={label}
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        required
+                    />
+                ))}
+                <RubroSelect
+                    rubros={rubros}
+                    rubro={formData.rubro}
+                    subRubro={formData.puesto}
+                    handleRubroChange={handleRubroChange}
+                    handleSubRubroChange={handlePuestoChange}
+                />
+            </div>
+        </div>
+        <div className="secondSectionEmleado">
+            <Button
+                onClick={editButton}
+                variant="contained"
+                color="primary"
+                sx={{ margin: '1rem' }}
+            >
+                Aceptar
+            </Button>
+            <ThirdSectionEmpleado />
+        </div>
+    </section>
+);
 };
 
 export default Empleado;

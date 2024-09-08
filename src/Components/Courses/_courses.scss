@@ -1,63 +1,63 @@
-@keyframes fadeIn {
-    0% {
-        opacity: 0.2;
-    }
+// @keyframes fadeIn {
+//     0% {
+//         opacity: 0.2;
+//     }
 
-    100% {
-        opacity: 1;
-    }
-}
+//     100% {
+//         opacity: 1;
+//     }
+// }
 
-.containerCourses {
-    animation: fadeIn 0.3s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    width: 100%;
-    .containerInfoCourses{
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        display: flex;
-        flex-direction: column;
-        margin: 3rem 0 7rem 0;
-        .secondItemInfoCourses{
-            display: flex;
-            width: 60%;
-            border-radius: 8px;
-        }
-        .containerImgContainerInfoCourses{
-            display: flex;
-            width: 80%;
-            background-image: url('../../assets/pexels-krakograff-textures-124842124-20560363.jpg');
-            background-position: center;
-            margin: 4rem 0;
-            background-size: contain;
-            border-radius: 8px;
-            height: 200px;
-        }
-    }
+// .containerCourses {
+//     animation: fadeIn 0.3s ease-in-out;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     text-align: center;
+//     align-items: center;
+//     width: 100%;
+//     .containerInfoCourses{
+//         justify-content: center;
+//         align-items: center;
+//         gap: 10px;
+//         display: flex;
+//         flex-direction: column;
+//         margin: 3rem 0 7rem 0;
+//         .secondItemInfoCourses{
+//             display: flex;
+//             width: 60%;
+//             border-radius: 8px;
+//         }
+//         .containerImgContainerInfoCourses{
+//             display: flex;
+//             width: 80%;
+//             background-image: url('../../assets/pexels-krakograff-textures-124842124-20560363.jpg');
+//             background-position: center;
+//             margin: 4rem 0;
+//             background-size: contain;
+//             border-radius: 8px;
+//             height: 200px;
+//         }
+//     }
 
-    .containerCoursesList {
-        width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 4rem;
-    .containerListItems {
-        width: 50%;
-    }
+//     .containerCoursesList {
+//         width: 100%;
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     align-items: center;
+//     text-align: center;
+//     margin-bottom: 4rem;
+//     .containerListItems {
+//         width: 50%;
+//     }
 
-    ul {
-        li {
-        margin: 8px 10px;
-        list-style: none;
-        font-weight: bold;
-        }
-    }
-    }
-}
+//     ul {
+//         li {
+//         margin: 8px 10px;
+//         list-style: none;
+//         font-weight: bold;
+//         }
+//     }
+//     }
+// }
