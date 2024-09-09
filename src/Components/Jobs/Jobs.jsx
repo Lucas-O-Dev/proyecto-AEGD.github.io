@@ -100,7 +100,7 @@ const Jobs = () => {
   return (
     <Box
       sx={{
-        padding: { xs: '10px', md: '20px' },
+        padding: '2rem 6rem',
         backgroundColor: '#f9f9f9',
       }}
     >

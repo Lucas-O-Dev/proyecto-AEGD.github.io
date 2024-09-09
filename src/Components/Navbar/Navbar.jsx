@@ -10,12 +10,12 @@ import Container from '@mui/material/Container';
 import { Button } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../../Firebase/Config';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AllInclusiveTwoToneIcon from '@mui/icons-material/AllInclusiveTwoTone';
 
-const pages = ['Cursos', 'Trabajos'];
+const pages = [ 'Trabajos','Cursos'];
 const settings = ['Perfil', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -55,10 +55,10 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static" color='primary' sx={{height: '3rem', display: 'flex', justifyContent: 'center'}}>
+        <AppBar position="static" sx={{height: '3rem', display: 'flex', justifyContent: 'center', backgroundColor: 'white',color: '#1d448e'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <AllInclusiveTwoToneIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
                         variant="h6"
                         noWrap
@@ -115,7 +115,7 @@ function ResponsiveAppBar() {
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <AllInclusiveTwoToneIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
                         variant="h5"
                         noWrap
@@ -139,7 +139,7 @@ function ResponsiveAppBar() {
                             <Link key={page} to={`/${page.toLowerCase()}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                 <Button
                                     onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                    sx={{ my: 2, color: '#1d448e', display: 'block' }}
                                 >
                                     {page}
                                 </Button>

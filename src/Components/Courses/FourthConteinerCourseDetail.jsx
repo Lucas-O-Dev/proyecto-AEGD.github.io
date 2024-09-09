@@ -18,7 +18,7 @@ const FourthConteinerCourseDetail = () => {
       }}
     >
       {/* Título principal */}
-      <Typography variant="h4" sx={{ fontWeight: 'bold', textAlign: 'center', marginBottom: '10px' }}>
+      <Typography variant="h4" sx={{ textAlign: 'center', marginBottom: '10px' }}>
         Qué aprenderás
       </Typography>
 

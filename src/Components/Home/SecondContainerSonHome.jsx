@@ -52,35 +52,6 @@ const SecondContainerSonHome = () => {
           <Item>
             <Button
               variant="contained"
-              onClick={() => handleNavigateClick('/trabajos')}
-              fullWidth
-              sx={{ mb: 1 }}
-            >
-              Ofertas Laborales
-            </Button>
-          </Item>
-          <Item>
-            <Button
-              variant="contained"
-              onClick={() => handleNavigateClick('/cursos')}
-              fullWidth
-              sx={{ mb: 1 }}
-            >
-              Cursos
-            </Button>
-          </Item>
-        </Stack>
-      </Box>
-      <Box
-        sx={{
-          padding: { xs: '10px', md: '20px' },
-          backgroundColor: '#f5f5f5',
-        }}
-      >
-        <Stack direction="row" spacing={2} flexWrap="wrap">
-          <Item>
-            <Button
-              variant="contained"
               onClick={() => handleNavigateClick('/documentation')}
               fullWidth
               sx={{ mb: 1 }}

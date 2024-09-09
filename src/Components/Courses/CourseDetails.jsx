@@ -4,11 +4,13 @@ import { doc, getDoc } from 'firebase/firestore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { db } from '../../../Firebase/Config';
 import { Box, Button, CircularProgress, Fade, Typography } from '@mui/material';
-import myImage from '../../assets/pngegg.png';
+import myImage from '../../assets/800_imagen.jpg';
 import LaptopIcon from '@mui/icons-material/Laptop';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import FourthConteinerCourseDetail from './FourthConteinerCourseDetail';
 import FifthConteinerCourseDetail from './FifthConteinerCourseDetail';
+import SixthConteinerCourseDetail from './SixthConteinerCourseDetail';
+import SeventhConteinerCourseDetail from './SeventhConteinerCourseDetail';
 
 const CourseDetails = () => {
   const [course, setCourse] = useState(null);
@@ -36,22 +38,20 @@ const CourseDetails = () => {
   }, [id]);
 
   return (
-    <Box sx={{ padding: { xs: '10px', md: '20px' }, backgroundColor: '#f9f9f9' }}>
+    <Box sx={{ backgroundColor: '#f9f9f9', display: 'flex', width: '100%', flexDirection: 'column' }}>
       {/* Sección principal del curso */}
       <Box
         sx={{
           display: 'flex',
+          justifyContent: 'flex-end',
           flexDirection: { xs: 'column', md: 'row' },
-          gap: '20px',
-          backgroundColor: '#fff',
-          borderRadius: '10px',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-          padding: '20px',
+          gap: { xs: '1rem', md: '5rem' }, // Ajuste del gap según el tamaño de la pantalla
+          padding: { xs: '2rem', md: '6rem' }, // Ajuste del padding según el tamaño de la pantalla
         }}
       >
         {/* Información del curso */}
         <Box sx={{ flex: 1 }}>
-          <Typography variant="h4" sx={{ marginBottom: '10px' }}>
+          <Typography variant="h4" sx={{ marginBottom: '10px', color: '#031b4e' }}>
             Curso de {course ? course.course : '...'}.
           </Typography>
           {loading ? (
@@ -61,9 +61,6 @@ const CourseDetails = () => {
           ) : (
             <>
               <Typography variant="body1">{course.description}</Typography>
-              <Typography variant="body2" sx={{ marginTop: '1rem' }}>
-                Duración: {course.duration}.
-              </Typography>
               <Typography
                 sx={{
                   display: 'flex',
@@ -84,7 +81,7 @@ const CourseDetails = () => {
           <img
             src={myImage}
             alt="Descripción del curso"
-            style={{ width: '100%', height: '8rem', objectFit: 'contain' }}
+            style={{ width: '100%', height: 'auto', maxWidth: '100%', objectFit: 'contain' }} // Imagen responsiva
           />
           <Button
             variant="contained"
@@ -105,18 +102,18 @@ const CourseDetails = () => {
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
-            gap: '20px',
+            gap: { xs: '1rem', md: '2rem' }, // Ajuste del gap según el tamaño de la pantalla
             marginTop: '20px',
             backgroundColor: '#fff',
             borderRadius: '10px',
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            padding: '20px',
+            padding: { xs: '1rem', md: '1rem 6rem' }, // Ajuste del padding según el tamaño de la pantalla
           }}
         >
           <Box sx={{ flex: 1 }}>
             <Typography
               variant="h6"
-              sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
             >
               <LaptopIcon /> Modalidad 100% {course.modality}.
             </Typography>
@@ -124,10 +121,11 @@ const CourseDetails = () => {
               El contenido está disponible las 24 horas del día para que puedas estudiar en tu propio horario.
             </Typography>
           </Box>
+
           <Box sx={{ flex: 1 }}>
             <Typography
               variant="h6"
-              sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
             >
               <WorkspacePremiumIcon /> Certificado Internacional.
             </Typography>
@@ -135,14 +133,24 @@ const CourseDetails = () => {
               Al finalizar el Curso de {course.course}, puedes obtener un certificado de estudios, con validez internacional.
             </Typography>
           </Box>
+
         </Box>
       )}
 
-      {/* Otros contenedores de detalles del curso */}
-      <FourthConteinerCourseDetail />
-      <FifthConteinerCourseDetail />
+
+<FourthConteinerCourseDetail />
+
+<FifthConteinerCourseDetail /> 
+<SixthConteinerCourseDetail />
+<SeventhConteinerCourseDetail />
     </Box>
+
+    
   );
 };
+
+
+
+
 
 export default CourseDetails;

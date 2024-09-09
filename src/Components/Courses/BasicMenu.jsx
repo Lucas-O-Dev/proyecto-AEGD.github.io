@@ -22,12 +22,15 @@ export default function BasicMenu() {
     <Box
       sx={{
         border: '1px solid #e0e0e0',
-        padding: '10px',
+        padding: '1rem',
         display: 'flex',
+        alignItems:'flex-start',
         justifyContent: 'flex-start',
-        gap: '10px',
+        gap: '1rem',
+        width: '80%',
         flexWrap: 'wrap',
         borderRadius: '8px',
+        flexDirection: 'column',
         backgroundColor: '#fafafa',
       }}
     >

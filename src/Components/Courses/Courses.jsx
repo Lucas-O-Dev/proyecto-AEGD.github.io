@@ -34,7 +34,7 @@ const Courses = () => {
   return (
     <Box
       sx={{
-        padding: { xs: '10px', md: '20px' },
+        padding: '2rem 6rem',
         display: 'flex',
         flexDirection: 'column',
         gap: '20px',
