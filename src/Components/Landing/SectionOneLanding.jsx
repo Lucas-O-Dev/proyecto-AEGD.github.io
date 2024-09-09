@@ -1,40 +1,58 @@
 import React from 'react'
-import {Link}  from 'react-router-dom'
-import myImage  from '../../assets/EmpleAR_logo_transparent.png'
-import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom'
+import myImage from '../../assets/EmpleAR_logo_transparent.png'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
 import './_sectiononelanding.scss'
 
 const SectionOneLanding = () => {
   return (
-    <section className='sectionOneLanding'>
+    <Box 
+      component="section"
+      className="sectionOneLanding"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '16px',
+        padding: '16px',
+        textAlign: 'center',
+      }}
+    >
+      <Box 
+        component="article" 
+        className="articleTitleLanding"
+        sx={{ marginBottom: '16px' }}
+      >
+        <img src={myImage} alt="logo-de-la-empresa" />
+      </Box>
 
-  <article className='articleTitleLanding'>
-    <img src={myImage} alt="logo-de-la-empresa" />
-  </article>
+      <Box 
+        component="article" 
+        className="articleParrafoLanding"
+        sx={{ marginBottom: '16px' }}
+      >
+        <Typography variant="h2" sx={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+          ¡Conseguí trabajo ahora!
+        </Typography>
+      </Box>
 
-  {/* <article>
-  <img src={logoIcon} alt="logo-icon" height="80px" width="80px" />
-  </article> */}
-
-  <article className='articleParrafoLanding '>
-  <p>Conectá con tu próximo empleo!</p>
-  </article>
-
-  <article className='articleButtonLoginLanding'>
-  <Button  variant="contained" sx={{padding: '0.4rem', margin: '1.2rem'}}>
-  <Link to="/Login">Comenzar</Link>
-  </Button>
-
-  </article>
-
-
-        {/* <article className='articleButtonLinkToCurriculumLanding'>
-        <Button variant="outlined" ><Link to='/curriculum'  className='linkToCurriculum'><p>CREA TU CURRICULUM GRATIS!</p></Link></Button>
-        </article> */}
-
-
-</section>
-
+      <Box 
+        component="article" 
+        className="articleButtonLoginLanding"
+        sx={{ marginBottom: '16px' }}
+      >
+        <Button 
+          variant="contained" 
+          sx={{ padding: '0.4rem 1.2rem' }}
+        >
+          <Link to="/Login" style={{ textDecoration: 'none', color: 'inherit' }}>
+            Comenzar
+          </Link>
+        </Button>
+      </Box>
+    </Box>
   )
 }
 

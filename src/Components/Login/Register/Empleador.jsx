@@ -4,7 +4,7 @@ import { updateDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../../../../Firebase/Config';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Button, TextField, InputLabel, FormControl, FormControlLabel, Checkbox, FormLabel } from '@mui/material';
+import { Button, TextField, InputLabel, FormControl, FormControlLabel, Checkbox, FormLabel, Box, Grid } from '@mui/material';
 import './_empleador.scss';
 
 const Empleador = () => {
@@ -16,7 +16,7 @@ const Empleador = () => {
         emailEmpresa: "",
         numeroTelefonicoEmpresa: "",
         situacionFiscal: "",
-        comprobanteDeInscripcionAfip: null // Agregado para manejo de archivo
+        comprobanteDeInscripcionAfip: null
     });
     const [userUID, setUserUID] = useState(null);
     const navigate = useNavigate();
@@ -63,54 +63,63 @@ const Empleador = () => {
     };
 
     return (
-        <section className="containerFormEmpleador">
-            <article className="articleFormEmpleador">
-                <p>¡Perfecto, eres empleador!</p>
+        <section className="containerFormEmpleador" style={{ padding: '2rem', backgroundColor: '#f9f9f9' }}>
+            <Box mb={4}>
+                <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>¡Perfecto, eres empleador!</p>
                 <p>A continuación te pediremos los datos de tu empresa.</p>
-            </article>
-            <div className="containerCheckboxRoleEmpleador">
-                <FormControl component="fieldset" sx={{ display: 'flex', flexDirection: 'row', marginBottom: '1rem', flexWrap: "wrap" }}>
-                    <FormLabel component="legend">Situación Fiscal</FormLabel>
-                    {["responsable Inscripto", "monotributo", "personal"].map(role => (
-                        <FormControlLabel
-                            key={role}
-                            control={
-                                <Checkbox
-                                    value={role}
-                                    checked={formData.situacionFiscal === role}
-                                    onChange={handleRoleChange}
-                                    inputProps={{ 'aria-label': role }}
-                                />
-                            }
-                            label={role.charAt(0).toUpperCase() + role.slice(1)}
-                        />
-                    ))}
-                </FormControl>
-            </div>
-            <div className="containerInputsEmpleador">
-                {[
-                    { label: "Cuit o Dni", name: "cuit" },
-                    { label: "Razón Social", name: "razonSocial" },
-                    { label: "Nombre de Fantasía", name: "nombreDeFantasia" },
-                    { label: "Dirección Fiscal", name: "direccionFiscal" },
-                    { label: "Email Empresa", name: "emailEmpresa" },
-                    { label: "Número Telefónico Empresa", name: "numeroTelefonicoEmpresa" }
-                ].map(({ label, name }) => (
-                    <TextField
-                        key={name}
-                        name={name}
-                        value={formData[name]}
-                        onChange={handleInputChange}
-                        label={label}
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        required
+            </Box>
+
+            <Box mb={4}>
+    <FormControl component="fieldset" sx={{ display: 'flex', flexDirection: 'row', gap: 2, alignItems: 'center' }}>
+        <FormLabel component="legend" sx={{ fontWeight: 'bold', marginRight: 2 }}>Situación Fiscal</FormLabel>
+        {["responsable Inscripto", "monotributo", "personal"].map(role => (
+            <FormControlLabel
+                key={role}
+                control={
+                    <Checkbox
+                        value={role}
+                        checked={formData.situacionFiscal === role}
+                        onChange={handleRoleChange}
+                        inputProps={{ 'aria-label': role }}
                     />
-                ))}
-            </div>
-            <div className="containerFileUploadEmpleador">
-                <InputLabel htmlFor="comprobanteDeInscripcionAfip" sx={{ marginTop: '1rem', marginBottom: '0' }}>
+                }
+                label={role.charAt(0).toUpperCase() + role.slice(1)}
+            />
+        ))}
+    </FormControl>
+</Box>
+
+
+<Box mb={2} sx={{ width:'50%'}}>
+    <Grid container spacing={1}>
+        {[
+            { label: "Cuit o Dni", name: "cuit" },
+            { label: "Razón Social", name: "razonSocial" },
+            { label: "Nombre de Fantasía", name: "nombreDeFantasia" },
+            { label: "Dirección Fiscal", name: "direccionFiscal" },
+            { label: "Email Empresa", name: "emailEmpresa" },
+            { label: "Número Telefónico Empresa", name: "numeroTelefonicoEmpresa" }
+        ].map(({ label, name }) => (
+            <Grid item xs={12} md={6} key={name}>
+                <TextField
+                    name={name}
+                    value={formData[name]}
+                    onChange={handleInputChange}
+                    label={label}
+                    variant="outlined"
+                    fullWidth
+                    margin="dense"  // Cambia a 'dense' para reducir el margen
+                    required
+                    sx={{ mb: 0.2 }}  // Ajusta el margen inferior
+                />
+            </Grid>
+        ))}
+    </Grid>
+</Box>
+
+
+            <Box mb={4}>
+                <InputLabel htmlFor="comprobanteDeInscripcionAfip" sx={{ marginBottom: '0.5rem' }}>
                     Comprobante de Inscripción AFIP
                 </InputLabel>
                 <input
@@ -118,13 +127,15 @@ const Empleador = () => {
                     name="comprobanteDeInscripcionAfip"
                     onChange={handleFileChange}
                     required
+                    style={{ display: 'block', marginBottom: '1rem' }}
                 />
-            </div>
+            </Box>
+
             <Button
                 onClick={editButton}
                 variant="contained"
                 color="primary"
-                sx={{ margin: '1rem' }}
+                sx={{ margin: '1rem 0' }}
             >
                 Aceptar
             </Button>

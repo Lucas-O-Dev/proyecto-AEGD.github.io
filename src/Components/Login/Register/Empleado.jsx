@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Select from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import Box from '@mui/material/Box'
 import MenuItem from '@mui/material/MenuItem';
 import ThirdSectionEmpleado from "./ThirdSectionEmpleado";
 import FormControl from '@mui/material/FormControl';
@@ -12,7 +13,6 @@ import RubroSelect from '../../RubroSelect/RubroSelect';
 import TextField from '@mui/material/TextField';
 import { Button, InputLabel } from '@mui/material';
 import ArticleFirstEmpleado from "./ArticleFirstEmpleado";
-import './_empleado.scss';
 
 const rubros = {
     // Estructura de datos que contiene los rubros y sus sub-rubros
@@ -106,8 +106,7 @@ const Empleado = () => {
 
     // Función para renderizar un campo de selección
 const renderSelectField = (label, value, onChange, options) => (
-    <div className='containerInputAddJobs'>
-        <FormControl fullWidth>
+        <FormControl fullWidth sx={{margin:'0.1rem 0'}}>
             <InputLabel id={`${label}-label`}>{label}</InputLabel>
             <Select
                 labelId={`${label}-label`}
@@ -123,7 +122,6 @@ const renderSelectField = (label, value, onChange, options) => (
                 ))}
             </Select>
         </FormControl>
-    </div>
 );
 
 const editButton = async () => {
@@ -143,48 +141,74 @@ const editButton = async () => {
   };
 
   return (
-    <section className="sectionConteinerFormEmpleado">
-        <ArticleFirstEmpleado />
-        <div className="containerFormEmpleado">
-            <div className="firstSectionEmpleado">
-                {renderSelectField("Nivel Educativo", formData.nivelEducativo, handleNivelEducativoChange, nivelesEducativos)}
-                {[
-                    { label: "Título Académico", name: "tituloAcademico" },
-                    { label: "Experiencias Laborales", name: "experienciasLaborales" }
-                ].map(({ label, name }) => (
-                    <TextField
-                        key={name}
-                        name={name}
-                        value={formData[name]}
-                        onChange={handleInputChange}
-                        label={label}
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                        required
-                    />
-                ))}
-                <RubroSelect
-                    rubros={rubros}
-                    rubro={formData.rubro}
-                    subRubro={formData.puesto}
-                    handleRubroChange={handleRubroChange}
-                    handleSubRubroChange={handlePuestoChange}
-                />
-            </div>
-        </div>
-        <div className="secondSectionEmleado">
+<Box
+  sx={{
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center', // Alinea elementos en el eje vertical (ya que flexDirection es column)
+    alignItems: 'center',     // Alinea elementos en el eje horizontal
+    flexDirection: 'column',
+  }}
+>
+<ArticleFirstEmpleado />
+<Box
+      className="containerFormEmpleado"
+      sx={{
+        marginTop:'1rem',
+        width: '40%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+        }}
+      >
+        
+        {[
+          { label: "Título Académico", name: "tituloAcademico" },
+          { label: "Experiencias Laborales", name: "experienciasLaborales" }
+        ].map(({ label, name }) => (
+          <TextField
+sx={{margin: '0.2rem 0', padding:'0'}}
+          key={name}
+            name={name}
+            value={formData[name]}
+            onChange={handleInputChange}
+            label={label}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            required
+          />
+        ))}
+        {renderSelectField("Nivel Educativo", formData.nivelEducativo, handleNivelEducativoChange, nivelesEducativos)}
+        <RubroSelect
+          rubros={rubros}
+          rubro={formData.rubro}
+          subRubro={formData.puesto}
+          handleRubroChange={handleRubroChange}
+          handleSubRubroChange={handlePuestoChange}
+        />
+      </Box>
+    </Box>
+
+        <Box className="secondSectionEmleado" sx={{p: 2,display: 'flex', justifyContent: 'center' }}>
             <Button
                 onClick={editButton}
                 variant="contained"
                 color="primary"
-                sx={{ margin: '1rem' }}
             >
                 Aceptar
             </Button>
-            <ThirdSectionEmpleado />
-        </div>
-    </section>
+        </Box>
+        <ThirdSectionEmpleado />
+</Box>
 );
 };
 

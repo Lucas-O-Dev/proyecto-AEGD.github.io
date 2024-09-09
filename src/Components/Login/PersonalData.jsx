@@ -88,7 +88,12 @@ const PersonalData = () => {
         try {
             await setDoc(doc(db, `users/${userUID}`), updatedFormData);
 
-            const redirectTo = rol === 'Empleado' ? '/empleado' : rol === 'Empleador' ? '/empleador' : '/Home';
+            const redirectTo =
+                rol === 'Empleado' ? '/empleado' :
+                    rol === 'Empleador' ? '/empleador' :
+                        rol === 'Profesor' ? '/profesor' :
+                            '/Home';
+
 
             toast.success('¡Formulario enviado con éxito!', {
                 onClose: () => navigate(redirectTo)
@@ -100,17 +105,37 @@ const PersonalData = () => {
     };
 
     return (
-        <Box sx={{ maxWidth: 600, margin: 'auto', padding: 2, display: 'flex', flexDirection:'column', alignItems: 'center' }}>
-            <Item>A continuación te pediremos tus datos personales</Item>
-            <FormControl component="fieldset" sx={{ display: 'flex', flexDirection: 'column', marginBottom: 2 }}>
-                <FormLabel component="legend">¿Cuál es tu rol?</FormLabel>
+        <Box sx={{ maxWidth: 600, margin: 'auto', padding: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Item>A continuación te pediremos tus datos personales.</Item>
+            <FormControl
+                component="fieldset"
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center', // Centra horizontalmente
+                    marginBottom: 2
+                }}
+            >
+                <FormLabel
+                    component="legend"
+                    sx={{
+                        textAlign: 'center', // Centra el texto dentro del FormLabel
+                        marginBottom: 1, // Espacio entre el label y los radio buttons
+                    }}
+                >
+                    ¿Cuál es tu rol?
+                </FormLabel>
                 <RadioGroup
+                    row // Hace que los radio buttons se alineen horizontalmente
                     aria-label="role"
                     name="rol"
                     value={formData.rol}
                     onChange={handleRoleChange}
+                    sx={{
+                        justifyContent: 'center', // Centra los radio buttons horizontalmente
+                    }}
                 >
-                    {["Empleado", "Empleador"].map(role => (
+                    {["Empleado", "Empleador", "Profesor"].map(role => (
                         <FormControlLabel
                             key={role}
                             value={role}
@@ -121,12 +146,14 @@ const PersonalData = () => {
                 </RadioGroup>
             </FormControl>
 
-            <Grid container spacing={2}>
+
+
+            <Grid container spacing={0.2}>
                 {["nombre", "apellido", "direccion", "localidad", "cp"].map(field => (
                     <Grid item xs={12} key={field}>
                         <InputLabel>{field.charAt(0).toUpperCase() + field.slice(1)}</InputLabel>
                         <OutlinedInput
-                            sx={{ width: '100%', height:'2rem' }}
+                            sx={{ width: '100%', height: '2rem' }}
                             type="text"
                             name={field}
                             value={formData[field]}
@@ -139,13 +166,13 @@ const PersonalData = () => {
 
             <Button
                 onClick={setButton}
-                sx={{ marginTop: 2, width: '40%', display: 'flex'}}
+                sx={{ marginTop: 2, width: '40%', display: 'flex' }}
                 variant="contained"
                 color="primary"
             >
                 Aceptar
             </Button>
-                        <Item>
+            <Item>
                 Buscar nuevas oportunidades profesionales es un proceso que, aunque desafiante,
                 puede conducir a grandes logros. Es fundamental destacar la ética de trabajo,
                 la capacidad para resolver problemas y la dedicación en cada aplicación y entrevista.

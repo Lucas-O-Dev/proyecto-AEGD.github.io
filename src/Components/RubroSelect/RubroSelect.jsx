@@ -2,7 +2,6 @@ import React from 'react';
 // Importación de componentes específicos de Material-UI
 import { Select, MenuItem, FormControl, InputLabel, OutlinedInput } from '@mui/material';
 // Importación del archivo de estilos personalizados para el componente
-import './_rubroselect.scss';
 
 // Definición del componente funcional RubroSelect con sus propiedades
 const RubroSelect = ({
@@ -33,7 +32,6 @@ const RubroSelect = ({
     return (
         <>
             {/* Contenedor para el primer selector (Rubro) */}
-            <div className="containerInputAddJobs">
             <p>¿ En qué rubro y puesto deseas trabajar ?</p>
                 {/* Control de formulario que contiene el selector */}
                 <FormControl fullWidth  >
@@ -56,7 +54,6 @@ const RubroSelect = ({
                         
                     </Select>
                 </FormControl>
-            </div>
 
             {/* Renderizado condicional del segundo selector (SubRubro) solo si hay un rubro seleccionado */}
             {rubro && (
