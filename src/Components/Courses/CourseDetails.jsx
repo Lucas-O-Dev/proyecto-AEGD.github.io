@@ -37,6 +37,22 @@ const CourseDetails = () => {
     fetchCourse();
   }, [id]);
 
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (!course) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Typography variant="h5">No se encontró el curso.</Typography>
+      </Box>
+    );
+  }
+
   return (
     <Box sx={{ backgroundColor: '#f9f9f9', display: 'flex', width: '100%', flexDirection: 'column' }}>
       {/* Sección principal del curso */}
@@ -45,35 +61,27 @@ const CourseDetails = () => {
           display: 'flex',
           justifyContent: 'flex-end',
           flexDirection: { xs: 'column', md: 'row' },
-          gap: { xs: '1rem', md: '5rem' }, // Ajuste del gap según el tamaño de la pantalla
-          padding: { xs: '2rem', md: '6rem' }, // Ajuste del padding según el tamaño de la pantalla
+          gap: { xs: '1rem', md: '5rem' },
+          padding: { xs: '2rem', md: '6rem' },
         }}
       >
         {/* Información del curso */}
         <Box sx={{ flex: 1 }}>
           <Typography variant="h4" sx={{ marginBottom: '10px', color: '#031b4e' }}>
-            Curso de {course ? course.course : '...'}.
+            Curso de {course.course}
           </Typography>
-          {loading ? (
-            <Fade in={loading} timeout={500}>
-              <CircularProgress />
-            </Fade>
-          ) : (
-            <>
-              <Typography variant="body1">{course.description}</Typography>
-              <Typography
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  marginTop: '10px',
-                }}
-              >
-                <FavoriteIcon sx={{ color: 'red', cursor: 'pointer' }} />
-                Curso Gratis.
-              </Typography>
-            </>
-          )}
+          <Typography variant="body1">{course.description}</Typography>
+          <Typography
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              marginTop: '10px',
+            }}
+          >
+            <FavoriteIcon sx={{ color: 'red', cursor: 'pointer' }} />
+            Curso Gratis.
+          </Typography>
         </Box>
 
         {/* Imagen del curso y botón de acción */}
@@ -81,7 +89,7 @@ const CourseDetails = () => {
           <img
             src={myImage}
             alt="Descripción del curso"
-            style={{ width: '100%', height: 'auto', maxWidth: '100%', objectFit: 'contain' }} // Imagen responsiva
+            style={{ width: '100%', height: 'auto', maxWidth: '100%', objectFit: 'contain' }}
           />
           <Button
             variant="contained"
@@ -97,60 +105,50 @@ const CourseDetails = () => {
       </Box>
 
       {/* Sección de detalles adicionales */}
-      {!loading && course && (
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            gap: { xs: '1rem', md: '2rem' }, // Ajuste del gap según el tamaño de la pantalla
-            marginTop: '20px',
-            backgroundColor: '#fff',
-            borderRadius: '10px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            padding: { xs: '1rem', md: '1rem 6rem' }, // Ajuste del padding según el tamaño de la pantalla
-          }}
-        >
-          <Box sx={{ flex: 1 }}>
-            <Typography
-              variant="h6"
-              sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
-            >
-              <LaptopIcon /> Modalidad 100% {course.modality}.
-            </Typography>
-            <Typography variant="body2" sx={{ marginTop: '10px', color: '#555' }}>
-              El contenido está disponible las 24 horas del día para que puedas estudiar en tu propio horario.
-            </Typography>
-          </Box>
-
-          <Box sx={{ flex: 1 }}>
-            <Typography
-              variant="h6"
-              sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
-            >
-              <WorkspacePremiumIcon /> Certificado Internacional.
-            </Typography>
-            <Typography variant="body2" sx={{ marginTop: '10px', color: '#555' }}>
-              Al finalizar el Curso de {course.course}, puedes obtener un certificado de estudios, con validez internacional.
-            </Typography>
-          </Box>
-
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          gap: { xs: '1rem', md: '2rem' },
+          marginTop: '20px',
+          backgroundColor: '#fff',
+          borderRadius: '10px',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          padding: { xs: '1rem', md: '1rem 6rem' },
+        }}
+      >
+        <Box sx={{ flex: 1 }}>
+          <Typography
+            variant="h6"
+            sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
+          >
+            <LaptopIcon /> Modalidad 100% {course.modality}.
+          </Typography>
+          <Typography variant="body2" sx={{ marginTop: '10px', color: '#555' }}>
+            El contenido está disponible las 24 horas del día para que puedas estudiar en tu propio horario.
+          </Typography>
         </Box>
-      )}
 
+        <Box sx={{ flex: 1 }}>
+          <Typography
+            variant="h6"
+            sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
+          >
+            <WorkspacePremiumIcon /> Certificado Internacional.
+          </Typography>
+          <Typography variant="body2" sx={{ marginTop: '10px', color: '#555' }}>
+            Al finalizar el Curso de {course.course}, puedes obtener un certificado de estudios, con validez internacional.
+          </Typography>
+        </Box>
+      </Box>
 
-<FourthConteinerCourseDetail />
-
-<FifthConteinerCourseDetail /> 
-<SixthConteinerCourseDetail />
-<SeventhConteinerCourseDetail />
+      {/* Renderización de contenedores hijos */}
+      <FourthConteinerCourseDetail course={course} />
+      <FifthConteinerCourseDetail course={course} />
+      <SixthConteinerCourseDetail course={course} />
+      <SeventhConteinerCourseDetail course={course} />
     </Box>
-
-    
   );
 };
-
-
-
-
 
 export default CourseDetails;

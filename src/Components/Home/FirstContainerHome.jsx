@@ -40,7 +40,7 @@ const FirstContainerHome = () => {
               fullWidth
               sx={{ mb: 1 }}
             >
-              Ofertas Laborales
+              Trabajos
             </Button>
           </Item>
           <Item>
@@ -50,7 +50,7 @@ const FirstContainerHome = () => {
               fullWidth
               sx={{ mb: 1 }}
             >
-              Capacitaciones
+              Cursos
             </Button>
           </Item>
         </Stack>

@@ -24,6 +24,7 @@ import JobDetails from './Components/Jobs/JobDetails';
 import EmailAndNumberPhoneIsVerified from './Components/Login/EmailAndNumberPhoneIsVerified';
 import ResetPasswordFirebase from './Components/Login/ResetPasswordFirebase';
 import ServicesUser from './Components/Login/ServicesUser';
+import Profesor from './Components/Login/Register/Profesor';
 
 function App() {
 
@@ -89,7 +90,8 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
-          <Route path="/PersonalData" element={<PersonalData/>} />
+          <Route path="/PersonalData" element={<PersonalData />} />
+          <Route path="/Profesor" element={<Profesor />} />
           <Route path="/Empleado" element={<Empleado />} />
           <Route path="/Empleador" element={<Empleador />} />
           <Route path="/curriculum" element={<Curriculums />} />

@@ -4,7 +4,9 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
-const FourthConteinerCourseDetail = () => {
+
+const FourthConteinerCourseDetail = ({course}) => {
+
   return (
     <Box
       sx={{
@@ -19,7 +21,7 @@ const FourthConteinerCourseDetail = () => {
     >
       {/* Título principal */}
       <Typography variant="h4" sx={{ textAlign: 'center', marginBottom: '10px' }}>
-        Qué aprenderás
+        Curso de {course.course}
       </Typography>
 
       {/* Primera sección: Objetivos del curso */}
@@ -29,23 +31,23 @@ const FourthConteinerCourseDetail = () => {
         </Typography>
         <List sx={{ listStyleType: 'disc', paddingLeft: '20px' }}>
           <ListItem sx={{ display: 'list-item' }}>
-            <ListItemText primary="Comprender la importancia de Python en la programación." />
+          <ListItemText primary={course.LearningOne} />
           </ListItem>
           <ListItem sx={{ display: 'list-item' }}>
-            <ListItemText primary="Comprender todo lo relacionado con variables y operadores." />
+            <ListItemText primary={course.LearningTwo} />
           </ListItem>
           <ListItem sx={{ display: 'list-item' }}>
-            <ListItemText primary="Utilizar los condicionales y ciclos." />
+            <ListItemText primary={course.LearningThree}/>
           </ListItem>
           <ListItem sx={{ display: 'list-item' }}>
-            <ListItemText primary="Utilizar las funciones y estructuras de datos." />
+            <ListItemText primary={course.LearningFour} />
           </ListItem>
           <ListItem sx={{ display: 'list-item' }}>
-            <ListItemText primary="Trabajar con la programación orientada a objetos." />
+            <ListItemText primary={course.LearningFive} />
           </ListItem>
         </List>
         <Typography sx={{ marginTop: '15px', color: '#555' }}>
-          ¿A quién va dirigido? Este curso de Python está dirigido a técnicos, tecnólogos y profesionales de la ciencia de la computación interesados en aprender este lenguaje para incursionar en el mundo de la programación.
+          ¿A quién está dirigido? {course.aimedAt}.
         </Typography>
       </Box>
 
@@ -72,10 +74,10 @@ const FourthConteinerCourseDetail = () => {
               marginBottom: '5px',
             }}
           >
-            <AccessTimeIcon /> 5 semanas estimadas
+            <AccessTimeIcon /> {course.estimatedWeeks} estimadas.
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            1-2 horas por semana
+            {course.hoursPerWeek}.
           </Typography>
         </Box>
 

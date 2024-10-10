@@ -13,7 +13,6 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import backgroundImg from '../StylesLogin/pexelssteve1266808.jpg';
 import './_register.scss';
 
 const defaultTheme = createTheme();
@@ -45,13 +44,11 @@ const Register = () => {
 
     if (!isValidEmail(correo)) {
       setEmailError("Por favor ingresa un correo electrónico válido.");
-      alert("Por favor ingresa un correo electrónico válido.");
       return;
     }
 
     if (contraseña.length < 8 || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(contraseña)) {
       setPasswordError("La contraseña debe tener al menos 8 caracteres y al menos un símbolo especial.");
-      alert("La contraseña debe tener al menos 8 caracteres y al menos un símbolo especial.");
       return;
     }
 
@@ -84,15 +81,7 @@ const Register = () => {
   return (
     <ThemeProvider theme={defaultTheme}>
       <div className="containerPrincipalRegister">
-        <div className='containerImgLoginLeft' style={{
-          backgroundImage: `url(${backgroundImg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          display: 'flex',
-          width: '4%',
-          height: '100vh',
-        }} />
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" sx={{marginTop:'8rem', marginBottom:'10rem'}}>
           <CssBaseline />
           <Box
             sx={{
@@ -108,10 +97,10 @@ const Register = () => {
             <Typography component="h1" variant="h5">
               Registrarse
             </Typography>
-            <Box component="form" noValidate onSubmit={funcAutentication} sx={{ mt: 2 }} >
+            <Box component="form" noValidate onSubmit={funcAutentication} sx={{ mt: 2 }}>
               <Grid item xs={12} marginBottom={4}>
                 <TextField
-                  size='small'
+                  size="small"
                   required
                   fullWidth
                   id="email"
@@ -124,7 +113,7 @@ const Register = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  size='small'
+                  size="small"
                   required
                   fullWidth
                   name="password"
@@ -156,17 +145,9 @@ const Register = () => {
           </Box>
           <Copyright sx={{ mt: 1 }} />
         </Container>
-        <div className='containerImgLoginRight' style={{
-          backgroundImage: `url(${backgroundImg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          display: 'flex',
-          width: '4%',
-          height: '100vh',
-        }} />
       </div>
     </ThemeProvider>
   );
-}
+};
 
 export default Register;

@@ -3,7 +3,7 @@ import { Box, Typography, Button } from '@mui/material';
 import BasicMenu from './BasicMenu';
 import TerminalIcon from '@mui/icons-material/Terminal';
 
-const FifthConteinerCourseDetail = () => {
+const FifthConteinerCourseDetail = ({course}) => {
   const courses = [
     {
       title: 'Curso de "C"',
@@ -52,7 +52,7 @@ const FifthConteinerCourseDetail = () => {
         >
           Programa del curso
         </Typography>
-        <BasicMenu />
+        <BasicMenu courseData= {course}/>
       </Box>
 
       {/* Segunda sección */}

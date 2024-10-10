@@ -148,21 +148,44 @@ const PersonalData = () => {
 
 
 
-            <Grid container spacing={0.2}>
-                {["nombre", "apellido", "direccion", "localidad", "cp"].map(field => (
-                    <Grid item xs={12} key={field}>
-                        <InputLabel>{field.charAt(0).toUpperCase() + field.slice(1)}</InputLabel>
-                        <OutlinedInput
-                            sx={{ width: '100%', height: '2rem' }}
-                            type="text"
-                            name={field}
-                            value={formData[field]}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </Grid>
-                ))}
-            </Grid>
+            <Grid container spacing={0.2} justifyContent="center" alignItems="center">
+  {["nombre", "apellido", "direccion", "localidad", "cp"].map(field => (
+    <Grid 
+    key={field} 
+    container 
+    sx={{
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      flexDirection: 'column', 
+      width: '100%'
+    }}
+  >
+    <InputLabel 
+      sx={{ 
+        textAlign: 'center', 
+        width: '100%' 
+      }}
+    >
+      {field.charAt(0).toUpperCase() + field.slice(1)}
+    </InputLabel>
+    <OutlinedInput
+      sx={{ 
+        width: { xs: '100%', sm: '80%', md: '60%' },  // Ancho responsive
+        height: '2rem',
+        textAlign: 'center'
+      }}
+      type="text"
+      name={field}
+      value={formData[field]}
+      onChange={handleInputChange}
+      required
+    />
+  </Grid>
+  
+  ))}
+</Grid>
+
 
             <Button
                 onClick={setButton}

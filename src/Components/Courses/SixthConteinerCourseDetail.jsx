@@ -2,7 +2,7 @@ import { Box, Button, Typography } from '@mui/material'
 import React from 'react'
 import CheckIcon from '@mui/icons-material/Check';
 
-const SixthConteinerCourseDetail = () => {
+const SixthConteinerCourseDetail = ({course}) => {
   return (
     <Box
       sx={{
@@ -103,10 +103,10 @@ const SixthConteinerCourseDetail = () => {
           }}
         >
           <Typography variant="h6">
-            Desarrollador de Python
+            {course.degree}
           </Typography>
           <Typography>
-            220 horas certificables.
+            {course.certifiableHours} certificables.
           </Typography>
         </Box>
 

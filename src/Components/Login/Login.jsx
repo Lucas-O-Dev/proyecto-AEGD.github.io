@@ -57,18 +57,7 @@ const Login = () => {
     <ThemeProvider theme={defaultTheme}>
       <div className="conteinerLoginForm">
 
-        <div className='containerImgLoginLeft' style={{
-          backgroundImage: `url(${backgroundImg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          display: 'flex',
-          width: '4%',
-          height: '100vh',
-        }}>
-
-        </div>
-
-        <Container component="main" sx={{ width: '100%' }}>
+        <Container component="main" sx={{ width: '100%', padding:'6rem' }}>
           <CssBaseline />
           <Box
             sx={{
@@ -134,16 +123,6 @@ const Login = () => {
           <Copyright sx={{ mt: 1 }} />
         </Container>
 
-        <div className='containerImgLoginRight' style={{
-          backgroundImage: `url(${backgroundImg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          display: 'flex',
-          width: '4%',
-          height: '100vh',
-        }}>
-
-        </div>
       </div>
     </ThemeProvider>
   );

@@ -18,9 +18,6 @@ const CoursesList = ({ courses }) => {
                   <Typography variant="body2" color="text.secondary">
                     {course.duration}
                   </Typography>
-                  {/* <Typography variant="body2" color="text.secondary">
-                    {course.description}
-                  </Typography> */}
                 </CardContent>
                 <Box sx={{ padding: 2 }}>
                   <Button component={Link} to={`/course/${course.id}`} variant="contained" color="primary" fullWidth>
